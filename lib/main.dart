@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+
 
   // This widget is the root of your application.
   @override
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         designSize: Size(375, 812),
         minTextAdapt: true,
         splitScreenMode: true,
-        builder: () => const MaterialApp(
+        builder: () =>  MaterialApp(
               home: Test(),
             ));
     // return MaterialApp(

@@ -4,19 +4,39 @@ import 'package:agc_conpany/themes/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'componant/input_feild.dart';
+
 class Test extends StatelessWidget {
-  const Test({Key? key}) : super(key: key);
+  TextEditingController tt = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: SacandaryButton(
-          label: 'Test',
-          onTap: () {},
-          height: 40.h,
-          width: 80.w,
-          color: rejectClr,
+    return Scaffold(
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: [
+              Container(
+                child: SacandaryButton(
+                  label: 'Test',
+                  onTap: () {},
+                  height: 40.h,
+                  width: 80.w,
+                  color: rejectClr,
+                  isFill: false,
+                ),
+              ),
+              Container(
+                child: WidgetTextField(
+                  icon: Icon(Icons.cleaning_services_outlined),
+                  controller: tt,
+
+                  inputType: TextInputType.text,
+                  hintText: 'TT',
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
