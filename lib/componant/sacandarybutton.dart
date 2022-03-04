@@ -1,7 +1,6 @@
 import 'package:agc_conpany/themes/themes.dart';
 import 'package:flutter/material.dart';
 
-
 class SacandaryButton extends StatelessWidget {
   const SacandaryButton({
     Key? key,
@@ -10,7 +9,7 @@ class SacandaryButton extends StatelessWidget {
     required this.height,
     required this.width,
     required this.color,
-
+    required this.isFill,
   }) : super(key: key);
 
   final String label;
@@ -18,8 +17,7 @@ class SacandaryButton extends StatelessWidget {
   final double height;
   final double width;
   final Color color;
-
-
+  final bool isFill;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -29,13 +27,10 @@ class SacandaryButton extends StatelessWidget {
         width: width,
         height: height,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            color: color
-        ),
-        child: Text(label,style: const TextStyle(
-            color: Colors.white,
-            fontSize: 18
-        ),
+            borderRadius: BorderRadius.circular(25), color: color),
+        child: Text(
+          label,
+          style: const TextStyle(color: Colors.white, fontSize: 18),
           textAlign: TextAlign.center,
         ),
       ),
