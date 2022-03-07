@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
                   'ar', 'SA'), // OR Locale('ar', 'AE') OR Other RTL locales,
               debugShowCheckedModeBanner: false,
               home: SplashScreenView(
-                navigateRoute: NavScreen(),
+                navigateRoute: Login(),
                 duration: 4000,
                 imageSize: 233,
                 imageSrc: 'assets/images/splahlogo.png',
