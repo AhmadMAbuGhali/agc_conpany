@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
                 text: "مجموعة أبناء أبوغالي للإستثمار",
                 textType: TextType.TyperAnimatedText,
                 textStyle: const TextStyle(
-                  fontSize: 30.0,
+                  fontSize: 31.0,
                 ),
               ),
             ));
