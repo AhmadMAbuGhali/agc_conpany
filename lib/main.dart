@@ -1,5 +1,7 @@
 import 'package:agc_conpany/test.dart';
+import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 
@@ -25,10 +27,19 @@ class _MyAppState extends State<MyApp> {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: () =>  MaterialApp(
+          localizationsDelegates: [
+            GlobalCupertinoLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+          ],
+          supportedLocales: [
+            Locale('ar', 'SA'), // OR Locale('ar', 'AE') OR Other RTL locales
+          ],
+          locale: Locale('ar', 'SA') ,// OR Locale('ar', 'AE') OR Other RTL locales,
           debugShowCheckedModeBanner: false,
               home: SplashScreenView(
-                navigateRoute: Test(),
-                duration: 10000,
+                navigateRoute: Login(),
+                duration: 4000,
                 imageSize: 233,
                 imageSrc: 'assets/images/splahlogo.png',
                 backgroundColor: Colors.white,
