@@ -22,33 +22,15 @@ class SacandaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child:  isFill
-      ?Container(
+      child: Container(
         alignment: Alignment.center,
         width: width,
         height: height,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10), color: color),
+            borderRadius: BorderRadius.circular(25), color: color),
         child: Text(
           label,
           style: const TextStyle(color: Colors.white, fontSize: 18),
-          textAlign: TextAlign.center,
-        ),
-      ):Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10), color: Colors.transparent,
-          border: Border.all(
-        color: color,
-
-        ),
-        ),
-        alignment: Alignment.center,
-        width: width,
-        height: height,
-
-        child: Text(
-          label,
-          style:  TextStyle(color: color, fontSize: 18),
           textAlign: TextAlign.center,
         ),
       ),
