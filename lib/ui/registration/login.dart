@@ -1,4 +1,5 @@
 import 'package:agc_conpany/componant/input_feild.dart';
+import 'package:agc_conpany/ui/nav_bar.dart';
 import 'package:agc_conpany/ui/registration/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -74,17 +75,6 @@ class Login extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  // Positioned(
-                  //   right: -25,
-                  //   height: 353.h,
-                  //   width: 416.w,
-                  //   child: Container(
-                  //     decoration: const BoxDecoration(
-                  //         image: DecorationImage(
-                  //       image: AssetImage('assets/images/ndark.png'),
-                  //     )),
-                  //   ),
-                  // ),
                 ],
               ),
             ),
@@ -137,7 +127,12 @@ class Login extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 80),
               child: PrimaryButton(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => NavScreen()),
+                  );
+                },
                 label: 'تسجيل الدخول ',
               ),
             ),
