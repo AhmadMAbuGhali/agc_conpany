@@ -1,8 +1,8 @@
 import 'package:agc_conpany/themes/themes.dart';
 import 'package:flutter/material.dart';
 
-class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({
+class AccountantNotiTrans extends StatelessWidget {
+  const AccountantNotiTrans({
     Key? key,
     required this.label,
     required this.onTap,
@@ -20,7 +20,7 @@ class PrimaryButton extends StatelessWidget {
         width: 253,
         height: 58,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25), color: orangeClr),
+            borderRadius: BorderRadius.circular(25), color: mainClr),
         child: Text(
           label,
           style: const TextStyle(color: Colors.white, fontSize: 12),
