@@ -2,23 +2,25 @@ import 'package:agc_conpany/componant/input_feild.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 import '../../componant/primarybutton.dart';
 
-class SingUP extends StatelessWidget {
+class SingUP extends GetxController {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passController = TextEditingController();
   // Initial Selected Value
-  String dropdownvalue = 'Accountant';
+  String dropdownValue = "محاسب".obs as String;
 
   // List of items in our dropdown menu
   var items = [
-    'Accountant',
-    'secretary',
-    'Storekeeper',
-    'Driver',
+    'محاسب',
+    'سكرتير',
+    'أمين المخازن',
+    'سائق',
+    'مندوب مبيعات'
   ];
 
   @override
@@ -54,7 +56,7 @@ class SingUP extends StatelessWidget {
                     top: 21,
                     right: 120,
                     left: 0,
-                    child: const Text(
+                    child:  Text(
                       'تسجيل حساب جديد ',
                       style: TextStyle(
                           fontSize: 18,
@@ -152,7 +154,7 @@ class SingUP extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                value: dropdownvalue,
+                value: dropdownValue,
                 items: items.map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -160,7 +162,7 @@ class SingUP extends StatelessWidget {
                   );
                 }).toList(),
                 onChanged: (vlaue) {
-                  dropdownvalue = vlaue!;
+                  dropdownValue = vlaue!;
                 },
               ),
             ),
@@ -186,10 +188,7 @@ class SingUP extends StatelessWidget {
                 ),
                 TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Login()),
-                      );
+                     Get.to(Login);
                     },
                     child: const Text(
                       ' تسجيل الدخول ',

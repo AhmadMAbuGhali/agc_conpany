@@ -3,7 +3,7 @@ import 'package:agc_conpany/ui/nav_bar.dart';
 import 'package:agc_conpany/ui/registration/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:get/get.dart';
 import '../../componant/primarybutton.dart';
 
 class Login extends StatelessWidget {
@@ -127,12 +127,7 @@ class Login extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 80),
               child: PrimaryButton(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => NavScreen()),
-                  );
-                },
+                onTap: () => Get.to(()=>NavScreen()),
                 label: 'تسجيل الدخول ',
               ),
             ),
@@ -151,10 +146,8 @@ class Login extends StatelessWidget {
                   ),
                   TextButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SingUP()),
-                        );
+                      Get.to(SingUP());
+
                       },
                       child: const Text(
                         'تسجيل',

@@ -4,6 +4,7 @@ import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class HomeAccountant extends StatelessWidget {
   List<String> MONTHS = [
@@ -101,13 +102,7 @@ class HomeAccountant extends StatelessWidget {
                           ),
                           const Spacer(),
                           InkWell(
-                              onTap: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Login()),
-                                );
-                              },
+                              onTap: () => Get.to(()=>Login()),
                               child: Container(
                                 child: Row(
                                   children: [
