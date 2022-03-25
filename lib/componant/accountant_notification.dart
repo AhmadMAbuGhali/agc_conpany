@@ -1,7 +1,5 @@
 import 'package:agc_conpany/componant/accountant_button_reject.dart';
 import 'package:agc_conpany/componant/accountant_button_trans.dart';
-import 'package:agc_conpany/componant/primarybutton.dart';
-import 'package:agc_conpany/componant/sacandarybutton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
