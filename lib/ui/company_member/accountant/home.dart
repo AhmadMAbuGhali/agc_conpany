@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'package:agc_conpany/componant/accountant_add_category.dart';
 import 'package:agc_conpany/componant/accountant_notification.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:flutter/cupertino.dart';
@@ -170,7 +171,12 @@ class HomeAccountant extends StatelessWidget {
             // ),
             Padding(
               padding: EdgeInsets.all(15),
-              child: AccountantNotification(),
+              child: Column(
+                children: [
+                  AccountantNotification(),
+                  AccountantAddCategory(label: "حيفا", onTap: (){})
+                ],
+              ),
             )
           ],
         ),
