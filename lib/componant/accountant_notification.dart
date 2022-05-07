@@ -22,8 +22,12 @@ class AccountantNotification extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'الزبون :أحمد محمد',
+                      'الزبون :أحمد محمود',
                       style: TextStyle(fontSize: 12.sp),
+                      /*
+                      * Test1
+                      * Test 2
+                      * */
                     ),
                     Text('المخبز :العائلات', style: TextStyle(fontSize: 12.sp)),
                     Text('رقم الهاتف :8765432',
