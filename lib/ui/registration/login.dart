@@ -1,12 +1,14 @@
 import 'package:agc_conpany/componant/input_feild.dart';
 import 'package:agc_conpany/resources/font_manager.dart';
 import 'package:agc_conpany/resources/styles_manager.dart';
+import 'package:agc_conpany/ui/admin/admin_home.dart';
 import 'package:agc_conpany/ui/nav_bar.dart';
 import 'package:agc_conpany/ui/registration/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../resources/color_manager.dart';
+import '../admin/admin_nav_bar.dart';
 
 class Login extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
@@ -119,7 +121,7 @@ class Login extends StatelessWidget {
               child: SizedBox(
                 width: 253.w,
                 height: 50.h,
-                child: ElevatedButton(onPressed: () => Get.to(()=>NavScreen()),
+                child: ElevatedButton(onPressed: () => Get.to(()=>AdminNavBar()),
                   child:const Text('تسجيل الدخول'),),
               )
             ),
