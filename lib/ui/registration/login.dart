@@ -1,10 +1,12 @@
 import 'package:agc_conpany/componant/input_feild.dart';
+import 'package:agc_conpany/resources/font_manager.dart';
+import 'package:agc_conpany/resources/styles_manager.dart';
 import 'package:agc_conpany/ui/nav_bar.dart';
 import 'package:agc_conpany/ui/registration/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import '../../componant/primarybutton.dart';
+import '../../resources/color_manager.dart';
 
 class Login extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
@@ -39,40 +41,31 @@ class Login extends StatelessWidget {
                       )),
                     ),
                   ),
-                  const Positioned(
+                      Positioned(
                     top: 40,
                     right: 150,
                     left: 0,
-                    child: const Text(
+                    child: Text(
                       'تسجيل الدخول ',
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                      style: getMediumStyle(color: ColorManager.white,fontSize: FontSize.s18),
                     ),
                   ),
-                  const Positioned(
+                    Positioned(
                     top: 90,
                     right: 170,
                     left: 0,
-                    child: const Text(
+                    child:   Text(
                       'مرحباً ',
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                      style:  getRegularStyle(color: ColorManager.white,fontSize: FontSize.s30),
                     ),
                   ),
-                  const Positioned(
+                    Positioned(
                     top: 150,
                     right: 120,
                     left: 0,
-                    child: const Text(
+                    child:   Text(
                       'سجل الدخول للمتابعة ',
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                      style:  getMediumStyle(color: ColorManager.white,fontSize: FontSize.s20),
                     ),
                   ),
                 ],
@@ -80,9 +73,9 @@ class Login extends StatelessWidget {
             ),
             SizedBox(height: 12.h),
             Container(
-              width: 295.w,
+              width: 325.w,
               height: 35.h,
-              margin: EdgeInsets.only(top: 64.h, left: 40.w, right: 40.w),
+              margin: EdgeInsets.only(top: 64.h, left: 25.w, right: 25.w),
               child: WidgetTextField(
                 hintText: 'البريد الالكتروني ',
                 inputType: TextInputType.emailAddress,
@@ -94,9 +87,9 @@ class Login extends StatelessWidget {
               ),
             ),
             Container(
-              width: 295.w,
+              width: 325.w,
               height: 35.h,
-              margin: EdgeInsets.only(top: 38.h, left: 40.w, right: 40.w),
+              margin: EdgeInsets.only(top: 38.h, left: 25.w, right: 25.w),
               child: WidgetTextField(
                 hintText: 'كلمة المرور',
                 inputType: TextInputType.visiblePassword,
@@ -109,27 +102,26 @@ class Login extends StatelessWidget {
               height: 18.h,
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 35),
+              padding:   EdgeInsets.only(right: 20.w),
               child: TextButton(
                   onPressed: () {},
-                  child: const Text(
+                  child:   Text(
                     'هل نسيت كلمة المرور ؟',
                     textAlign: TextAlign.right,
-                    style: TextStyle(
-                      decoration: TextDecoration.underline,
-                      color: Colors.black,
-                    ),
+                    style: getRegularStyle(color: ColorManager.black,fontSize: FontSize.s16.sp),
                   )),
             ),
             SizedBox(
               height: 18.h,
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 80),
-              child: PrimaryButton(
-                onTap: () => Get.to(()=>NavScreen()),
-                label: 'تسجيل الدخول ',
-              ),
+              padding:  EdgeInsets.symmetric(horizontal: 60.w),
+              child: SizedBox(
+                width: 253.w,
+                height: 50.h,
+                child: ElevatedButton(onPressed: () => Get.to(()=>NavScreen()),
+                  child:const Text('تسجيل الدخول'),),
+              )
             ),
             SizedBox(
               height: 18.h,
@@ -139,7 +131,7 @@ class Login extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    ' ليس لديك حساب؟  ',
+                    ' ليس لديك حساب؟',
                     style: TextStyle(
                       color: Colors.grey[600],
                     ),
@@ -147,7 +139,6 @@ class Login extends StatelessWidget {
                   TextButton(
                       onPressed: () {
                       Get.to(SingUP());
-
                       },
                       child: const Text(
                         'تسجيل',

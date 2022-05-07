@@ -1,3 +1,4 @@
+import 'package:agc_conpany/resources/theme_manager.dart';
 import 'package:agc_conpany/test.dart';
 import 'package:agc_conpany/ui/nav_bar.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
@@ -9,7 +10,6 @@ import 'package:splash_screen_view/SplashScreenView.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   runApp(MyApp());
 }
 
@@ -39,6 +39,7 @@ class _MyAppState extends State<MyApp> {
               locale: const Locale('ar', 'SA'),
               // OR Locale('ar', 'AE') OR Other RTL locales,
               debugShowCheckedModeBanner: false,
+              theme: getApplicationTheme(),
               home: SplashScreenView(
                 navigateRoute: Login(),
                 duration: 4000,

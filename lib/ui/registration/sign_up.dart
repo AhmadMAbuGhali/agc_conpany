@@ -1,10 +1,9 @@
 import 'package:agc_conpany/componant/input_feild.dart';
+import 'package:agc_conpany/ui/nav_bar.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-
-import '../../componant/primarybutton.dart';
 
 class SingUP extends GetxController {
   TextEditingController nameController = TextEditingController();
@@ -169,9 +168,10 @@ class SingUP extends GetxController {
             SizedBox(
               height: 25.h,
             ),
-            PrimaryButton(
-              onTap: () {},
-              label: 'تسجيل',
+            Padding(
+                padding: const EdgeInsets.only(right: 80),
+                child: ElevatedButton(onPressed: () => Get.to(()=>NavScreen()),
+                  child:Text('تسجيل'),)
             ),
             SizedBox(
               height: 5.h,

@@ -1,10 +1,8 @@
+import 'package:agc_conpany/resources/color_manager.dart';
 import 'package:agc_conpany/ui/company_member/accountant/home.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
-import '../themes/themes.dart';
-
 class NavScreen extends StatefulWidget {
   @override
   State<NavScreen> createState() => _HomeScreenState();
@@ -54,8 +52,8 @@ class _HomeScreenState extends State<NavScreen> {
             ),
           ],
           color: Colors.black.withOpacity(0.4),
-          buttonBackgroundColor: orangeClr,
-          backgroundColor: Colors.white,
+          buttonBackgroundColor: ColorManager.button,
+          backgroundColor: ColorManager.white,
           animationCurve: Curves.easeInOut,
           animationDuration: const Duration(milliseconds: 600),
           onTap: (index) {

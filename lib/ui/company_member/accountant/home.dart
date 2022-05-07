@@ -1,11 +1,16 @@
 import 'dart:math' as math;
 import 'package:agc_conpany/componant/accountant_add_category.dart';
 import 'package:agc_conpany/componant/accountant_notification.dart';
+import 'package:agc_conpany/resources/color_manager.dart';
+import 'package:agc_conpany/resources/font_manager.dart';
+import 'package:agc_conpany/resources/styles_manager.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import '../../../componant/accountant_completed_order.dart';
 
 class HomeAccountant extends StatelessWidget {
   List<String> MONTHS = [
@@ -67,17 +72,14 @@ class HomeAccountant extends StatelessWidget {
                         children: [
                           Text(
                             'أهلاً بك أحمد',
-                            style: TextStyle(
-                                fontSize: 30.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                            style: getBoldStyle(color: ColorManager.white,fontSize: FontSize.s30),
                           ),
                           const Spacer(),
                           IconButton(
                               onPressed: () {},
                               icon: const Icon(
                                 Icons.notifications,
-                                size: 27,
+                                size: 30,
                                 color: Colors.white,
                               ))
                         ],
@@ -88,7 +90,7 @@ class HomeAccountant extends StatelessWidget {
                       left: 0,
                       child: Text(
                         formattedDateTime(),
-                        style: TextStyle(fontSize: 20.sp, color: Colors.white),
+                        style: getMediumStyle(color: ColorManager.textOrange,fontSize: FontSize.s20),
                       )),
                   Positioned(
                       top: 92,
@@ -98,8 +100,7 @@ class HomeAccountant extends StatelessWidget {
                         children: [
                           Text(
                             formattedDay(),
-                            style:
-                                TextStyle(fontSize: 20.sp, color: Colors.white),
+                            style:getMediumStyle(color: ColorManager.white,fontSize: FontSize.s15)
                           ),
                           const Spacer(),
                           InkWell(
@@ -107,10 +108,10 @@ class HomeAccountant extends StatelessWidget {
                               child: Container(
                                 child: Row(
                                   children: [
-                                    const Text(
+                                      Text(
                                       'تسجيل الخروج',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
+                                      style: getRegularStyle(color: ColorManager.white,fontSize: FontSize.s13)),
+
                                     Transform(
                                       alignment: Alignment.center,
                                       transform: Matrix4.rotationY(math.pi),
@@ -174,7 +175,8 @@ class HomeAccountant extends StatelessWidget {
               child: Column(
                 children: [
                   AccountantNotification(),
-                  AccountantAddCategory(label: "حيفا", onTap: (){})
+                  AccountantAddCategory(label: "دقيق حيفا", onTap: (){}),
+                  SizedBox(height: 30.h,),CompletedOrder()
                 ],
               ),
             )

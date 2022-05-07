@@ -1,8 +1,8 @@
+import 'package:agc_conpany/resources/color_manager.dart';
+import 'package:agc_conpany/resources/font_manager.dart';
+import 'package:agc_conpany/resources/styles_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../themes/themes.dart';
-
 class AccountantAddCategory extends StatelessWidget {
   const AccountantAddCategory({
     Key? key,
@@ -20,17 +20,16 @@ class AccountantAddCategory extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-
+padding: EdgeInsets.symmetric(horizontal: 20.w),
         width: double.infinity,
         height: 41.h,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(15.r),
+            color: ColorManager.white,
             boxShadow:  [
         BoxShadow(
-        color: Colors.grey.withOpacity(0.5),
-        spreadRadius: 5,
-        blurRadius: 7,
+        color: ColorManager.black.withOpacity(0.16),
+         blurRadius: 10,
         offset: Offset(0, 3), // changes position of shadow
       ),
       ],
@@ -38,22 +37,15 @@ class AccountantAddCategory extends StatelessWidget {
               color: Colors.white60,
               width: 1,
             )),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(label,style:  getBoldStyle(color: ColorManager.black,fontSize: FontSize.s15) ,),
+          Spacer(),
+          IconButton(onPressed: onTap, icon: Icon(Icons.edit,size: 17,color: ColorManager.gray)),
+          Text("تعديل" , style: getMediumStyle(color: ColorManager.gray,fontSize: FontSize.s15),)
+          ],
 
-            crossAxisAlignment: CrossAxisAlignment.start,
-
-            children: [
-              Text(label,style: titleStyle ,),
-            Spacer(),
-            IconButton(onPressed: onTap, icon: Icon(Icons.edit)),
-             const Text("تعديل " , style: TextStyle(
-               color: Colors.grey
-             ),)
-            ],
-
-          ),
         )
       ),
     );

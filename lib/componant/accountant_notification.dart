@@ -1,7 +1,15 @@
-import 'package:agc_conpany/componant/accountant_button_reject.dart';
-import 'package:agc_conpany/componant/accountant_button_trans.dart';
+import 'package:agc_conpany/resources/color_manager.dart';
+import 'package:agc_conpany/resources/font_manager.dart';
+import 'package:agc_conpany/resources/styles_manager.dart';
+import 'package:agc_conpany/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+
+import '../resources/assets_manager.dart';
+import '../ui/nav_bar.dart';
 
 class AccountantNotification extends StatelessWidget {
   @override
@@ -11,7 +19,14 @@ class AccountantNotification extends StatelessWidget {
       width: 330.w,
       height: 111.h,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25), color: Colors.grey),
+          boxShadow: [
+            BoxShadow(
+              color: ColorManager.black.withOpacity(0.16),
+               blurRadius: 10,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+          borderRadius: BorderRadius.circular(15.r), color: ColorManager.white),
       child: Stack(
         children: [
           Padding(
@@ -50,32 +65,54 @@ class AccountantNotification extends StatelessWidget {
                   height: 11.h,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      height: 24.h,
-                      width: 122.w,
-                      child: AccountantNotiTrans(
-                        label: 'تحويل الي أمين المخزن',
-                        onTap: () {},
+                    SizedBox(
+                      width: 129.w,
+                      height: 20.h,
+                      child: ElevatedButton(onPressed: () => Get.to(()=>NavScreen()),
+                        child: Text('تحويل الى امين المخزن',style: getRegularStyle(color: ColorManager.white,fontSize: FontSize.s10.sp),)
+                        ,style: ElevatedButton.styleFrom(
+                            primary: ColorManager.primary,
+                            elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(AppSize.s5))
+                         ),
                       ),
                     ),
-                    AccountantButtonReject(
-                      label: 'رفض',
-                      onTap: () {},
-                      color: Colors.transparent,
+                    SizedBox(width: 15.w,)
+                    , SizedBox(
                       width: 69.w,
-                      height: 24.h,
+                      height: 20.h,
+                      child: ElevatedButton(onPressed: () => Get.to(()=>NavScreen()),
+                        child:Text('رفض',style: getRegularStyle(color: ColorManager.reject,fontSize: FontSize.s14.sp),)
+                          ,style: ElevatedButton.styleFrom(
+                              primary: ColorManager.white,
+                              side: BorderSide(width: 1.0, color: ColorManager.reject,),elevation: 1, shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(AppSize.s5))
+                          ),),
                     ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.timer,
-                          size: 15,
-                        ),
-                        Text('منذ 3 ساعات ', style: TextStyle(fontSize: 12.sp)),
-                      ],
+                    SizedBox(width: 10.w,),
+                    // Container(
+                    //   height: 24.h,
+                    //   width: 122.w,
+                    //   child: AccountantNotiTrans(
+                    //     label: 'تحويل الي أمين المخزن',
+                    //     onTap: () {},
+                    //   ),
+                    // ),
+                    // AccountantButtonReject(
+                    //   label: 'رفض',
+                    //   onTap: () {},
+                    //   color: Colors.transparent,
+                    //   width: 69.w,
+                    //   height: 24.h,
+                    // ),
+                    SvgPicture.asset(
+                      IconAssets.time,width: 13.w,height: 13.h,
                     ),
+                    SizedBox(width: 6.w,),
+                    Text('منذ 3 ساعات ', style: getRegularStyle(color: ColorManager.grayTime,fontSize: FontSize.s13)),
                   ],
                 ),
               ],

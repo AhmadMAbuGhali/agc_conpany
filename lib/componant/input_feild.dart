@@ -1,8 +1,4 @@
-import 'package:agc_conpany/themes/themes.dart';
-import 'package:agc_conpany/ui/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_utils/src/extensions/context_extensions.dart';
 
 class WidgetTextField extends StatelessWidget {
   String hintText;
