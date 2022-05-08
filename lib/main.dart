@@ -1,7 +1,7 @@
 import 'package:agc_conpany/resources/theme_manager.dart';
 import 'package:agc_conpany/test.dart';
 import 'package:agc_conpany/ui/company_member/accountant/notifiction.dart';
-import 'package:agc_conpany/ui/navigations_bar/nav_bar.dart';
+import 'package:agc_conpany/ui/navigations_bar/accountant_nav_bar.dart';
 import 'package:agc_conpany/ui/navigations_bar/secretary_nav_bar.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:flutter/material.dart';

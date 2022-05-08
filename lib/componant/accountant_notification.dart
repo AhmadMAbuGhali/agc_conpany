@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../resources/assets_manager.dart';
-import '../ui/navigations_bar/nav_bar.dart';
+import '../ui/navigations_bar/accountant_nav_bar.dart';
 
 class AccountantNotification extends StatelessWidget {
   @override
@@ -95,21 +95,7 @@ class AccountantNotification extends StatelessWidget {
                           ),),
                     ),
                     SizedBox(width: 10.w,),
-                    // Container(
-                    //   height: 24.h,
-                    //   width: 122.w,
-                    //   child: AccountantNotiTrans(
-                    //     label: 'تحويل الي أمين المخزن',
-                    //     onTap: () {},
-                    //   ),
-                    // ),
-                    // AccountantButtonReject(
-                    //   label: 'رفض',
-                    //   onTap: () {},
-                    //   color: Colors.transparent,
-                    //   width: 69.w,
-                    //   height: 24.h,
-                    // ),
+
                     SvgPicture.asset(
                       IconAssets.time,width: 13.w,height: 13.h,
                     ),

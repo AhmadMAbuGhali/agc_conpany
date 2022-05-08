@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../resources/assets_manager.dart';
-import '../ui/navigations_bar/nav_bar.dart';
+import '../ui/navigations_bar/accountant_nav_bar.dart';
 
 class SecreraryShowCustomerList extends StatelessWidget {
   @override

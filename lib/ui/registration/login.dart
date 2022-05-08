@@ -3,7 +3,7 @@ import 'package:agc_conpany/resources/font_manager.dart';
 import 'package:agc_conpany/resources/styles_manager.dart';
 import 'package:agc_conpany/ui/admin/admin_home.dart';
 import 'package:agc_conpany/ui/navigations_bar/secretary_nav_bar.dart';
-import 'package:agc_conpany/ui/navigations_bar/nav_bar.dart';
+import 'package:agc_conpany/ui/navigations_bar/accountant_nav_bar.dart';
 import 'package:agc_conpany/ui/registration/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

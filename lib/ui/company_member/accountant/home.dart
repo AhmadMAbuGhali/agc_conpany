@@ -11,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 import '../../../componant/accountant_completed_order.dart';
+import '../../../componant/accountant_product.dart';
 
 class HomeAccountant extends StatelessWidget {
   List<String> MONTHS = [
@@ -142,7 +143,8 @@ class HomeAccountant extends StatelessWidget {
             Column(
               children: [
 
-                SizedBox(height: 30.h,),CompletedOrder()
+                SizedBox(height: 30.h,),
+                AccountantProductWidget()
               ],
             )
           ],

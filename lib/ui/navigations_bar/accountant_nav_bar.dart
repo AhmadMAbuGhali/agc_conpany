@@ -5,6 +5,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../company_member/accountant/accountant_completed_orders.dart';
+import '../company_member/accountant/accountant_product.dart';
 import '../company_member/accountant/catoegoreis_accountant.dart';
 import '../company_member/accountant/notifiction.dart';
 class NavScreen extends StatefulWidget {
@@ -13,7 +14,7 @@ class NavScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<NavScreen> {
-  final int _pageCount = 4;
+  final int _pageCount = 5;
   int _pageIndex = 0;
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   @override
@@ -52,6 +53,12 @@ class _HomeScreenState extends State<NavScreen> {
               children: const [
                 Icon(Icons.favorite, size: 20),
                 Text('Hello'),
+              ],
+            ),Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(Icons.favorite, size: 20),
+                Text('product'),
               ],
             ),
           ],
@@ -101,6 +108,8 @@ class _HomeScreenState extends State<NavScreen> {
         return AccountantCategoeies();
       case 3:
         return AccountantCompletedOrders();
+      case 4:
+        return AccountantProduct();
     }
     throw "Invalid index $index";
   }
