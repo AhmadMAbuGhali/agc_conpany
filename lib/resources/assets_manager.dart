@@ -1,7 +1,8 @@
 const String IMAGE_PATH = 'assets/images';
 
 class ImageAssets {
-  static const String productTest = '$IMAGE_PATH/test.png';
+  static const String productTest = '$IMAGE_PATH/product.png';
+
 
 
 }
@@ -12,6 +13,7 @@ class IconAssets{
   static const String admin_company_member='$ICON_PATH/admincompanymember.svg';
   static const String admin_join='$ICON_PATH/adminjoin_req.svg';
   static const String person='$ICON_PATH/person.svg';
+  static const String complete_order='$ICON_PATH/completeorder.svg';
 
 
 }

@@ -2,6 +2,7 @@ import 'package:agc_conpany/componant/input_feild.dart';
 import 'package:agc_conpany/resources/font_manager.dart';
 import 'package:agc_conpany/resources/styles_manager.dart';
 import 'package:agc_conpany/ui/admin/admin_home.dart';
+import 'package:agc_conpany/ui/company_member/secretary/secretary_nav_bar.dart';
 import 'package:agc_conpany/ui/nav_bar.dart';
 import 'package:agc_conpany/ui/registration/sign_up.dart';
 import 'package:flutter/material.dart';
@@ -121,7 +122,7 @@ class Login extends StatelessWidget {
               child: SizedBox(
                 width: 253.w,
                 height: 50.h,
-                child: ElevatedButton(onPressed: () => Get.to(()=>AdminNavBar()),
+                child: ElevatedButton(onPressed: () => Get.to(()=>SecretaryNavBar()),
                   child:const Text('تسجيل الدخول'),),
               )
             ),

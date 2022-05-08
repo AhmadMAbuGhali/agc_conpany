@@ -1,24 +1,29 @@
+import 'package:agc_conpany/componant/secretary_join_customer.dart';
 import 'package:agc_conpany/resources/color_manager.dart';
 import 'package:agc_conpany/ui/admin/admin_home.dart';
 import 'package:agc_conpany/ui/admin/admin_member_join_req.dart';
 import 'package:agc_conpany/ui/company_member/accountant/home.dart';
+import 'package:agc_conpany/ui/company_member/secretary/secertary_home.dart';
+import 'package:agc_conpany/ui/company_member/secretary/secretary_complete_order.dart';
+import 'package:agc_conpany/ui/company_member/secretary/secretary_customer_join.dart';
+import 'package:agc_conpany/ui/company_member/secretary/secretary_customer_list.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../componant/join_req.dart';
-import '../../resources/assets_manager.dart';
-import 'admin_company_member.dart';
+import '../../../resources/assets_manager.dart';
 
-class AdminNavBar extends StatefulWidget {
+
+
+class SecretaryNavBar extends StatefulWidget {
   @override
-  State<AdminNavBar> createState() => _HomeScreenState();
+  State<SecretaryNavBar> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<AdminNavBar> {
-  final int _pageCount = 3;
+class _HomeScreenState extends State<SecretaryNavBar> {
+  final int _pageCount = 4;
   int _pageIndex = 0;
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   @override
@@ -46,7 +51,7 @@ class _HomeScreenState extends State<AdminNavBar> {
                 SvgPicture.asset(
                   IconAssets.admin_company_member,width: 20.w,height: 20.h,
                 ),
-                const Text('الأعضاء'),
+                const Text('الزبائن'),
               ],
             ),
             Column(
@@ -56,6 +61,15 @@ class _HomeScreenState extends State<AdminNavBar> {
                   IconAssets.admin_join,width: 20.w,height: 20.h,
                 ),
                 const Text('طلبات  الانضمام'),
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:  [
+                SvgPicture.asset(
+                  IconAssets.complete_order,width: 20.w,height: 20.h,
+                ),
+                const Text('الطلبات المكتملة'),
               ],
             ),
 
@@ -99,12 +113,13 @@ class _HomeScreenState extends State<AdminNavBar> {
   Widget ppage(int index) {
     switch (index) {
       case 0:
-        return AdminHome();
+        return SecretaryHome();
       case 1:
-        return AdminCompanyMember();
+        return SecretaryCustomerList();
       case 2:
-        return AdminMemberJoin();
-
+        return SecretaryCustomerReq();
+      case 3:
+        return SecretaryCompleteOrder();
     }
     throw "Invalid index $index";
   }

@@ -169,9 +169,7 @@ class AdminHome extends StatelessWidget {
                 padding: EdgeInsets.all(15),
                 child: Column(
                   children: [
-                    AdminJR(),
-                    SizedBox(height: 30.h,),
-                    AdminMember()
+
                   ],
 
                 ),
