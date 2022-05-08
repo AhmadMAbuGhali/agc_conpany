@@ -3,6 +3,10 @@ import 'package:agc_conpany/ui/company_member/accountant/home.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+
+import '../company_member/accountant/accountant_completed_orders.dart';
+import '../company_member/accountant/catoegoreis_accountant.dart';
+import '../company_member/accountant/notifiction.dart';
 class NavScreen extends StatefulWidget {
   @override
   State<NavScreen> createState() => _HomeScreenState();
@@ -92,11 +96,11 @@ class _HomeScreenState extends State<NavScreen> {
       case 0:
         return HomeAccountant();
       case 1:
-        return Login();
+        return Notifiction();
       case 2:
-        return Login();
+        return AccountantCategoeies();
       case 3:
-        return Login();
+        return AccountantCompletedOrders();
     }
     throw "Invalid index $index";
   }

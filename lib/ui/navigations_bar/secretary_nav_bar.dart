@@ -1,5 +1,7 @@
 import 'package:agc_conpany/componant/secretary_join_customer.dart';
 import 'package:agc_conpany/resources/color_manager.dart';
+import 'package:agc_conpany/resources/font_manager.dart';
+import 'package:agc_conpany/resources/styles_manager.dart';
 import 'package:agc_conpany/ui/admin/admin_home.dart';
 import 'package:agc_conpany/ui/admin/admin_member_join_req.dart';
 import 'package:agc_conpany/ui/company_member/accountant/home.dart';
@@ -13,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../resources/assets_manager.dart';
+import '../../resources/assets_manager.dart';
 
 
 
@@ -65,11 +67,12 @@ class _HomeScreenState extends State<SecretaryNavBar> {
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children:  [
                 SvgPicture.asset(
                   IconAssets.complete_order,width: 20.w,height: 20.h,
                 ),
-                const Text('الطلبات المكتملة'),
+                 Text('الطلبات المكتملة',style: getRegularStyle(color: ColorManager.black,fontSize: FontSize.s10),),
               ],
             ),
 

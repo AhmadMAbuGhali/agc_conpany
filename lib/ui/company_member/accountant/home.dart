@@ -134,51 +134,16 @@ class HomeAccountant extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(top: 24.h, right: 16.w),
               child: Text(
-                'اخر الاشعارات',
+                ' الاشعارات',
                 style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
               ),
             ),
-            // Container(
-            //   height: 320,
-            //   child: Column(
-            //     children: [
-            //       Expanded(
-            //         child: Scrollbar(
-            //           isAlwaysShown: true,
-            //           showTrackOnHover: true,
-            //           hoverThickness: 15.0,
-            //           child: ListView.builder(
-            //             physics: const BouncingScrollPhysics(),
-            //             padding: const EdgeInsets.only(bottom: 60),
-            //             controller: rrectController,
-            //             itemCount: 15,
-            //             itemBuilder: (context, index) {
-            //               return AccountantNotification();
-            //             },
-            //           ),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            // SingleChildScrollView(
-            //   child: Expanded(
-            //     child: ListView.builder(
-            //         itemCount: 5,
-            //         itemBuilder: (context, ind) {
-            //           return AccountantNotification();
-            //         }),
-            //   ),
-            // ),
-            Padding(
-              padding: EdgeInsets.all(15),
-              child: Column(
-                children: [
-                  AccountantNotification(),
-                  AccountantAddCategory(label: "دقيق حيفا", onTap: (){}),
-                  SizedBox(height: 30.h,),CompletedOrder()
-                ],
-              ),
+
+            Column(
+              children: [
+
+                SizedBox(height: 30.h,),CompletedOrder()
+              ],
             )
           ],
         ),

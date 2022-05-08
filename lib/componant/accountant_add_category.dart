@@ -20,6 +20,7 @@ class AccountantAddCategory extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        margin: EdgeInsets.symmetric(vertical: 15.h,horizontal: 20.w),
 padding: EdgeInsets.symmetric(horizontal: 20.w),
         width: double.infinity,
         height: 41.h,

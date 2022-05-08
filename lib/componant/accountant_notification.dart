@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../resources/assets_manager.dart';
-import '../ui/nav_bar.dart';
+import '../ui/navigations_bar/nav_bar.dart';
 
 class AccountantNotification extends StatelessWidget {
   @override
@@ -18,6 +18,7 @@ class AccountantNotification extends StatelessWidget {
     return Container(
       width: 330.w,
       height: 111.h,
+      margin: EdgeInsets.symmetric(vertical: 20.h,horizontal: 20.w),
       decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(

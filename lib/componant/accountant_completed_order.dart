@@ -13,7 +13,7 @@ class CompletedOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height:130.h ,
-      margin: EdgeInsets.symmetric(vertical: 8.h),
+      margin: EdgeInsets.symmetric(vertical: 18.h,horizontal: 20.w),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(8.r),
         color: ColorManager.white
         ,  boxShadow: [

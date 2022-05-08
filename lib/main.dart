@@ -1,6 +1,8 @@
 import 'package:agc_conpany/resources/theme_manager.dart';
 import 'package:agc_conpany/test.dart';
-import 'package:agc_conpany/ui/nav_bar.dart';
+import 'package:agc_conpany/ui/company_member/accountant/notifiction.dart';
+import 'package:agc_conpany/ui/navigations_bar/nav_bar.dart';
+import 'package:agc_conpany/ui/navigations_bar/secretary_nav_bar.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -41,7 +43,7 @@ class _MyAppState extends State<MyApp> {
               debugShowCheckedModeBanner: false,
               theme: getApplicationTheme(),
               home: SplashScreenView(
-                navigateRoute: Login(),
+                navigateRoute: NavScreen(),
                 duration: 4000,
                 imageSize: 233,
                 imageSrc: 'assets/images/splahlogo.png',

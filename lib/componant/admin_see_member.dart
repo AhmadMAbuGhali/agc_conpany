@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../resources/assets_manager.dart';
-import '../ui/nav_bar.dart';
+import '../ui/navigations_bar/nav_bar.dart';
 
 class AdminMember extends StatelessWidget {
   @override
