@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
               debugShowCheckedModeBanner: false,
               theme: getApplicationTheme(),
               home: SplashScreenView(
-                navigateRoute: NavScreen(),
+                navigateRoute: Login(),
                 duration: 4000,
                 imageSize: 233,
                 imageSrc: 'assets/images/splahlogo.png',

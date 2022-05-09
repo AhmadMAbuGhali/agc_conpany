@@ -14,6 +14,8 @@ class IconAssets{
   static const String admin_join='$ICON_PATH/adminjoin_req.svg';
   static const String person='$ICON_PATH/person.svg';
   static const String complete_order='$ICON_PATH/completeorder.svg';
+  static const String orders='$ICON_PATH/orders.svg';
+  static const String transfer_order='$ICON_PATH/transferorder.svg';
 
 
 }

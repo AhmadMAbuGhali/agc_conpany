@@ -5,6 +5,8 @@ import 'package:agc_conpany/resources/styles_manager.dart';
 import 'package:agc_conpany/ui/admin/admin_home.dart';
 import 'package:agc_conpany/ui/admin/admin_member_join_req.dart';
 import 'package:agc_conpany/ui/company_member/accountant/home.dart';
+import 'package:agc_conpany/ui/company_member/salesperson/salesperson_home.dart';
+import 'package:agc_conpany/ui/company_member/salesperson/salesperson_order_details.dart';
 import 'package:agc_conpany/ui/company_member/secretary/secertary_home.dart';
 import 'package:agc_conpany/ui/company_member/secretary/secretary_complete_order.dart';
 import 'package:agc_conpany/ui/company_member/secretary/secretary_customer_join.dart';
@@ -16,15 +18,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../resources/assets_manager.dart';
+import '../company_member/salesperson/salesperson_customer_order.dart';
 
 
 
-class SecretaryNavBar extends StatefulWidget {
+class SalespersonNavBar extends StatefulWidget {
   @override
-  State<SecretaryNavBar> createState() => _HomeScreenState();
+  State<SalespersonNavBar> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<SecretaryNavBar> {
+class _HomeScreenState extends State<SalespersonNavBar> {
   final int _pageCount = 4;
   int _pageIndex = 0;
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
@@ -51,18 +54,18 @@ class _HomeScreenState extends State<SecretaryNavBar> {
               mainAxisAlignment: MainAxisAlignment.center,
               children:  [
                 SvgPicture.asset(
-                  IconAssets.admin_company_member,width: 20.w,height: 20.h,
+                  IconAssets.orders,width: 20.w,height: 20.h,
                 ),
-                const Text('الزبائن'),
+                const Text('الطلبات'),
               ],
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children:  [
                 SvgPicture.asset(
-                  IconAssets.admin_join,width: 20.w,height: 20.h,
+                  IconAssets.transfer_order,width: 20.w,height: 20.h,
                 ),
-                const Text('طلبات  الانضمام'),
+                const Text('تحويل الطلبات'),
               ],
             ),
             Column(
@@ -72,7 +75,7 @@ class _HomeScreenState extends State<SecretaryNavBar> {
                 SvgPicture.asset(
                   IconAssets.complete_order,width: 20.w,height: 20.h,
                 ),
-                 Text('الطلبات المكتملة',style: getRegularStyle(color: ColorManager.black,fontSize: FontSize.s11),),
+                Text('الطلبات المكتملة',style: getRegularStyle(color: ColorManager.black,fontSize: FontSize.s11),),
               ],
             ),
 
@@ -116,11 +119,11 @@ class _HomeScreenState extends State<SecretaryNavBar> {
   Widget ppage(int index) {
     switch (index) {
       case 0:
-        return SecretaryHome();
+        return SalespersonHome();
       case 1:
-        return SecretaryCustomerList();
+        return SalespersonCustomerOrder();
       case 2:
-        return SecretaryCustomerReq();
+        return SalespersonOrderDetails();
       case 3:
         return SecretaryCompleteOrder();
     }
