@@ -7,6 +7,7 @@ import 'package:agc_conpany/ui/admin/admin_member_join_req.dart';
 import 'package:agc_conpany/ui/company_member/accountant/home.dart';
 import 'package:agc_conpany/ui/company_member/salesperson/salesperson_home.dart';
 import 'package:agc_conpany/ui/company_member/salesperson/salesperson_order_details.dart';
+import 'package:agc_conpany/ui/company_member/salesperson/salesperson_transfer_order.dart';
 import 'package:agc_conpany/ui/company_member/secretary/secertary_home.dart';
 import 'package:agc_conpany/ui/company_member/secretary/secretary_complete_order.dart';
 import 'package:agc_conpany/ui/company_member/secretary/secretary_customer_join.dart';
@@ -123,7 +124,7 @@ class _HomeScreenState extends State<SalespersonNavBar> {
       case 1:
         return SalespersonCustomerOrder();
       case 2:
-        return SalespersonOrderDetails();
+        return SalespersonTransferOrder();
       case 3:
         return SecretaryCompleteOrder();
     }

@@ -4,12 +4,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 import '../../../componant/order_from_customer.dart';
+import '../../../componant/salesperson_to_accountant.dart';
 import '../../../resources/color_manager.dart';
 import '../../../resources/font_manager.dart';
 import '../../../resources/styles_manager.dart';
 
-class SalespersonCustomerOrder extends StatelessWidget {
-  const SalespersonCustomerOrder({Key? key}) : super(key: key);
+class SalespersonTransferOrder extends StatelessWidget {
+  const SalespersonTransferOrder({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class SalespersonCustomerOrder extends StatelessWidget {
               child: Column(
 
                 children: [
-                  Text('طلبات الزبائن',
+                  Text('تحويل الطلبات',
                     style: getBoldStyle(color: ColorManager.primary,fontSize: FontSize.s22),
                   ),
 
@@ -30,7 +31,7 @@ class SalespersonCustomerOrder extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder:(context, index) {
-                      return CustomerOrder();
+                      return SalespersonToAccountant();
                     } ,itemCount: 10,),
 
                 ],
