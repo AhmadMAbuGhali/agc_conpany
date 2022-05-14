@@ -30,6 +30,7 @@ class SalespersonCustomerOrder extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder:(context, index) {
+
                       return CustomerOrder();
                     } ,itemCount: 10,),
 

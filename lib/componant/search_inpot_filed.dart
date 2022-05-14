@@ -36,16 +36,20 @@ class WidgetSearchField extends StatelessWidget {
         ],
       ),
       child: TextFormField(
-
+            
         style: TextStyle(color: Colors.black),
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: controller,
         obscureText: isPassword,
+        maxLines: 1,
+
         keyboardType: inputType,
         decoration: InputDecoration(
           // border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
           suffixIcon: icon,
           border: InputBorder.none,
+          contentPadding: EdgeInsets.all(15),
+
 
           hintStyle: TextStyle(color: Colors.black, fontSize: 16),
           labelStyle: TextStyle(color: Colors.black, fontSize: 25),
