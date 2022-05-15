@@ -1,4 +1,4 @@
-import 'package:agc_conpany/componant/input_feild.dart';
+
 import 'package:agc_conpany/resources/font_manager.dart';
 import 'package:agc_conpany/resources/styles_manager.dart';
 import 'package:agc_conpany/ui/admin/admin_home.dart';
@@ -9,6 +9,7 @@ import 'package:agc_conpany/ui/registration/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import '../../componant/componant.dart';
 import '../../resources/color_manager.dart';
 import '../admin/admin_nav_bar.dart';
 

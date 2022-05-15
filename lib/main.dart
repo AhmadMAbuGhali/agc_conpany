@@ -1,9 +1,6 @@
 import 'package:agc_conpany/resources/theme_manager.dart';
-import 'package:agc_conpany/test.dart';
-import 'package:agc_conpany/ui/company_member/accountant/notifiction.dart';
-import 'package:agc_conpany/ui/navigations_bar/accountant_nav_bar.dart';
-import 'package:agc_conpany/ui/navigations_bar/secretary_nav_bar.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
+import 'package:agc_conpany/ui/registration/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,18 +39,7 @@ class _MyAppState extends State<MyApp> {
               // OR Locale('ar', 'AE') OR Other RTL locales,
               debugShowCheckedModeBanner: false,
               theme: getApplicationTheme(),
-              home: SplashScreenView(
-                navigateRoute: Login(),
-                duration: 4000,
-                imageSize: 233,
-                imageSrc: 'assets/images/splahlogo.png',
-                backgroundColor: Colors.white,
-                text: "مجموعة أبناء أبوغالي للإستثمار",
-                textType: TextType.TyperAnimatedText,
-                textStyle: const TextStyle(
-                  fontSize: 31.0,
-                ),
-              ),
+              home: SplashScreen(),
             ));
     // return MaterialApp(
     //   title: 'Flutter Demo',

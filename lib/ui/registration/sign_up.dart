@@ -1,9 +1,11 @@
-import 'package:agc_conpany/componant/input_feild.dart';
+
 import 'package:agc_conpany/ui/navigations_bar/accountant_nav_bar.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import '../../componant/componant.dart';
 
 class SingUP extends GetxController {
   TextEditingController nameController = TextEditingController();

@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 
-import 'package:agc_conpany/componant/admin_see_member.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -133,38 +133,7 @@ class SecretaryHome extends StatelessWidget {
                 style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
               ),
             ),
-            // Container(
-            //   height: 320,
-            //   child: Column(
-            //     children: [
-            //       Expanded(
-            //         child: Scrollbar(
-            //           isAlwaysShown: true,
-            //           showTrackOnHover: true,
-            //           hoverThickness: 15.0,
-            //           child: ListView.builder(
-            //             physics: const BouncingScrollPhysics(),
-            //             padding: const EdgeInsets.only(bottom: 60),
-            //             controller: rrectController,
-            //             itemCount: 15,
-            //             itemBuilder: (context, index) {
-            //               return AccountantNotification();
-            //             },
-            //           ),
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            // SingleChildScrollView(
-            //   child: Expanded(
-            //     child: ListView.builder(
-            //         itemCount: 5,
-            //         itemBuilder: (context, ind) {
-            //           return AccountantNotification();
-            //         }),
-            //   ),
-            // ),
+
             Padding(
               padding: EdgeInsets.all(15),
               child: Column(

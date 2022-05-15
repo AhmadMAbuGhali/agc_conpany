@@ -1,6 +1,5 @@
 import 'dart:math' as math;
-import 'package:agc_conpany/componant/accountant_add_category.dart';
-import 'package:agc_conpany/componant/accountant_notification.dart';
+
 import 'package:agc_conpany/resources/color_manager.dart';
 import 'package:agc_conpany/resources/font_manager.dart';
 import 'package:agc_conpany/resources/styles_manager.dart';
@@ -10,8 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../componant/accountant_completed_order.dart';
-import '../../../componant/accountant_product.dart';
+import '../../../componant/componant.dart';
+
+
 
 class HomeAccountant extends StatelessWidget {
   List<String> MONTHS = [

@@ -1,13 +1,10 @@
 import 'dart:math' as math;
 
-import 'package:agc_conpany/componant/admin_see_member.dart';
-import 'package:agc_conpany/componant/search_inpot_filed.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../../componant/order_from_customer.dart';
+import '../../../componant/componant.dart';
 import '../../../resources/color_manager.dart';
 import '../../../resources/font_manager.dart';
 import '../../../resources/styles_manager.dart';

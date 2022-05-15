@@ -1,4 +1,4 @@
-import 'package:agc_conpany/componant/secretary_join_customer.dart';
+
 import 'package:agc_conpany/resources/color_manager.dart';
 import 'package:agc_conpany/resources/font_manager.dart';
 import 'package:agc_conpany/resources/styles_manager.dart';

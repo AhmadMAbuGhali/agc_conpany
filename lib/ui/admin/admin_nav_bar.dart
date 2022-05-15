@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../componant/join_req.dart';
+
 import '../../resources/assets_manager.dart';
 import 'admin_company_member.dart';
 

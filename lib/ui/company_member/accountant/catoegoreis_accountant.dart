@@ -1,4 +1,4 @@
-import 'package:agc_conpany/componant/accountant_add_category.dart';
+
 import 'package:agc_conpany/resources/color_manager.dart';
 import 'package:agc_conpany/resources/font_manager.dart';
 import 'package:agc_conpany/resources/styles_manager.dart';
@@ -6,6 +6,8 @@ import 'package:agc_conpany/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+
+import '../../../componant/componant.dart';
 
 class AccountantCategoeies extends StatelessWidget {
   @override

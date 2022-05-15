@@ -1,7 +1,8 @@
-import 'package:agc_conpany/componant/join_req.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../componant/componant.dart';
 import '../../resources/color_manager.dart';
 import '../../resources/font_manager.dart';
 import '../../resources/styles_manager.dart';

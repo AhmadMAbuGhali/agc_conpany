@@ -5,8 +5,9 @@ import 'package:agc_conpany/resources/values_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../componant/accountant_completed_order.dart';
-import '../../../componant/accountant_notification.dart';
+import '../../../componant/componant.dart';
+
+
 
 class AccountantCompletedOrders extends StatelessWidget {
   @override
