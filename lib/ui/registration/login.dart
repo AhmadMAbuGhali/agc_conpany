@@ -5,6 +5,7 @@ import 'package:agc_conpany/ui/admin/admin_home.dart';
 import 'package:agc_conpany/ui/navigations_bar/salesperson_nav_bar.dart';
 import 'package:agc_conpany/ui/navigations_bar/secretary_nav_bar.dart';
 import 'package:agc_conpany/ui/navigations_bar/accountant_nav_bar.dart';
+import 'package:agc_conpany/ui/navigations_bar/storekeeper_nav_bar.dart';
 import 'package:agc_conpany/ui/registration/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -124,7 +125,7 @@ class Login extends StatelessWidget {
               child: SizedBox(
                 width: 253.w,
                 height: 50.h,
-                child: ElevatedButton(onPressed: () => Get.to(()=>SalespersonNavBar()),
+                child: ElevatedButton(onPressed: () => Get.to(()=>StoreKeeperNavBar()),
                   child:const Text('تسجيل الدخول'),),
               )
             ),
