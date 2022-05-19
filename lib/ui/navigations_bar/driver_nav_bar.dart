@@ -2,7 +2,6 @@
 import 'package:agc_conpany/resources/color_manager.dart';
 import 'package:agc_conpany/resources/font_manager.dart';
 import 'package:agc_conpany/resources/styles_manager.dart';
-import 'package:agc_conpany/ui/company_member/salesperson/salesperson_home.dart';
 import 'package:agc_conpany/ui/company_member/salesperson/salesperson_transfer_order.dart';
 import 'package:agc_conpany/ui/company_member/secretary/secretary_complete_order.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -11,16 +10,17 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../resources/assets_manager.dart';
-import '../company_member/salesperson/salesperson_customer_order.dart';
+import '../company_member/driver/driver_home.dart';
+import '../company_member/driver/driver_order.dart';
 
 
 
-class SalespersonNavBar extends StatefulWidget {
+class DriverNavBar extends StatefulWidget {
   @override
-  State<SalespersonNavBar> createState() => _HomeScreenState();
+  State<DriverNavBar> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<SalespersonNavBar> {
+class _HomeScreenState extends State<DriverNavBar> {
   final int _pageCount = 4;
   int _pageIndex = 0;
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
@@ -56,9 +56,9 @@ class _HomeScreenState extends State<SalespersonNavBar> {
               mainAxisAlignment: MainAxisAlignment.center,
               children:  [
                 SvgPicture.asset(
-                  IconAssets.transfer_order,width: 20.w,height: 20.h,
+                  IconAssets.order_delevery,width: 20.w,height: 20.h,
                 ),
-                const Text('تحويل الطلبات'),
+                const Text('تسليم الطلبات'),
               ],
             ),
             Column(
@@ -112,9 +112,9 @@ class _HomeScreenState extends State<SalespersonNavBar> {
   Widget ppage(int index) {
     switch (index) {
       case 0:
-        return SalespersonHome();
+        return DriverHome();
       case 1:
-        return SalespersonCustomerOrder();
+        return DriverCustomerOrder();
       case 2:
         return SalespersonTransferOrder();
       case 3:
