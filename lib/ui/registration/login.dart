@@ -143,15 +143,14 @@ class Login extends StatelessWidget {
                       color: Colors.grey[600],
                     ),
                   ),
-                  TextButton(
-                      onPressed: () {
-                      Get.to(SingUP());
-                      },
-                      child:  Text(
-                        'تسجيل',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
-                      ))
+                  GestureDetector(
+                   onTap: ()=>  Get.to(SingUP()),
+                    child: Text(
+                      'تسجيل',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black),
+                        ),
+                  )
                 ],
               ),
             )

@@ -1,4 +1,6 @@
 
+import 'dart:collection';
+
 import 'package:agc_conpany/ui/navigations_bar/accountant_nav_bar.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:flutter/material.dart';
@@ -7,25 +9,38 @@ import 'package:get/get.dart';
 
 import '../../componant/componant.dart';
 
-class SingUP extends GetxController {
+
+class SingUP extends StatelessWidget {
+
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passController = TextEditingController();
   // Initial Selected Value
-  String dropdownValue = "محاسب".obs as String;
+  String? dropdownValue = "محاسب";
+  String? name;
+  String? email;
+  String? password;
+  int? phoneNumber;
+  String? listItem;
+
+  static const Map<int,String> companyMemberList = {
+    1 : 'محاسب',
+    2: 'سكرتير',
+    3:'مندوب مبيعات ',
+    4:'أمين مخازن',
+    5:'سائق'
+  };
+
 
   // List of items in our dropdown menu
-  var items = [
-    'محاسب',
-    'سكرتير',
-    'أمين المخازن',
-    'سائق',
-    'مندوب مبيعات'
-  ];
+
 
   @override
   Widget build(BuildContext context) {
+
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight =  MediaQuery.of(context).size.height;
     // TODO: implement build
     return Scaffold(
       body: SafeArea(
@@ -69,7 +84,7 @@ class SingUP extends GetxController {
                     top: 71,
                     right: 165,
                     left: 0,
-                    child: const Text(
+                    child: Text(
                       'مرحباً ',
                       style: TextStyle(
                           fontSize: 30,
@@ -81,7 +96,7 @@ class SingUP extends GetxController {
                     top: 131,
                     right: 120,
                     left: 0,
-                    child: const Text(
+                    child: Text(
                       'أنشئ حسابك للمتابعة ',
                       style: TextStyle(
                           fontSize: 18,
@@ -146,7 +161,7 @@ class SingUP extends GetxController {
             ),
             Container(
               width: 295.w,
-              height: 45.h,
+              height: 55.h,
               margin: EdgeInsets.only(top: 20.h, left: 40.w, right: 40.w),
               child: DropdownButtonFormField<String>(
                 decoration: const InputDecoration(
@@ -156,12 +171,14 @@ class SingUP extends GetxController {
                   ),
                 ),
                 value: dropdownValue,
-                items: items.map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: new Text(value),
-                  );
-                }).toList(),
+                items: companyMemberList.map((int num,String value) {
+                  return MapEntry(num,
+                      DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      ));
+
+                }).values.toList(),
                 onChanged: (vlaue) {
                   dropdownValue = vlaue!;
                 },
@@ -190,7 +207,7 @@ class SingUP extends GetxController {
                 ),
                 TextButton(
                     onPressed: () {
-                     Get.to(Login);
+                     Get.to(Login());
                     },
                     child: const Text(
                       ' تسجيل الدخول ',

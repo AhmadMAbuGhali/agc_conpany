@@ -1,3 +1,4 @@
+import 'package:agc_conpany/ui/registration/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 
@@ -10,7 +11,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body:  SplashScreenView(
-        navigateRoute: Login(),
+        navigateRoute: SingUP(),
         duration: 4000,
         imageSize: 233,
         imageSrc: 'assets/images/splahlogo.png',

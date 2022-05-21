@@ -29,6 +29,13 @@
             {
               "client_id": "98484703060-0usblcuvbh8b872rfhufe9aq63jmphet.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "98484703060-8amc4q63auq5ln99lg0vnukuaq219g4m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.powerteam.agcConpany"
+              }
             }
           ]
         }
