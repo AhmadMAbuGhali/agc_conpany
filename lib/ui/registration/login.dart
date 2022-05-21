@@ -147,7 +147,7 @@ class Login extends StatelessWidget {
                       onPressed: () {
                       Get.to(SingUP());
                       },
-                      child: const Text(
+                      child:  Text(
                         'تسجيل',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.black),

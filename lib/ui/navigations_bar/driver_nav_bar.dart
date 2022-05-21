@@ -10,6 +10,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../resources/assets_manager.dart';
+import '../company_member/driver/driver_complete_order.dart';
+import '../company_member/driver/driver_delevery.dart';
 import '../company_member/driver/driver_home.dart';
 import '../company_member/driver/driver_order.dart';
 
@@ -116,9 +118,9 @@ class _HomeScreenState extends State<DriverNavBar> {
       case 1:
         return DriverCustomerOrder();
       case 2:
-        return SalespersonTransferOrder();
+        return DriverDeleveryOrder();
       case 3:
-        return SecretaryCompleteOrder();
+        return DriverCompleteOrder();
     }
     throw "Invalid index $index";
   }
