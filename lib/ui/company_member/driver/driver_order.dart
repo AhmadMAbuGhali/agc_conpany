@@ -15,6 +15,7 @@ class DriverCustomerOrder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -31,10 +32,10 @@ class DriverCustomerOrder extends StatelessWidget {
                   ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemBuilder: (context, index) {
+                    itemBuilder: (ctx, index) {
                       return DriverAccetpOrder(
                         onAccept: () => showDialog(
-                          context: context,
+                          context: ctx,
                           builder: (ctx) => AlertDialog(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.r),
@@ -106,7 +107,7 @@ class DriverCustomerOrder extends StatelessWidget {
                           ),
                         ),
                         onReject: () => showDialog(
-                          context: context,
+                          context: ctx,
                           builder: (ctx) => AlertDialog(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30.r),

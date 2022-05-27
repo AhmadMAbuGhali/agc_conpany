@@ -25,7 +25,7 @@ class SingUP extends StatelessWidget {
   String? listItem;
 
   static const Map<int,String> companyMemberList = {
-    1 : 'محاسب',
+    1: 'محاسب',
     2: 'سكرتير',
     3:'مندوب مبيعات ',
     4:'أمين مخازن',
@@ -207,7 +207,7 @@ class SingUP extends StatelessWidget {
                 ),
                 TextButton(
                     onPressed: () {
-                     Get.to(Login());
+                     Get.off(Login());
                     },
                     child: const Text(
                       ' تسجيل الدخول ',

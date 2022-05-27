@@ -126,7 +126,7 @@ class Login extends StatelessWidget {
               child: SizedBox(
                 width: 253.w,
                 height: 50.h,
-                child: ElevatedButton(onPressed: () => Get.to(()=>DriverNavBar()),
+                child: ElevatedButton(onPressed: () => Get.to(()=>SalespersonNavBar()),
                   child:const Text('تسجيل الدخول'),),
               )
             ),
@@ -144,7 +144,7 @@ class Login extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                   onTap: ()=>  Get.to(SingUP()),
+                   onTap: ()=>  Get.off(SingUP()),
                     child: Text(
                       'تسجيل',
                           style: TextStyle(

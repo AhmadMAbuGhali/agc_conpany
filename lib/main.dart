@@ -31,28 +31,35 @@ class _MyAppState extends State<MyApp> {
         designSize: Size(375, 812),
         minTextAdapt: true,
         splitScreenMode: true,
-        builder: () => GetMaterialApp(
-          useInheritedMediaQuery: true,
-          // locale: DevicePreview.locale(context),
-          builder: DevicePreview.appBuilder,
-          theme: ThemeData.light(),
-          darkTheme: ThemeData.dark(),
+        builder: (context , child) {
+     return   GetMaterialApp(
 
-              localizationsDelegates: const [
-                GlobalCupertinoLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-              ],
-              supportedLocales: const [
-                Locale(
-                    'ar', 'SA'), // OR Locale('ar', 'AE') OR Other RTL locales
-              ],
-              locale: const Locale('ar', 'SA'),
-              // OR Locale('ar', 'AE') OR Other RTL locales,
-              debugShowCheckedModeBanner: false,
-              // theme: getApplicationTheme(),
-              home: SplashScreen(),
-            ));
+            useInheritedMediaQuery: true,
+            // locale: DevicePreview.locale(context),
+            builder: DevicePreview.appBuilder,
+            theme: ThemeData.light(),
+            darkTheme: ThemeData.dark(),
+
+            localizationsDelegates: const [
+              GlobalCupertinoLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale(
+                  'ar', 'SA'), // OR Locale('ar', 'AE') OR Other RTL locales
+            ],
+            locale: const Locale('ar', 'SA'),
+            // OR Locale('ar', 'AE') OR Other RTL locales,
+            debugShowCheckedModeBanner: false,
+            // theme: getApplicationTheme(),
+            home: child,
+          );
+
+          },
+child: SplashScreen(),
+
+         );
     // return MaterialApp(
     //   title: 'Flutter Demo',
     //   theme: ThemeData(+

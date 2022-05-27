@@ -25,7 +25,7 @@ class _HomeScreenState extends State<NavScreen> {
         bottomNavigationBar: CurvedNavigationBar(
           key: _bottomNavigationKey,
           index: 0,
-          height: 50.0,
+          height: 60.0,
           items: <Widget>[
             Column(
               mainAxisAlignment: MainAxisAlignment.center,

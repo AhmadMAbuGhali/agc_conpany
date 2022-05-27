@@ -391,7 +391,7 @@ Widget CustomerOrder() => Padding(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: 69.w,
+                        width: 55.w,
                         height: 20.h,
                         child: ElevatedButton(
                           onPressed: () => Get.to(() => NavScreen()),
@@ -413,7 +413,7 @@ Widget CustomerOrder() => Padding(
                         width: 15.w,
                       ),
                       SizedBox(
-                        width: 69.w,
+                        width: 55.w,
                         height: 20.h,
                         child: ElevatedButton(
                           onPressed: () => Get.to(() => NavScreen()),
@@ -421,7 +421,7 @@ Widget CustomerOrder() => Padding(
                             'رفض',
                             style: getRegularStyle(
                                 color: ColorManager.reject,
-                                fontSize: FontSize.s14.sp),
+                                fontSize: FontSize.s10.sp),
                           ),
                           style: ElevatedButton.styleFrom(
                               primary: ColorManager.white,
@@ -1583,6 +1583,7 @@ Widget DriverAccetpOrder({
   padding: const EdgeInsets.all(8.0),
   child: Container(
     height: 150.h,
+
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8.r),
       color: ColorManager.white,
@@ -1728,10 +1729,10 @@ Widget DriverAccetpOrder({
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
-                    width: 69.w,
+                    width: 55.w,
                     height: 20.h,
                     child: ElevatedButton(
-                      onPressed: () => onAccept,
+                      onPressed: onAccept,
 
                       child: Text(
                         'قبول',
@@ -1751,17 +1752,17 @@ Widget DriverAccetpOrder({
                     width: 15.w,
                   ),
                   SizedBox(
-                    width: 69.w,
+                    width: 55.w,
                     height: 20.h,
                     child: ElevatedButton(
-                      onPressed: () => onReject,
+                      onPressed: onReject,
 
 
                       child: Text(
                         'رفض',
                         style: getRegularStyle(
                             color: ColorManager.reject,
-                            fontSize: FontSize.s14.sp),
+                            fontSize: FontSize.s10.sp),
                       ),
                       style: ElevatedButton.styleFrom(
                           primary: ColorManager.white,
