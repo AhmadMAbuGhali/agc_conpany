@@ -1,9 +1,7 @@
 import 'package:agc_conpany/resources/color_manager.dart';
 import 'package:agc_conpany/ui/company_member/accountant/home.dart';
-import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
 import '../company_member/accountant/accountant_completed_orders.dart';
 import '../company_member/accountant/accountant_product.dart';
 import '../company_member/accountant/catoegoreis_accountant.dart';

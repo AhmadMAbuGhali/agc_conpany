@@ -16,7 +16,7 @@ Widget WidgetTextField({
   required String hintText,
   required TextInputType inputType,
   required TextEditingController controller,
-  required Icon icon,
+  Icon? icon,
   Icon? endIcon,
   bool isPassword = false,
 }) =>
@@ -28,7 +28,7 @@ Widget WidgetTextField({
       keyboardType: inputType,
       decoration: InputDecoration(
         // border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
-        prefixIcon: icon,
+        prefixIcon: icon != null ? icon : null,
         suffixIcon: endIcon != null ? endIcon : null,
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.black, fontSize: 16),

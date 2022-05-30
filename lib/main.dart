@@ -1,21 +1,18 @@
-import 'package:agc_conpany/resources/theme_manager.dart';
-import 'package:agc_conpany/ui/registration/login.dart';
-import 'package:agc_conpany/ui/registration/splash_screen.dart';
+import 'package:agc_conpany/controller/a.dart';
+import 'package:agc_conpany/ui/company_member/accountant/add_product.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:splash_screen_view/SplashScreenView.dart';
+import 'package:provider/provider.dart';
 
-Future<void> main() async {
+void main() async {
+  await ScreenUtil.ensureScreenSize();
   WidgetsFlutterBinding.ensureInitialized();
-  runApp( DevicePreview(
-      enabled: true,
-      tools: [
-        ...DevicePreview.defaultTools,
-      ],
-      builder: (context) =>  MyApp()));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider())
+  ], child:   MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -28,11 +25,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: Size(375, 812),
+        designSize: const Size(375, 812),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context , child) {
-     return   GetMaterialApp(
+         return  GetMaterialApp(
 
             useInheritedMediaQuery: true,
             // locale: DevicePreview.locale(context),
@@ -57,15 +54,9 @@ class _MyAppState extends State<MyApp> {
           );
 
           },
-child: SplashScreen(),
+            child:  AddProductScreen(),
 
          );
-    // return MaterialApp(
-    //   title: 'Flutter Demo',
-    //   theme: ThemeData(+
-    //     primarySwatch: Colors.blue,
-    //   ),
-    //   home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    // );
+
   }
 }
