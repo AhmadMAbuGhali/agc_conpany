@@ -1981,3 +1981,70 @@ Widget DriverToCustomer({
     ),
   ),
 );
+
+Widget WidgetTextFieldProudct({
+  required String hintText,
+  required TextInputType inputType,
+  required TextEditingController controller,
+  Icon? icon,
+  Icon? endIcon,
+  bool isPassword = false,
+}) =>
+    Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15.r),
+        color: ColorManager.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 0,
+            blurRadius: 6,
+            offset: Offset(0, 2), // changes position of shadow
+          ),
+        ],
+      ),
+      child: TextFormField(
+
+        style: TextStyle(color: Colors.black),
+
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        controller: controller,
+        obscureText: isPassword,
+        keyboardType: inputType,
+        decoration: InputDecoration(
+          focusedBorder: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          errorBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
+          // border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
+          prefixIcon: icon != null ? icon : null,
+          suffixIcon: endIcon != null ? endIcon : null,
+          hintText: hintText,
+          hintStyle: TextStyle(color: Colors.black, fontSize: 16),
+          labelStyle: TextStyle(color: Colors.black, fontSize: 25),
+        ),
+      ),
+    );
+
+Widget ChooseCategory()=> Container(
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(15.r),
+    color: ColorManager.white,
+    boxShadow: [
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.2),
+        spreadRadius: 0,
+        blurRadius: 6,
+        offset: Offset(0, 2), // changes position of shadow
+      ),
+    ],
+  ),
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Text('إختر تصنيف'),
+      Icon(Icons.keyboard_arrow_down_sharp),
+    ],
+  ),
+);
+

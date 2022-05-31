@@ -25,11 +25,11 @@ class SingUP extends StatelessWidget {
   String? listItem;
 
   static const Map<int,String> companyMemberList = {
-    1: 'محاسب',
-    2: 'سكرتير',
-    3:'مندوب مبيعات ',
-    4:'أمين مخازن',
-    5:'سائق'
+    1 : 'محاسب',
+    2 : 'سكرتير',
+    3 :'مندوب مبيعات ',
+    4 :'أمين مخازن',
+    5 :'سائق'
   };
 
 
