@@ -44,7 +44,6 @@ class _HomeScreenState extends State<SecretaryNavBar> {
                 SvgPicture.asset(
                   IconAssets.admin_home,width: 20.w,height: 20.h,
                 ),
-                const Text('الرئيسة'),
               ],
             ),
             Column(
@@ -53,7 +52,6 @@ class _HomeScreenState extends State<SecretaryNavBar> {
                 SvgPicture.asset(
                   IconAssets.admin_company_member,width: 20.w,height: 20.h,
                 ),
-                const Text('الزبائن'),
               ],
             ),
             Column(
@@ -62,7 +60,6 @@ class _HomeScreenState extends State<SecretaryNavBar> {
                 SvgPicture.asset(
                   IconAssets.admin_join,width: 20.w,height: 20.h,
                 ),
-                const Text('طلبات  الانضمام'),
               ],
             ),
             Column(
@@ -72,7 +69,6 @@ class _HomeScreenState extends State<SecretaryNavBar> {
                 SvgPicture.asset(
                   IconAssets.complete_order,width: 20.w,height: 20.h,
                 ),
-                 Text('الطلبات المكتملة',style: getRegularStyle(color: ColorManager.black,fontSize: FontSize.s11),),
               ],
             ),
 

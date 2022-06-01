@@ -29,34 +29,32 @@ class _HomeScreenState extends State<NavScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 Icon(Icons.home, size: 20),
-                Text('Home'),
+
               ],
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 Icon(Icons.account_circle, size: 20),
-                Text('Hello'),
+
               ],
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 Icon(Icons.notifications, size: 20),
-                Text('Hello'),
+
               ],
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 Icon(Icons.favorite, size: 20),
-                Text('Hello'),
               ],
             ),Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 Icon(Icons.favorite, size: 20),
-                Text('product'),
               ],
             ),
           ],

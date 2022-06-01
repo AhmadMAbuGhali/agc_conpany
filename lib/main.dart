@@ -1,4 +1,5 @@
 import 'package:agc_conpany/ui/company_member/accountant/add_product.dart';
+import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -51,7 +52,7 @@ class _MyAppState extends State<MyApp> {
           );
 
           },
-            child:  AddProductScreen(),
+            child:  Login(),
 
          );
 
