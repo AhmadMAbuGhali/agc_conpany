@@ -1,4 +1,3 @@
-import 'package:agc_conpany/controller/a.dart';
 import 'package:agc_conpany/ui/company_member/accountant/add_product.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +9,7 @@ import 'package:provider/provider.dart';
 void main() async {
   await ScreenUtil.ensureScreenSize();
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider())
-  ], child:   MyApp()));
+  runApp( MyApp());
 }
 
 class MyApp extends StatefulWidget {

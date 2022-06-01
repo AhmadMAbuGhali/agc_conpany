@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:agc_conpany/componant/componant.dart';
-import 'package:agc_conpany/controller/a.dart';
 import 'package:agc_conpany/controller/add_product_controller.dart';
 import 'package:agc_conpany/resources/color_manager.dart';
 import 'package:dotted_border/dotted_border.dart';
