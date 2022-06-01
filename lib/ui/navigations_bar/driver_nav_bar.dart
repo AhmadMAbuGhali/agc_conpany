@@ -42,7 +42,6 @@ class _HomeScreenState extends State<DriverNavBar> {
                 SvgPicture.asset(
                   IconAssets.admin_home,width: 20.w,height: 20.h,
                 ),
-                const Text('الرئيسة'),
               ],
             ),
             Column(
@@ -51,7 +50,6 @@ class _HomeScreenState extends State<DriverNavBar> {
                 SvgPicture.asset(
                   IconAssets.orders,width: 20.w,height: 20.h,
                 ),
-                const Text('الطلبات'),
               ],
             ),
             Column(
@@ -60,7 +58,6 @@ class _HomeScreenState extends State<DriverNavBar> {
                 SvgPicture.asset(
                   IconAssets.order_delevery,width: 20.w,height: 20.h,
                 ),
-                const Text('تسليم الطلبات'),
               ],
             ),
             Column(
@@ -70,7 +67,6 @@ class _HomeScreenState extends State<DriverNavBar> {
                 SvgPicture.asset(
                   IconAssets.complete_order,width: 20.w,height: 20.h,
                 ),
-                Text('الطلبات المكتملة',style: getRegularStyle(color: ColorManager.black,fontSize: FontSize.s11),),
               ],
             ),
 

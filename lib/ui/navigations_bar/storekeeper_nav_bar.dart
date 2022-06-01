@@ -48,7 +48,6 @@ class _HomeScreenState extends State<StoreKeeperNavBar> {
                 SvgPicture.asset(
                   IconAssets.admin_home,width: 20.w,height: 20.h,
                 ),
-                const Text('الرئيسة'),
               ],
             ),
             Column(
@@ -57,7 +56,6 @@ class _HomeScreenState extends State<StoreKeeperNavBar> {
                 SvgPicture.asset(
                   IconAssets.add_to_stake,width: 20.w,height: 20.h,
                 ),
-                const Text('إضافة كميات'),
               ],
             ),
             Column(
@@ -66,7 +64,6 @@ class _HomeScreenState extends State<StoreKeeperNavBar> {
                 SvgPicture.asset(
                   IconAssets.orders,width: 20.w,height: 20.h,
                 ),
-                const Text('الطلبات '),
               ],
             ),
             Column(
@@ -76,7 +73,6 @@ class _HomeScreenState extends State<StoreKeeperNavBar> {
                 SvgPicture.asset(
                   IconAssets.transfer_order,width: 20.w,height: 20.h,
                 ),
-                 Text('تحويل الطلبات',style: getRegularStyle(color: ColorManager.black,fontSize: FontSize.s11),),
               ],
             ),
 

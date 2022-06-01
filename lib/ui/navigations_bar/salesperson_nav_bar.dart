@@ -40,7 +40,6 @@ class _HomeScreenState extends State<SalespersonNavBar> {
                 SvgPicture.asset(
                   IconAssets.admin_home,width: 20.w,height: 20.h,
                 ),
-                const Text('الرئيسة'),
               ],
             ),
             Column(
@@ -49,7 +48,6 @@ class _HomeScreenState extends State<SalespersonNavBar> {
                 SvgPicture.asset(
                   IconAssets.orders,width: 20.w,height: 20.h,
                 ),
-                const Text('الطلبات'),
               ],
             ),
             Column(
@@ -58,7 +56,6 @@ class _HomeScreenState extends State<SalespersonNavBar> {
                 SvgPicture.asset(
                   IconAssets.transfer_order,width: 20.w,height: 20.h,
                 ),
-                const Text('تحويل الطلبات'),
               ],
             ),
             Column(
@@ -68,7 +65,6 @@ class _HomeScreenState extends State<SalespersonNavBar> {
                 SvgPicture.asset(
                   IconAssets.complete_order,width: 20.w,height: 20.h,
                 ),
-                Text('الطلبات المكتملة',style: getRegularStyle(color: ColorManager.black,fontSize: FontSize.s11),),
               ],
             ),
 
