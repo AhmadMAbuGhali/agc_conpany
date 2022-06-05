@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 
 import 'package:agc_conpany/servisers/auth_provider.dart';
+import 'package:agc_conpany/servisers/firebase_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -135,6 +136,9 @@ class AdminHome extends StatelessWidget {
                   style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
                 ),
               ),
+              ElevatedButton(onPressed: (){
+                Provider.of<FireBaseProvider>(context,listen: false).getAllWaitingUser();
+              }, child: Text('test'))
               // Container(
               //   height: 320,
               //   child: Column(
@@ -167,7 +171,7 @@ class AdminHome extends StatelessWidget {
               //         }),
               //   ),
               // ),
-              Padding(
+              ,Padding(
                 padding: EdgeInsets.all(15),
                 child: Column(
                   children: [

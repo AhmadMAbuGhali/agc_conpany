@@ -1,9 +1,14 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:developer';
+
+import 'package:agc_conpany/model/users.dart';
+import 'package:agc_conpany/servisers/firebase_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../resources/assets_manager.dart';
 import '../resources/color_manager.dart';
@@ -43,7 +48,7 @@ Widget WidgetTextField({
 
     );
 
-Widget AdminJR() => Container(
+Widget AdminJR(UserApp userApp) => Container(
       width: 330.w,
       height: 150.h,
       decoration: BoxDecoration(boxShadow: [
@@ -72,9 +77,9 @@ Widget AdminJR() => Container(
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('أحمد أبو غالي '),
-                        Text('رقم الجوال : 0595511949'),
-                        Text('المسمى الوظيفي : محاسب'),
+                        Text(userApp.name!),
+                        Text('رقم الجوال : '+userApp.phonenumber!),
+                        Text('المسمى الوظيفي : '+userApp.jobtitle!),
                       ],
                     )
                   ],
@@ -87,86 +92,98 @@ Widget AdminJR() => Container(
                   height: 11.h,
                 ),
                 // Accept or reject
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 69.w,
-                      height: 20.h,
-                      child: ElevatedButton(
-                        onPressed: () => Get.to(() => NavScreen()),
-                        child: Text(
-                          'قبول',
-                          style: getRegularStyle(
-                              color: ColorManager.white,
-                              fontSize: FontSize.s10.sp),
+                Consumer<FireBaseProvider>(
+                  builder:(context,provider,x){
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 69.w,
+                        height: 20.h,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            log('accept');
+                            userApp.isaccept=true;
+                            provider.acceptedUser(userApp);
+                            provider.deleteFromWating(userApp.id.toString());
+                          },
+                          child: Text(
+                            'قبول',
+                            style: getRegularStyle(
+                                color: ColorManager.white,
+                                fontSize: FontSize.s10.sp),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              primary: ColorManager.primary,
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            primary: ColorManager.primary,
-                            elevation: 1,
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(AppSize.s5))),
                       ),
-                    ),
-                    SizedBox(
-                      width: 15.w,
-                    ),
-                    SizedBox(
-                      width: 69.w,
-                      height: 20.h,
-                      child: ElevatedButton(
-                        onPressed: () => Get.to(() => NavScreen()),
-                        child: Text(
-                          'رفض',
-                          style: getRegularStyle(
-                              color: ColorManager.reject,
-                              fontSize: FontSize.s14.sp),
+                      SizedBox(
+                        width: 15.w,
+                      ),
+                      SizedBox(
+                        width: 69.w,
+                        height: 20.h,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            userApp.isreject=true;
+                            provider.rejectedUser(userApp);
+                            provider.deleteFromWating(userApp.id.toString());
+                          },
+                          child: Text(
+                            'رفض',
+                            style: getRegularStyle(
+                                color: ColorManager.reject,
+                                fontSize: FontSize.s14.sp),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              primary: ColorManager.white,
+                              side: BorderSide(
+                                width: 1.0,
+                                color: ColorManager.reject,
+                              ),
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            primary: ColorManager.white,
-                            side: BorderSide(
-                              width: 1.0,
-                              color: ColorManager.reject,
-                            ),
-                            elevation: 1,
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(AppSize.s5))),
                       ),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    // Container(
-                    //   height: 24.h,
-                    //   width: 122.w,
-                    //   child: AccountantNotiTrans(
-                    //     label: 'تحويل الي أمين المخزن',
-                    //     onTap: () {},
-                    //   ),
-                    // ),
-                    // AccountantButtonReject(
-                    //   label: 'رفض',
-                    //   onTap: () {},
-                    //   color: Colors.transparent,
-                    //   width: 69.w,
-                    //   height: 24.h,
-                    // ),
-                    Spacer(),
-                    SvgPicture.asset(
-                      IconAssets.time,
-                      width: 13.w,
-                      height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 6.w,
-                    ),
-                    Text('منذ 3 ساعات ',
-                        style: getRegularStyle(
-                            color: ColorManager.grayTime,
-                            fontSize: FontSize.s13)),
-                  ],
+                      SizedBox(
+                        width: 10.w,
+                      ),
+                      // Container(
+                      //   height: 24.h,
+                      //   width: 122.w,
+                      //   child: AccountantNotiTrans(
+                      //     label: 'تحويل الي أمين المخزن',
+                      //     onTap: () {},
+                      //   ),
+                      // ),
+                      // AccountantButtonReject(
+                      //   label: 'رفض',
+                      //   onTap: () {},
+                      //   color: Colors.transparent,
+                      //   width: 69.w,
+                      //   height: 24.h,
+                      // ),
+                      Spacer(),
+                      SvgPicture.asset(
+                        IconAssets.time,
+                        width: 13.w,
+                        height: 13.h,
+                      ),
+                      SizedBox(
+                        width: 6.w,
+                      ),
+                      Text('منذ 3 ساعات ',
+                          style: getRegularStyle(
+                              color: ColorManager.grayTime,
+                              fontSize: FontSize.s13)),
+                    ],
+                  );}
                 ),
               ],
             ),

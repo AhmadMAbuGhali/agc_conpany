@@ -12,11 +12,15 @@ class FirestoreHelper {
     await firebaseFirestore.collection('usersWaiting').doc(user.id).set(user.toMap());
   }
   acceptedUser(UserApp user) async {
-    await firebaseFirestore.collection('usersAccepted').doc(user.id).set(user.toMap());
+    await firebaseFirestore.collection('users').doc(user.id).set(user.toMap());
   }
   rejectedUser(UserApp user) async {
     await firebaseFirestore.collection('usersRejected').doc(user.id).set(user.toMap());
   }
+  deletefromUsersAwaiting(String userID)async{
+    await firebaseFirestore.collection('usersWaiting').doc(userID).delete();
+  }
+
 
   Future<UserApp> getUserFromWaiting(String userid) async {
     DocumentSnapshot<Map<String, dynamic>> document =
