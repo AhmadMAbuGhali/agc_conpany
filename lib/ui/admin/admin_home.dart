@@ -1,9 +1,11 @@
 import 'dart:math' as math;
 
 
+import 'package:agc_conpany/servisers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 
 import '../../resources/color_manager.dart';
@@ -99,7 +101,7 @@ class AdminHome extends StatelessWidget {
                             ),
                             const Spacer(),
                             InkWell(
-                                onTap: () => Get.to(()=>Login()),
+                                onTap: () =>Provider.of<AuthProvider>(context,listen: false).logOut(),
                                 child: Container(
                                   child: Row(
                                     children: [

@@ -37,7 +37,7 @@ class _HomeScreenState extends State<AdminNavBar> {
                 SvgPicture.asset(
                   IconAssets.admin_home,width: 20.w,height: 20.h,
                 ),
-                const Text('الرئيسة'),
+
               ],
             ),
             Column(
@@ -46,7 +46,7 @@ class _HomeScreenState extends State<AdminNavBar> {
                 SvgPicture.asset(
                   IconAssets.admin_company_member,width: 20.w,height: 20.h,
                 ),
-                const Text('الأعضاء'),
+
               ],
             ),
             Column(
@@ -55,7 +55,7 @@ class _HomeScreenState extends State<AdminNavBar> {
                 SvgPicture.asset(
                   IconAssets.admin_join,width: 20.w,height: 20.h,
                 ),
-                const Text('طلبات  الانضمام'),
+             
               ],
             ),
 

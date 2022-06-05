@@ -19,6 +19,7 @@ Widget WidgetTextField({
   Icon? icon,
   Icon? endIcon,
   bool isPassword = false,
+  required TextInputAction textInputAction
 }) =>
     TextFormField(
       style: TextStyle(color: Colors.black),
@@ -26,6 +27,10 @@ Widget WidgetTextField({
       controller: controller,
       obscureText: isPassword,
       keyboardType: inputType,
+      textInputAction:textInputAction ,
+        focusNode: FocusNode(),
+        // showCursor: true,
+        // readOnly: true,
       decoration: InputDecoration(
         // border: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
         prefixIcon: icon != null ? icon : null,
@@ -33,7 +38,9 @@ Widget WidgetTextField({
         hintText: hintText,
         hintStyle: TextStyle(color: Colors.black, fontSize: 16),
         labelStyle: TextStyle(color: Colors.black, fontSize: 25),
+
       ),
+
     );
 
 Widget AdminJR() => Container(

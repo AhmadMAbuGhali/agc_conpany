@@ -7,13 +7,7 @@ class FbFirestoreWaitingUser{
 
   final FirebaseFirestore _firebaseFirestore=FirebaseFirestore.instance;
 
-
-
-
-
-
-
-  Future<bool> createAccount ({required User user})async{
+  Future<bool> createAccount ({required UserApp user})async{
 
 
     return await _firebaseFirestore.collection('waitinguser')
