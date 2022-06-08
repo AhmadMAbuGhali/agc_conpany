@@ -15,6 +15,7 @@ class AuthHelper {
       verifyEmail();
       return userCredential;
     } on FirebaseAuthException catch (e) {
+
       if (e.code == 'weak-password') {
         throw ('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
