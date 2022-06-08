@@ -8,9 +8,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:provider/provider.dart';
-void main() async {
+
+Future <void> main() async {
   await ScreenUtil.ensureScreenSize();
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),

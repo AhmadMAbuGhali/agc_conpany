@@ -27,6 +27,7 @@ class FirestoreHelper {
         await firebaseFirestore.collection('usersWaiting').doc(userid).get();
     Map<String, dynamic>? userData = document.data();
     userData?['id'] = document.id;
+    print(userData);
     UserApp gdUser = UserApp.fromMap(userData!);
     return gdUser;
   }

@@ -4,11 +4,17 @@ import 'package:agc_conpany/resources/constants_manager.dart';
 import 'package:agc_conpany/servisers/firebase/auth_helper.dart';
 import 'package:agc_conpany/servisers/firebase/firestore_helper.dart';
 import 'package:agc_conpany/ui/admin/admin_nav_bar.dart';
+import 'package:agc_conpany/ui/navigations_bar/driver_nav_bar.dart';
+import 'package:agc_conpany/ui/navigations_bar/salesperson_nav_bar.dart';
+import 'package:agc_conpany/ui/navigations_bar/secretary_nav_bar.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+
+import '../ui/navigations_bar/accountant_nav_bar.dart';
+import '../ui/navigations_bar/storekeeper_nav_bar.dart';
 
 class AuthProvider extends ChangeNotifier {
   AuthProvider() ;
@@ -69,26 +75,19 @@ class AuthProvider extends ChangeNotifier {
            },
          );
        }else if(AppConstants.loggedUser!.isaccept==true){
-         return showDialog(
-           context: context,
-           builder: (BuildContext context) {
-             return AlertDialog(
-               content:  const Text('you are  Accept'),
-               actions:[
-                 Row(
-                   mainAxisAlignment:MainAxisAlignment.center,
-                   children: [
-                     ElevatedButton(
-                       onPressed: () => Navigator.of(context).pop(false),
-                       child:  Text('Ok'),
-                     ),
-                   ],
-                 ),
 
-               ],
-             );
-           },
-         );
+         if(AppConstants.loggedUser!.jobtitle == "محاسب"){
+           Get.off(NavScreen());
+         }else if(AppConstants.loggedUser!.jobtitle == "سكرتير"){
+           Get.off(SecretaryNavBar());
+         }else if(AppConstants.loggedUser!.jobtitle == "مندوب مبيعات"){
+           Get.off(SalespersonNavBar());
+         }else if(AppConstants.loggedUser!.jobtitle == "أمين مخازن"){
+           Get.off(StoreKeeperNavBar());
+         }else{
+           Get.off(DriverNavBar());
+         }
+
        }else{
          return showDialog(
            context: context,
