@@ -21,7 +21,6 @@ class FirestoreHelper {
     await firebaseFirestore.collection('usersWaiting').doc(userID).delete();
   }
 
-
   Future<UserApp> getUserFromWaiting(String userid) async {
     DocumentSnapshot<Map<String, dynamic>> document =
         await firebaseFirestore.collection('usersWaiting').doc(userid).get();
@@ -32,7 +31,7 @@ class FirestoreHelper {
   }
   Future<UserApp> getUserFromAccepted(String userid) async {
     DocumentSnapshot<Map<String, dynamic>> document =
-        await firebaseFirestore.collection('usersAccepted').doc(userid).get();
+        await firebaseFirestore.collection('users').doc(userid).get();
     Map<String, dynamic>? userData = document.data();
     userData?['id'] = document.id;
     UserApp gdUser = UserApp.fromMap(userData!);
@@ -59,7 +58,23 @@ class FirestoreHelper {
     }).toList();
     return allAsset;
   }
+  Future<List<UserApp>> getAllUsers() async {
+    QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
+    await firebaseFirestore.collection('users').get();
+    List<UserApp> allAsset = allAssetSnapshot.docs.map((e) {
+      Map<String, dynamic> documentMap = e.data();
+      documentMap['id'] = e.id;
+      log('firestore helper e.id: ${e.id}');
+      log("firestore helper documentMap['id']: ${documentMap['id']}");
+      UserApp userApp = UserApp.fromMap(documentMap);
+      return userApp;
+    }).toList();
+    return allAsset;
+  }
 
+  Future disableUser(String userId)async{
+  await firebaseFirestore.collection('users').doc(userId).update({'disable': false});
+}
 }
   // deleteCollectio() async {
   //   await firebaseFirestore.collection('users').doc().delete();

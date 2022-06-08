@@ -7,7 +7,7 @@ class UserApp{
     bool? isaccept;
     bool? isreject;
     bool? disable;
-  String? id;
+    String? id;
   UserApp(
       {required this.name,
         required this.password,

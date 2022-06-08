@@ -8,12 +8,23 @@ import 'package:flutter/material.dart';
 class FireBaseProvider extends ChangeNotifier {
   FireBaseProvider() {
     getAllWaitingUser();
+    getAllUser();
   }
 
   List<UserApp> watingUser=[];
+  List<UserApp> allUser=[];
 getAllWaitingUser()async{
   watingUser=await FirestoreHelper.firestoreHelper.getAllUsersWaiting();
   log(watingUser.length.toString());
+  notifyListeners();
+}
+getAllUser()async{
+    allUser=await FirestoreHelper.firestoreHelper.getAllUsers();
+  log(allUser.length.toString());
+  notifyListeners();
+}
+disableUser(String userId)async{
+   await FirestoreHelper.firestoreHelper.disableUser(userId);
   notifyListeners();
 }
 acceptedUser(UserApp userApp)async{

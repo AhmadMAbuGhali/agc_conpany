@@ -1,7 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:developer';
-
 import 'package:agc_conpany/model/users.dart';
 import 'package:agc_conpany/servisers/firebase_provider.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-
 import '../resources/assets_manager.dart';
 import '../resources/color_manager.dart';
 import '../resources/font_manager.dart';
@@ -1307,9 +1305,10 @@ Widget AccountantProductWidget() => Container(
       ),
     );
 
-Widget AdminMember() => Container(
+Widget AdminMember(UserApp userApp) => Container(
       width: 350.w,
       height: 135.h,
+      margin: EdgeInsets.symmetric(vertical: 10.h),
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
           color: ColorManager.black.withOpacity(0.16),
@@ -1336,9 +1335,9 @@ Widget AdminMember() => Container(
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('أحمد أبو غالي '),
-                        Text('رقم الجوال : 0595511949'),
-                        Text('المسمى الوظيفي : محاسب'),
+                        Text(userApp.name!),
+                        Text('رقم الجوال : '+userApp.phonenumber!),
+                        Text('المسمى الوظيفي : '+userApp.jobtitle!),
                       ],
                     )
                   ],
@@ -1348,73 +1347,70 @@ Widget AdminMember() => Container(
                 ),
 
                 // Accept or reject
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 121.w,
-                      height: 20.h,
-                      child: ElevatedButton(
-                        onPressed: () => Get.to(() => NavScreen()),
-                        child: Text(
-                          'تغيير كلمة المرور ',
-                          style: getRegularStyle(
-                              color: ColorManager.white,
-                              fontSize: FontSize.s10.sp),
+                Consumer<FireBaseProvider>(
+                  builder: (context,provider,x){
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 121.w,
+                        height: 25.h,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            // log('accept');
+                            // userApp.isaccept=true;
+                            // provider.acceptedUser(userApp);
+                            // provider.deleteFromWating(userApp.id.toString());
+                          },
+                          child: Text(
+                            'تغيير كلمة المرور ',
+                            style: getRegularStyle(
+                                color: ColorManager.white,
+                                fontSize: FontSize.s10.sp),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              primary: ColorManager.primary,
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            primary: ColorManager.primary,
-                            elevation: 1,
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(AppSize.s5))),
                       ),
-                    ),
-                    SizedBox(
-                      width: 15.w,
-                    ),
-                    SizedBox(
-                      width: 117.w,
-                      height: 20.h,
-                      child: ElevatedButton(
-                        onPressed: () => Get.to(() => NavScreen()),
-                        child: Text(
-                          'تعطيل الحساب ',
-                          style: getRegularStyle(
-                              color: ColorManager.reject,
-                              fontSize: FontSize.s14.sp),
+                      SizedBox(
+                        width: 15.w,
+                      ),
+                      SizedBox(
+                        width: 127.w,
+                        height: 25.h,
+                        child: ElevatedButton(
+                          onPressed: () {
+                           provider.disableUser(userApp.id!);
+
+                           },
+                          child: Text(
+                            'تعطيل الحساب',
+                            style: getRegularStyle(
+                                color: ColorManager.reject,
+                                fontSize: FontSize.s14.sp),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              primary: ColorManager.white,
+                              side: BorderSide(
+                                width: 1.0,
+                                color: ColorManager.reject,
+                              ),
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            primary: ColorManager.white,
-                            side: BorderSide(
-                              width: 1.0,
-                              color: ColorManager.reject,
-                            ),
-                            elevation: 1,
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.circular(AppSize.s5))),
                       ),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    // Container(
-                    //   height: 24.h,
-                    //   width: 122.w,
-                    //   child: AccountantNotiTrans(
-                    //     label: 'تحويل الي أمين المخزن',
-                    //     onTap: () {},
-                    //   ),
-                    // ),
-                    // AccountantButtonReject(
-                    //   label: 'رفض',
-                    //   onTap: () {},
-                    //   color: Colors.transparent,
-                    //   width: 69.w,
-                    //   height: 24.h,
-                    // ),
-                  ],
+                      SizedBox(
+                        width: 10.w,
+                      ),
+
+                    ],
+                  );}
                 ),
               ],
             ),
