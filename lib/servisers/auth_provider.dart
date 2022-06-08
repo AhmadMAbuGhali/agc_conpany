@@ -75,7 +75,6 @@ class AuthProvider extends ChangeNotifier {
            },
          );
        }else if(AppConstants.loggedUser!.isaccept==true){
-
          if(AppConstants.loggedUser!.jobtitle == "محاسب"){
            Get.off(NavScreen());
          }else if(AppConstants.loggedUser!.jobtitle == "سكرتير"){
@@ -130,8 +129,8 @@ class AuthProvider extends ChangeNotifier {
   getUserFromFirebase() async {
     String userId = FirebaseAuth.instance.currentUser!.uid;
     AppConstants.loggedUser = await FirestoreHelper.firestoreHelper.getUserFromWaiting(userId);
-    AppConstants.loggedUser ??= await FirestoreHelper.firestoreHelper.getUserFromAccepted(userId);
-    AppConstants.loggedUser ??= await FirestoreHelper.firestoreHelper.getUserFromReject(userId);
+    // AppConstants.loggedUser ??= await FirestoreHelper.firestoreHelper.getUserFromAccepted(userId);
+    // AppConstants.loggedUser ??= await FirestoreHelper.firestoreHelper.getUserFromReject(userId);
     notifyListeners();
   }
 

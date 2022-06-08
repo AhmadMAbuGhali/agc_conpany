@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:agc_conpany/model/users.dart';
+import 'package:agc_conpany/resources/constants_manager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreHelper {
@@ -24,19 +25,26 @@ class FirestoreHelper {
   Future<UserApp> getUserFromWaiting(String userid) async {
     DocumentSnapshot<Map<String, dynamic>> document =
         await firebaseFirestore.collection('usersWaiting').doc(userid).get();
-    Map<String, dynamic>? userData = document.data();
-    userData?['id'] = document.id;
-    print(userData);
-    UserApp gdUser = UserApp.fromMap(userData!);
-    return gdUser;
+
+      Map<String, dynamic>? userData = document.data();
+      userData?['id'] = document.id;
+
+    if(userData !=null) {
+      UserApp gdUser = UserApp.fromMap(userData);
+      return gdUser;
+    }
+    return getUserFromAccepted(userid);
   }
   Future<UserApp> getUserFromAccepted(String userid) async {
     DocumentSnapshot<Map<String, dynamic>> document =
         await firebaseFirestore.collection('users').doc(userid).get();
     Map<String, dynamic>? userData = document.data();
     userData?['id'] = document.id;
-    UserApp gdUser = UserApp.fromMap(userData!);
-    return gdUser;
+    if(userData !=null) {
+      UserApp gdUser = UserApp.fromMap(userData);
+      return gdUser;
+    }
+    return getUserFromReject(userid);
   }
   Future<UserApp> getUserFromReject(String userid) async {
     DocumentSnapshot<Map<String, dynamic>> document =
