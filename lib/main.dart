@@ -3,6 +3,9 @@ import 'package:agc_conpany/servisers/firebase_provider.dart';
 import 'package:agc_conpany/ui/navigations_bar/accountant_nav_bar.dart';
 import 'package:agc_conpany/ui/navigations_bar/admin_nav_bar.dart';
 import 'package:agc_conpany/ui/navigations_bar/driver_nav_bar.dart';
+import 'package:agc_conpany/ui/navigations_bar/salesperson_nav_bar.dart';
+import 'package:agc_conpany/ui/navigations_bar/secretary_nav_bar.dart';
+import 'package:agc_conpany/ui/navigations_bar/storekeeper_nav_bar.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:agc_conpany/ui/registration/sign_up.dart';
 import 'package:device_preview/device_preview.dart';
@@ -63,7 +66,7 @@ class _MyAppState extends State<MyApp> {
           );
 
           },
-            child:  DriverNavBar(),
+            child:  StoreKeeperNavBar(),
 
          );
 

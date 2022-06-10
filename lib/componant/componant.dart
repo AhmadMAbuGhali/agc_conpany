@@ -192,7 +192,7 @@ Widget AdminJR(UserApp userApp) => Container(
 
 Widget OrderDetails() => Container(
       height: 70.h,
-      margin: EdgeInsets.symmetric(vertical: 18.h, horizontal: 20.w),
+      margin: EdgeInsets.symmetric(vertical: 18.h),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
         color: ColorManager.white,
@@ -264,228 +264,237 @@ Widget OrderDetails() => Container(
       ),
     );
 
-Widget CustomerOrder() => Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        height: 150.h,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.r),
-          color: ColorManager.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 0,
-              blurRadius: 6,
-              offset: Offset(0, 2), // changes position of shadow
-            ),
-          ],
+Widget CustomerOrder({
+  required Function() onAccept,
+  required Function() onReject
+}) => Padding(
+  padding: const EdgeInsets.all(8.0),
+  child: Container(
+    height: 180.h,
+
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(8.r),
+      color: ColorManager.white,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.grey.withOpacity(0.2),
+          spreadRadius: 0,
+          blurRadius: 6,
+          offset: Offset(0, 2), // changes position of shadow
         ),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              padding: EdgeInsets.only(top: 5.h, right: 5.w),
-              child: const CircleAvatar(
-                radius: 38.0,
-                backgroundImage: NetworkImage(
-                    'https://miro.medium.com/max/1000/1*wnKTi_JRAZJ58WeWaCn7yw.jpeg'),
-                backgroundColor: Colors.transparent,
+      ],
+    ),
+
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+
+        Container(
+          padding: EdgeInsets.only(top: 50.h, right: 2.w),
+          decoration: BoxDecoration(),
+          child: const CircleAvatar(
+            radius: 38.0,
+            backgroundImage: NetworkImage(
+                'https://miro.medium.com/max/1000/1*wnKTi_JRAZJ58WeWaCn7yw.jpeg'),
+            backgroundColor: Colors.transparent,
+          ),
+        ),
+
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 2.w),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'هذا النص هو مثال لنص',
+                style: getBoldStyle(
+                    color: ColorManager.black, fontSize: FontSize.s14),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.h),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              SizedBox(
+                height: 6.h,
+              ),
+              Row(
                 children: [
+
+
                   Text(
-                    'هذا النص هو مثال لنص',
-                    style: getBoldStyle(
-                        color: ColorManager.black, fontSize: FontSize.s14),
+                    'الزبون: ',
+                    style: getMediumStyle(
+                        color: ColorManager.black, fontSize: FontSize.s14.sp),
+                  ),
+                  Text(
+                    'احمد سعيد',
+                    style: getMediumStyle(
+                        color: ColorManager.gray, fontSize: FontSize.s14.sp),
                   ),
                   SizedBox(
-                    height: 6.h,
+                    width: 30.w,
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        'وزن 25 كجم: ',
-                        style: getMediumStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      Text(
-                        '100',
-                        style: getMediumStyle(
-                            color: ColorManager.gray,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      SizedBox(
-                        width: 15.w,
-                      ),
-                      Text(
-                        'الزبون: ',
-                        style: getMediumStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      Text(
-                        'احمد سعيد',
-                        style: getMediumStyle(
-                            color: ColorManager.gray,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                    ],
+                  Text(
+                    'الكمية: ',
+                    style: getMediumStyle(
+                        color: ColorManager.black, fontSize: FontSize.s14.sp),
                   ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'وزن 50 كجم: ',
-                        style: getMediumStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      Text(
-                        '50',
-                        style: getMediumStyle(
-                            color: ColorManager.gray,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      SizedBox(
-                        width: 15.w,
-                      ),
-                      Text(
-                        'رقم الهاتف :  ',
-                        style: getMediumStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      Text(
-                        '5217143',
-                        style: getMediumStyle(
-                            color: ColorManager.gray,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'الكمية: ',
-                        style: getMediumStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      Text(
-                        '150',
-                        style: getMediumStyle(
-                            color: ColorManager.gray,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      SizedBox(
-                        width: 15.w,
-                      ),
-                      Text(
-                        ': تاريخ الطلب: ',
-                        style: getMediumStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      Text(
-                        '12/12/2021',
-                        style: getMediumStyle(
-                            color: ColorManager.gray,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 55.w,
-                        height: 20.h,
-                        child: ElevatedButton(
-                          onPressed: () => Get.to(() => AccountantNavBar()),
-                          child: Text(
-                            'قبول',
-                            style: getRegularStyle(
-                                color: ColorManager.white,
-                                fontSize: FontSize.s10.sp),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: ColorManager.primary,
-                              elevation: 1,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(AppSize.s5))),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 15.w,
-                      ),
-                      SizedBox(
-                        width: 55.w,
-                        height: 20.h,
-                        child: ElevatedButton(
-                          onPressed: () => Get.to(() => AccountantNavBar()),
-                          child: Text(
-                            'رفض',
-                            style: getRegularStyle(
-                                color: ColorManager.reject,
-                                fontSize: FontSize.s10.sp),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: ColorManager.white,
-                              side: BorderSide(
-                                width: 1.0,
-                                color: ColorManager.reject,
-                              ),
-                              elevation: 1,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(AppSize.s5))),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 15.w,
-                      ),
-                      SvgPicture.asset(
-                        IconAssets.time,
-                        width: 13.w,
-                        height: 13.h,
-                      ),
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Text('منذ 3 ساعات ',
-                          style: getRegularStyle(
-                              color: ColorManager.grayTime,
-                              fontSize: FontSize.s13)),
-                    ],
+                  Text(
+                    '150',
+                    style: getMediumStyle(
+                        color: ColorManager.gray, fontSize: FontSize.s14.sp),
                   ),
                 ],
               ),
-            )
-          ],
+              SizedBox(
+                height: 4.h,
+              ),
+              Row(
+                children: [
+
+                  Text(
+                    'رقم الهاتف :  ',
+                    style: getMediumStyle(
+                        color: ColorManager.black, fontSize: FontSize.s14.sp),
+                  ),
+                  Text(
+                    '5217143',
+                    style: getMediumStyle(
+                        color: ColorManager.gray, fontSize: FontSize.s14.sp),
+                  ),
+
+
+                ],
+              ),
+              SizedBox(
+                height: 4.h,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'وزن 25 كجم: ',
+                    style: getMediumStyle(
+                        color: ColorManager.black, fontSize: FontSize.s14.sp),
+                  ),
+                  Text(
+                    '100',
+                    style: getMediumStyle(
+                        color: ColorManager.gray, fontSize: FontSize.s14.sp),
+                  ),
+                  SizedBox(
+                    width: 15.w,
+                  ),
+                  Text(
+                    'وزن 50 كجم: ',
+                    style: getMediumStyle(
+                        color: ColorManager.black, fontSize: FontSize.s14.sp),
+                  ),
+                  Text(
+                    '50',
+                    style: getMediumStyle(
+                        color: ColorManager.gray, fontSize: FontSize.s14.sp),
+                  ),
+                ],
+              ),
+
+
+              SizedBox(
+                height: 4.h,
+              ),
+
+              Row(
+                children: [
+                  Text(
+                    ' تاريخ الطلب: ',
+                    style: getMediumStyle(
+                        color: ColorManager.black, fontSize: FontSize.s14.sp),
+                  ),
+                  Text(
+                    '12/12/2021',
+                    style: getMediumStyle(
+                        color: ColorManager.gray, fontSize: FontSize.s14.sp),
+                  ),
+
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 55.w,
+                    height: 20.h,
+                    child: ElevatedButton(
+                      onPressed: onAccept,
+
+                      child: Text(
+                        'قبول',
+                        style: getRegularStyle(
+                            color: ColorManager.white,
+                            fontSize: FontSize.s10.sp),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          primary: ColorManager.primary,
+                          elevation: 1,
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(AppSize.s5))),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 15.w,
+                  ),
+                  SizedBox(
+                    width: 60.w,
+                    height: 20.h,
+                    child: ElevatedButton(
+                      onPressed: onReject,
+
+
+                      child: Text(
+                        'رفض',
+                        style: getRegularStyle(
+                            color: ColorManager.reject,
+                            fontSize: FontSize.s10.sp),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          primary: ColorManager.white,
+                          side: BorderSide(
+                            width: 1.0,
+                            color: ColorManager.reject,
+                          ),
+                          elevation: 1,
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(AppSize.s5))),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                  SvgPicture.asset(
+                    IconAssets.time,
+                    width: 13.w,
+                    height: 13.h,
+                  ),
+                  SizedBox(
+                    width: 6.w,
+                  ),
+                  Text('منذ 3 ساعات ',
+                      style: getRegularStyle(
+                          color: ColorManager.grayTime,
+                          fontSize: FontSize.s13)),
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      ],
+    ),
+  ),
+);
+
 
 Widget SalespersonToAccountant() => Container(
-      width: 330.w,
-      height: 111.h,
-      margin: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+      height: 150.h,
+      margin: EdgeInsets.symmetric(vertical: 20.h,),
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
           color: ColorManager.black.withOpacity(0.16),
@@ -506,7 +515,21 @@ Widget SalespersonToAccountant() => Container(
                       'الزبون :أحمد محمود',
                       style: TextStyle(fontSize: 12.sp),
                     ),
+
+                  ],
+                ),
+                SizedBox(
+                  height: 11.h
+                  ,
+                ),
+                Row(
+
+                  children: [
+
                     Text('المخبز :العائلات', style: TextStyle(fontSize: 12.sp)),
+                    SizedBox(
+                      width: 70.w,
+                    ),
                     Text('رقم الهاتف :8765432',
                         style: TextStyle(fontSize: 12.sp)),
                   ],
@@ -522,7 +545,7 @@ Widget SalespersonToAccountant() => Container(
                       style: TextStyle(fontSize: 12.sp),
                     ),
                     SizedBox(
-                      width: 20.w,
+                      width: 40.w,
                     ),
                     Text('الكمية :250 ', style: TextStyle(fontSize: 12.sp)),
                   ],
@@ -666,7 +689,7 @@ Widget SecreraryShowCustomerList() => Container(
 
 Widget SecretaryJoinReq() => Container(
       width: 330.w,
-      height: 150.h,
+      height: 170.h,
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
           color: ColorManager.black.withOpacity(0.16),
@@ -1413,8 +1436,8 @@ Widget AdminMember(UserApp userApp) => Container(
     );
 Widget StoreKeeperToDriver() => Container(
   width: 330.w,
-  height: 111.h,
-  margin: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+  height: 130.h,
+  margin: EdgeInsets.symmetric(vertical: 20.h),
   decoration: BoxDecoration(boxShadow: [
     BoxShadow(
       color: ColorManager.black.withOpacity(0.16),

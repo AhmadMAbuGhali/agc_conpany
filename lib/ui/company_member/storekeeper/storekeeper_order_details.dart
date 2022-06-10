@@ -33,16 +33,7 @@ class StoreKeeperOrderDetails extends StatelessWidget {
                   SizedBox(height: 48.h,),
                   OrderDetails(),
 
-                  OrderDetails(),
 
-                  OrderDetails(),
-
-                  OrderDetails(),
-
-                  OrderDetails(),
-                  OrderDetails(),
-                  OrderDetails(),
-                  OrderDetails(),
                 ],
               ),
             ),

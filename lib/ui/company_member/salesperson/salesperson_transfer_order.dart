@@ -31,7 +31,7 @@ class SalespersonTransferOrder extends StatelessWidget {
                     shrinkWrap: true,
                     itemBuilder:(context, index) {
                       return SalespersonToAccountant();
-                    } ,itemCount: 10,),
+                    } ,itemCount: 1,),
 
                 ],
               ),

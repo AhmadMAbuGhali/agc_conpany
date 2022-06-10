@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 
 
@@ -32,8 +33,10 @@ class SalespersonCustomerOrder extends StatelessWidget {
                     shrinkWrap: true,
                     itemBuilder:(context, index) {
 
-                      return CustomerOrder();
-                    } ,itemCount: 10,),
+                      return GestureDetector(
+                          onTap: ()=> Get.to(OrderDetails()),
+                          child: CustomerOrder(onAccept: (){},onReject: (){}));
+                    } ,itemCount: 1,),
 
                 ],
               ),
