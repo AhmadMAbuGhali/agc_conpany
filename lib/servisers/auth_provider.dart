@@ -11,8 +11,6 @@ import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import '../ui/navigations_bar/accountant_nav_bar.dart';
 import '../ui/navigations_bar/storekeeper_nav_bar.dart';
 
@@ -44,9 +42,9 @@ class AuthProvider extends ChangeNotifier {
   }
   login(BuildContext context,String email,String password) async {
     try {
-      UserCredential? userCredential=  await AuthHelper.authHelper.signIn(email,password);
+         await AuthHelper.authHelper.signIn(email,password);
       if (AuthHelper.authHelper.success) {
-        String? email =await FirebaseAuth.instance.currentUser!.email;
+        String? email = await FirebaseAuth.instance.currentUser!.email;
 
    if(email=='admin@admin.com'){
      Get.off(AdminNavBar());

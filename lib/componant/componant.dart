@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:developer';
+import 'package:agc_conpany/model/customer_model.dart';
 import 'package:agc_conpany/model/users.dart';
 import 'package:agc_conpany/servisers/firebase_provider.dart';
 import 'package:flutter/material.dart';
@@ -687,7 +688,7 @@ Widget SecreraryShowCustomerList() => Container(
       ),
     );
 
-Widget SecretaryJoinReq() => Container(
+Widget SecretaryJoinReq(CustomerModel customerModel) => Container(
       width: 330.w,
       height: 170.h,
       decoration: BoxDecoration(boxShadow: [
@@ -716,9 +717,9 @@ Widget SecretaryJoinReq() => Container(
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('أحمد أبو غالي '),
-                        Text('رقم الجوال : 0595511949'),
-                        Text('المخبز : العائلات'),
+                        Text(customerModel.name),
+                        Text('رقم الجوال : '+customerModel.phoneNumber),
+                        Text('المخبز : '+customerModel.bakeryName),
                       ],
                     )
                   ],

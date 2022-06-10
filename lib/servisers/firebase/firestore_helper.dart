@@ -1,8 +1,6 @@
-
 import 'dart:developer';
-
+import 'package:agc_conpany/model/customer_model.dart';
 import 'package:agc_conpany/model/users.dart';
-import 'package:agc_conpany/resources/constants_manager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreHelper {
@@ -21,7 +19,6 @@ class FirestoreHelper {
   deletefromUsersAwaiting(String userID)async{
     await firebaseFirestore.collection('usersWaiting').doc(userID).delete();
   }
-
   Future<UserApp> getUserFromWaiting(String userid) async {
     DocumentSnapshot<Map<String, dynamic>> document =
         await firebaseFirestore.collection('usersWaiting').doc(userid).get();
@@ -80,32 +77,18 @@ class FirestoreHelper {
     }).toList();
     return allAsset;
   }
-
+  Future<List<CustomerModel>> getAllCustomerWaiting() async {
+    QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
+    await firebaseFirestore.collection('customersWaiting').get();
+    List<CustomerModel> allUser = allAssetSnapshot.docs.map((e) {
+      Map<String, dynamic> documentMap = e.data();
+      documentMap['id'] = e.id;
+      CustomerModel userApp = CustomerModel.fromMap(documentMap);
+      return userApp;
+    }).toList();
+    return allUser;
+  }
   Future disableUser(String userId)async{
   await firebaseFirestore.collection('users').doc(userId).update({'disable': false});
 }
 }
-  // deleteCollectio() async {
-  //   await firebaseFirestore.collection('users').doc().delete();
-  // }
-
-  // addNewAsset(Asset1 asset1) async {
-  //   // DocumentReference<Map<String, dynamic>> doc =
-  //   await firebaseFirestore.collection('asset').add(asset1.toMap());
-  // }
-  //
-  // Future<List<Asset1>> getAllAsset() async {
-  //   QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
-  //       await firebaseFirestore.collection('asset').get();
-  //
-  //   List<Asset1> allAsset = allAssetSnapshot.docs.map((e) {
-  //     Map<String, dynamic> documentMap = e.data();
-  //     documentMap['id'] = e.id;
-  //     // log('firestore helper e.id: ${e.id}');
-  //     // log("firestore helper documentMap['id']: ${documentMap['id']}");
-  //     Asset1 asset1 = Asset1.fromMap(documentMap);
-  //     return asset1;
-  //   }).toList();
-  //   return allAsset;
-  // }
-

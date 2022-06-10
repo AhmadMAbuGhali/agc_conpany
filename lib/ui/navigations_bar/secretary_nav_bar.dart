@@ -23,12 +23,9 @@ class SecretaryNavBar extends StatefulWidget {
 class _HomeScreenState extends State<SecretaryNavBar> {
   final pages = [
     SecretaryHome(),
-
     SecretaryCustomerList(),
-
     SecretaryCustomerReq(),
     SecretaryCompleteOrder(),
-
   ];
 
   int index = 0;
