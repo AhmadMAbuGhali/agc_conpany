@@ -15,7 +15,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import '../../componant/componant.dart';
 import '../../resources/color_manager.dart';
-import '../admin/admin_nav_bar.dart';
+import '../navigations_bar/admin_nav_bar.dart';
 
 class Login extends StatelessWidget {
   TextEditingController emailController = TextEditingController();

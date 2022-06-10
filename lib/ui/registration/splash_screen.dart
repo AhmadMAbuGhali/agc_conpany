@@ -1,5 +1,5 @@
 import 'package:agc_conpany/servisers/auth_provider.dart';
-import 'package:agc_conpany/ui/admin/admin_nav_bar.dart';
+import 'package:agc_conpany/ui/navigations_bar/admin_nav_bar.dart';
 import 'package:agc_conpany/ui/registration/sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

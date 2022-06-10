@@ -1,123 +1,146 @@
 
-import 'package:agc_conpany/resources/color_manager.dart';
-import 'package:agc_conpany/resources/font_manager.dart';
-import 'package:agc_conpany/resources/styles_manager.dart';
-import 'package:agc_conpany/ui/company_member/salesperson/salesperson_transfer_order.dart';
-import 'package:agc_conpany/ui/company_member/secretary/secretary_complete_order.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../resources/assets_manager.dart';
+import '../../resources/color_manager.dart';
+
 import '../company_member/driver/driver_complete_order.dart';
 import '../company_member/driver/driver_delevery.dart';
 import '../company_member/driver/driver_home.dart';
 import '../company_member/driver/driver_order.dart';
 
 
-
 class DriverNavBar extends StatefulWidget {
+  DriverNavBar({Key? key}) : super(key: key);
   @override
-  State<DriverNavBar> createState() => _HomeScreenState();
+  State<DriverNavBar> createState() => _DriverNavBarState();
 }
 
-class _HomeScreenState extends State<DriverNavBar> {
-  final int _pageCount = 4;
-  int _pageIndex = 0;
-  final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
-  @override
+class _DriverNavBarState extends State<DriverNavBar> {
+  final pages = [
+    DriverHome(),
+
+    DriverCustomerOrder(),
+
+    DriverDeleveryOrder(),
+  DriverCompleteOrder(),
+
+  ];
+
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-        bottomNavigationBar: CurvedNavigationBar(
-          key: _bottomNavigationKey,
-          index: 0,
-          height: 50.0,
-          items: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:  [
-                SvgPicture.asset(
-                  IconAssets.admin_home,width: 20.w,height: 20.h,
-                ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:  [
-                SvgPicture.asset(
-                  IconAssets.orders,width: 20.w,height: 20.h,
-                ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:  [
-                SvgPicture.asset(
-                  IconAssets.order_delevery,width: 20.w,height: 20.h,
-                ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children:  [
-                SvgPicture.asset(
-                  IconAssets.complete_order,width: 20.w,height: 20.h,
-                ),
-              ],
-            ),
+    ScreenUtil.init(context, designSize: const Size(375, 812));
+    return Directionality(
+        textDirection: TextDirection.rtl,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: pages[index],
+          bottomNavigationBar: Container(
+            decoration: BoxDecoration(
+              // border: Border(top: BorderSide(color: Colors.red, width: 1.0)),
 
-          ],
-          color: Colors.white.withOpacity(0.11),
-          buttonBackgroundColor: ColorManager.button,
-          backgroundColor: ColorManager.white,
-          animationCurve: Curves.easeInOut,
-          animationDuration: const Duration(milliseconds: 600),
-          onTap: (index) {
-            setState(() {
-              _pageIndex = index;
-            });
-          },
-          letIndexChange: (index) => true,
-        ),
-        body: _body());
-  }
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(24.r),
+                  topLeft: Radius.circular(24.r)),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(24.r),
+                topRight: Radius.circular(24.r),
+              ),
+              child: BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                elevation: 0.0,
+                currentIndex: index,
+                onTap: (newindex) {
+                  setState(() {
+                    index = newindex;
+                  });
+                  setState(() {});
+                },
+                items: [
+                  BottomNavigationBarItem(
+                      label: '',
+                      icon: index == 0
+                          ? SvgPicture.asset(
+                        IconAssets.admin_home,
+                        height: 25.h,
+                        width: 25.w,
+                        color: ColorManager.textOrange,
+                      )
+                          : SvgPicture.asset(
+                        IconAssets.admin_home,
+                        height: 25.h,
+                        width: 25.w,
+                        color: ColorManager.primary,
+                      )),
+                  BottomNavigationBarItem(
+                      label: '',
+                      icon: index == 1
+                          ? SvgPicture.asset(
+                        IconAssets.orders,
+                        height: 25.h,
+                        width: 25.w,
+                        color: ColorManager.textOrange,
+                      )
+                          : SvgPicture.asset(
+                        IconAssets.orders,
+                        height: 25.h,
+                        width: 25.w,
+                        color: ColorManager.primary,
+                      )),
+                  BottomNavigationBarItem(
+                      label: '',
+                      icon: index == 2
+                          ? SvgPicture.asset(
+                        IconAssets.order_delevery,
+                        height: 25.h,
+                        width: 25.w,
+                        color: ColorManager.textOrange,
+                      )
+                          : SvgPicture.asset(
+                        IconAssets.order_delevery,
+                        height: 25.h,
+                        width: 25.w,
+                        color: ColorManager.primary,
+                      )),
+                  BottomNavigationBarItem(
+                      label: '',
+                      icon: index == 3
+                          ? SvgPicture.asset(
+                        IconAssets.complete_order,
+                        height: 25.h,
+                        width: 25.w,
+                        color: ColorManager.textOrange,
+                      )
+                          : SvgPicture.asset(
+                        IconAssets.complete_order,
+                        height: 25.h,
+                        width: 25.w,
+                        color: ColorManager.primary,
+                      )),
 
-  Widget _body() {
-    return Stack(
-      children: List<Widget>.generate(_pageCount, (int index) {
-        return IgnorePointer(
-          ignoring: index != _pageIndex,
-          child: Opacity(
-            opacity: _pageIndex == index ? 1.0 : 0.0,
-            child: Navigator(
-              onGenerateRoute: (RouteSettings settings) {
-                return MaterialPageRoute(
-                  builder: (_) => ppage(index),
-                  settings: settings,
-                );
-              },
+                ],
+              ),
             ),
           ),
-        );
-      }),
-    );
+        ));
   }
 
-  Widget ppage(int index) {
-    switch (index) {
-      case 0:
-        return DriverHome();
-      case 1:
-        return DriverCustomerOrder();
-      case 2:
-        return DriverDeleveryOrder();
-      case 3:
-        return DriverCompleteOrder();
-    }
-    throw "Invalid index $index";
-  }
 }

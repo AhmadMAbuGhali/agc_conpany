@@ -3,7 +3,7 @@ import 'package:agc_conpany/model/users.dart';
 import 'package:agc_conpany/resources/constants_manager.dart';
 import 'package:agc_conpany/servisers/firebase/auth_helper.dart';
 import 'package:agc_conpany/servisers/firebase/firestore_helper.dart';
-import 'package:agc_conpany/ui/admin/admin_nav_bar.dart';
+import 'package:agc_conpany/ui/navigations_bar/admin_nav_bar.dart';
 import 'package:agc_conpany/ui/navigations_bar/driver_nav_bar.dart';
 import 'package:agc_conpany/ui/navigations_bar/salesperson_nav_bar.dart';
 import 'package:agc_conpany/ui/navigations_bar/secretary_nav_bar.dart';
@@ -25,7 +25,7 @@ class AuthProvider extends ChangeNotifier {
     duration: Duration(milliseconds: 2000),
   );
 
-  register(BuildContext context,String name,String email,String password,String ,jopTitel,String phoneNumber) async {
+  register(BuildContext context,String name,String email,String password,String, jopTitel,String phoneNumber) async {
    log('start register');
     UserApp userApp = UserApp(name:name,password: password,phonenumber: phoneNumber,jobtitle: jopTitel,email: email );
     try {
@@ -76,7 +76,7 @@ class AuthProvider extends ChangeNotifier {
          );
        }else if(AppConstants.loggedUser!.isaccept==true){
          if(AppConstants.loggedUser!.jobtitle == "محاسب"){
-           Get.off(NavScreen());
+           Get.off(AccountantNavBar());
          }else if(AppConstants.loggedUser!.jobtitle == "سكرتير"){
            Get.off(SecretaryNavBar());
          }else if(AppConstants.loggedUser!.jobtitle == "مندوب مبيعات"){

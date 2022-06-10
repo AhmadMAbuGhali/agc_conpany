@@ -83,7 +83,7 @@ class DriverDeleveryOrder extends StatelessWidget {
                           ],
                         ),
                       ));
-                    } ,itemCount: 10,),
+                    } ,itemCount: 1,),
 
                 ],
               ),

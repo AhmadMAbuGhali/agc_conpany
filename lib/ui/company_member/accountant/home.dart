@@ -144,7 +144,7 @@ class HomeAccountant extends StatelessWidget {
               children: [
 
                 SizedBox(height: 30.h,),
-                AccountantProductWidget()
+
               ],
             )
           ],

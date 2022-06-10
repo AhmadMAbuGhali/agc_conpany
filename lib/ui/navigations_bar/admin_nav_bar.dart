@@ -7,27 +7,25 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../resources/assets_manager.dart';
 import '../../resources/color_manager.dart';
-import '../company_member/accountant/accountant_completed_orders.dart';
-import '../company_member/accountant/accountant_product.dart';
-import '../company_member/accountant/catoegoreis_accountant.dart';
-import '../company_member/accountant/home.dart';
-import '../company_member/accountant/transfer_orders.dart';
+import '../admin/admin_company_member.dart';
+import '../admin/admin_home.dart';
+import '../admin/admin_member_join_req.dart';
 
-class AccountantNavBar extends StatefulWidget {
-  AccountantNavBar({Key? key}) : super(key: key);
+
+class AdminNavBar extends StatefulWidget {
+  AdminNavBar({Key? key}) : super(key: key);
   @override
-  State<AccountantNavBar> createState() => _AccountantNavBarState();
+  State<AdminNavBar> createState() => _AdminNavBarState();
 }
 
-class _AccountantNavBarState extends State<AccountantNavBar> {
+class _AdminNavBarState extends State<AdminNavBar> {
   final pages = [
-    HomeAccountant(),
+    AdminHome(),
 
-    AccountantCategoeies(),
+    AdminCompanyMember(),
 
-    AccountantProduct(),
-    Transferorders(),
-    AccountantCompletedOrders(),
+    AdminMemberJoin(),
+
   ];
 
   int index = 0;
@@ -93,13 +91,13 @@ class _AccountantNavBarState extends State<AccountantNavBar> {
                       label: '',
                       icon: index == 1
                           ? SvgPicture.asset(
-                        IconAssets.category,
+                        IconAssets.admin_company_member,
                         height: 25.h,
                         width: 25.w,
                         color: ColorManager.textOrange,
                       )
                           : SvgPicture.asset(
-                        IconAssets.category,
+                        IconAssets.admin_company_member,
                         height: 25.h,
                         width: 25.w,
                         color: ColorManager.primary,
@@ -108,47 +106,18 @@ class _AccountantNavBarState extends State<AccountantNavBar> {
                       label: '',
                       icon: index == 2
                           ? SvgPicture.asset(
-                        IconAssets.product,
+                        IconAssets.admin_join,
                         height: 25.h,
                         width: 25.w,
                         color: ColorManager.textOrange,
                       )
                           : SvgPicture.asset(
-                        IconAssets.product,
+                        IconAssets.admin_join,
                         height: 25.h,
                         width: 25.w,
                         color: ColorManager.primary,
                       )),
-                  BottomNavigationBarItem(
-                      label: '',
-                      icon: index == 3
-                          ? SvgPicture.asset(
-                        IconAssets.transfer_order,
-                        height: 25.h,
-                        width: 25.w,
-                        color: ColorManager.textOrange,
-                      )
-                          : SvgPicture.asset(
-                        IconAssets.transfer_order,
-                        height: 25.h,
-                        width: 25.w,
-                        color: ColorManager.primary,
-                      )),
-                  BottomNavigationBarItem(
-                      label: '',
-                      icon: index == 4
-                          ? SvgPicture.asset(
-                        IconAssets.order,
-                        height: 25.h,
-                        width: 25.w,
-                        color: ColorManager.textOrange,
-                      )
-                          : SvgPicture.asset(
-                        IconAssets.order,
-                        height: 25.h,
-                        width: 25.w,
-                        color: ColorManager.primary,
-                      )),
+
                 ],
               ),
             ),

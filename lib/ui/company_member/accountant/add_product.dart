@@ -36,10 +36,27 @@ class AddProductScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 27.h),
                 child: Column(
                   children: [
-                    Text(
-                      'أضافة منتج',
-                      style: getBoldStyle(color: Colors.black),
-                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 32.0),
+                            child:Text(
+                              'أضافة منتج',
+                              style: getBoldStyle(color: Colors.black),
+                              textAlign: TextAlign.center,
+                            ),
+
+                            ),
+                          ),
+                       IconButton(onPressed: ()=> Get.back(), icon:  Icon(Icons.arrow_forward_ios, size: 32.0,),)
+                      ]
+
+                        ),
+
+
+
+
                     SizedBox(
                       height: 20.h,
                     ),
@@ -222,15 +239,18 @@ class AddProductScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: ColorManager.primary,
-                          elevation: 0.0,
+                      child: GestureDetector(
+                        onTap: (){},
+                        child: Container(
+                          width:253 ,
+                          height: 45,
+                          decoration: BoxDecoration(
+                            color: ColorManager.primary,
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child:Center(child: Text('  إضافة المنتج',style: getBoldStyle(color: ColorManager.white),)) ,
                         ),
-
-                        onPressed: () {},
-                        child: Text('إضافة المنتج'),
-                      ),
+                      )
                     )
                   ],
                 ),

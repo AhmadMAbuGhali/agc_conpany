@@ -48,7 +48,7 @@ Widget WidgetTextField({
 
 Widget AdminJR(UserApp userApp) => Container(
       width: 330.w,
-      height: 150.h,
+      height: 180.h,
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
           color: ColorManager.black.withOpacity(0.16),
@@ -416,7 +416,7 @@ Widget CustomerOrder() => Padding(
                         width: 55.w,
                         height: 20.h,
                         child: ElevatedButton(
-                          onPressed: () => Get.to(() => NavScreen()),
+                          onPressed: () => Get.to(() => AccountantNavBar()),
                           child: Text(
                             'قبول',
                             style: getRegularStyle(
@@ -438,7 +438,7 @@ Widget CustomerOrder() => Padding(
                         width: 55.w,
                         height: 20.h,
                         child: ElevatedButton(
-                          onPressed: () => Get.to(() => NavScreen()),
+                          onPressed: () => Get.to(() => AccountantNavBar()),
                           child: Text(
                             'رفض',
                             style: getRegularStyle(
@@ -537,7 +537,7 @@ Widget SalespersonToAccountant() => Container(
                       width: 129.w,
                       height: 20.h,
                       child: ElevatedButton(
-                        onPressed: () => Get.to(() => NavScreen()),
+                        onPressed: () => Get.to(() => AccountantNavBar()),
                         child: Text(
                           'تحويل الى المحاسب',
                           style: getRegularStyle(
@@ -715,7 +715,7 @@ Widget SecretaryJoinReq() => Container(
                       width: 69.w,
                       height: 20.h,
                       child: ElevatedButton(
-                        onPressed: () => Get.to(() => NavScreen()),
+                        onPressed: () => Get.to(() => AccountantNavBar()),
                         child: Text(
                           'قبول',
                           style: getRegularStyle(
@@ -737,7 +737,7 @@ Widget SecretaryJoinReq() => Container(
                       width: 69.w,
                       height: 20.h,
                       child: ElevatedButton(
-                        onPressed: () => Get.to(() => NavScreen()),
+                        onPressed: () => Get.to(() => AccountantNavBar()),
                         child: Text(
                           'رفض',
                           style: getRegularStyle(
@@ -803,7 +803,7 @@ Widget AccountantAddCategory({
     GestureDetector(
       onTap: onTap,
       child: Container(
-          margin: EdgeInsets.symmetric(vertical: 15.h, horizontal: 20.w),
+           margin: EdgeInsets.symmetric(vertical: 15.h),
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           width: double.infinity,
           height: 41.h,
@@ -843,7 +843,7 @@ Widget AccountantAddCategory({
     );
 
 Widget CompletedOrder() => Container(
-      height: 135.h,
+      height: 180.h,
 
       // margin: EdgeInsets.symmetric(vertical: 18.h,horizontal: 20.w),
       decoration: BoxDecoration(
@@ -862,21 +862,9 @@ Widget CompletedOrder() => Container(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          // Container(
-          //   height: 100.h,
-          //   width: 100.w,
-          //   decoration: BoxDecoration(
-          //       color: ColorManager.parent,
-          //       borderRadius: BorderRadius.circular(70.r),
-          //       // image: const DecorationImage(image: AssetImage(ImageAssets.productTest),fit: BoxFit.cover)
-          //   ),
-          //     child: ClipOval(
-          //       child: Image.asset(ImageAssets.productTest,fit: BoxFit.contain,alignment: Alignment.topCenter,
-          //       ),
-          //     ),
-          // ),
+
           Container(
-            padding: EdgeInsets.only(top: 5.h, right: 5.w),
+             padding: EdgeInsets.only(top: 5.h, right: 3.w),
             decoration: BoxDecoration(),
             child: const CircleAvatar(
               radius: 38.0,
@@ -902,6 +890,58 @@ Widget CompletedOrder() => Container(
                 ),
                 Row(
                   children: [
+
+
+                    Text(
+                      'الزبون: ',
+                      style: getMediumStyle(
+                          color: ColorManager.black, fontSize: FontSize.s14.sp),
+                    ),
+                    Text(
+                      'احمد سعيد',
+                      style: getMediumStyle(
+                          color: ColorManager.gray, fontSize: FontSize.s14.sp),
+                    ),
+                    SizedBox(
+                      width: 30.w,
+                    ),
+                    Text(
+                      'الكمية: ',
+                      style: getMediumStyle(
+                          color: ColorManager.black, fontSize: FontSize.s14.sp),
+                    ),
+                    Text(
+                      '150',
+                      style: getMediumStyle(
+                          color: ColorManager.gray, fontSize: FontSize.s14.sp),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 4.h,
+                ),
+                Row(
+                  children: [
+
+                    Text(
+                      'رقم الهاتف :  ',
+                      style: getMediumStyle(
+                          color: ColorManager.black, fontSize: FontSize.s14.sp),
+                    ),
+                    Text(
+                      '5217143',
+                      style: getMediumStyle(
+                          color: ColorManager.gray, fontSize: FontSize.s14.sp),
+                    ),
+
+
+                  ],
+                ),
+                SizedBox(
+                  height: 4.h,
+                ),
+                Row(
+                  children: [
                     Text(
                       'وزن 25 كجم: ',
                       style: getMediumStyle(
@@ -916,23 +956,6 @@ Widget CompletedOrder() => Container(
                       width: 15.w,
                     ),
                     Text(
-                      'الزبون: ',
-                      style: getMediumStyle(
-                          color: ColorManager.black, fontSize: FontSize.s14.sp),
-                    ),
-                    Text(
-                      'احمد سعيد',
-                      style: getMediumStyle(
-                          color: ColorManager.gray, fontSize: FontSize.s14.sp),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 4.h,
-                ),
-                Row(
-                  children: [
-                    Text(
                       'وزن 50 كجم: ',
                       style: getMediumStyle(
                           color: ColorManager.black, fontSize: FontSize.s14.sp),
@@ -942,51 +965,10 @@ Widget CompletedOrder() => Container(
                       style: getMediumStyle(
                           color: ColorManager.gray, fontSize: FontSize.s14.sp),
                     ),
-                    SizedBox(
-                      width: 15.w,
-                    ),
-                    Text(
-                      'رقم الهاتف :  ',
-                      style: getMediumStyle(
-                          color: ColorManager.black, fontSize: FontSize.s14.sp),
-                    ),
-                    Text(
-                      '5217143',
-                      style: getMediumStyle(
-                          color: ColorManager.gray, fontSize: FontSize.s14.sp),
-                    ),
                   ],
                 ),
-                SizedBox(
-                  height: 4.h,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'الكمية: ',
-                      style: getMediumStyle(
-                          color: ColorManager.black, fontSize: FontSize.s14.sp),
-                    ),
-                    Text(
-                      '150',
-                      style: getMediumStyle(
-                          color: ColorManager.gray, fontSize: FontSize.s14.sp),
-                    ),
-                    SizedBox(
-                      width: 15.w,
-                    ),
-                    Text(
-                      ': تاريخ الطلب: ',
-                      style: getMediumStyle(
-                          color: ColorManager.black, fontSize: FontSize.s14.sp),
-                    ),
-                    Text(
-                      '12/12/2021',
-                      style: getMediumStyle(
-                          color: ColorManager.gray, fontSize: FontSize.s14.sp),
-                    ),
-                  ],
-                ),
+
+
                 SizedBox(
                   height: 4.h,
                 ),
@@ -1002,6 +984,28 @@ Widget CompletedOrder() => Container(
                       style: getMediumStyle(
                           color: ColorManager.gray, fontSize: FontSize.s14.sp),
                     ),
+                    SizedBox(
+                      width: 15.w,
+                    ),
+
+                  ],
+                ),
+                SizedBox(
+                  height: 4.h,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      ': تاريخ الطلب: ',
+                      style: getMediumStyle(
+                          color: ColorManager.black, fontSize: FontSize.s14.sp),
+                    ),
+                    Text(
+                      '12/12/2021',
+                      style: getMediumStyle(
+                          color: ColorManager.gray, fontSize: FontSize.s14.sp),
+                    ),
+
                   ],
                 ),
               ],
@@ -1011,10 +1015,10 @@ Widget CompletedOrder() => Container(
       ),
     );
 
-Widget AccountantNotification() => Container(
-      width: 330.w,
-      height: 111.h,
-      margin: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+Widget AccountantTransferorders() => Container(
+
+      height: 120.h,
+      margin: EdgeInsets.symmetric(vertical: 20.h, ),
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
           color: ColorManager.black.withOpacity(0.16),
@@ -1025,7 +1029,7 @@ Widget AccountantNotification() => Container(
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 15.h, right: 10.w, left: 5.w),
+            padding: EdgeInsets.only(top: 15.h, right: 2.w, left: 5.w),
             child: Column(
               children: [
                 Row(
@@ -1063,10 +1067,10 @@ Widget AccountantNotification() => Container(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: 129.w,
-                      height: 20.h,
+                      width: 150.w,
+                      height: 25.h,
                       child: ElevatedButton(
-                        onPressed: () => Get.to(() => NavScreen()),
+                        onPressed: () => Get.to(() => AccountantNavBar()),
                         child: Text(
                           'تحويل الى امين المخزن',
                           style: getRegularStyle(
@@ -1082,13 +1086,13 @@ Widget AccountantNotification() => Container(
                       ),
                     ),
                     SizedBox(
-                      width: 15.w,
+                      width: 8.w,
                     ),
                     SizedBox(
                       width: 69.w,
                       height: 20.h,
                       child: ElevatedButton(
-                        onPressed: () => Get.to(() => NavScreen()),
+                        onPressed: () => Get.to(() => AccountantNavBar()),
                         child: Text(
                           'رفض',
                           style: getRegularStyle(
@@ -1108,7 +1112,7 @@ Widget AccountantNotification() => Container(
                       ),
                     ),
                     SizedBox(
-                      width: 10.w,
+                      width: 3.w,
                     ),
                     SvgPicture.asset(
                       IconAssets.time,
@@ -1132,8 +1136,9 @@ Widget AccountantNotification() => Container(
     );
 
 Widget AccountantProductWidget() => Container(
-      height: 130.h,
-      margin: EdgeInsets.symmetric(vertical: 18.h, horizontal: 20.w),
+      height: 150.h,
+
+      margin: EdgeInsets.symmetric(vertical: 18.h, ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
         color: ColorManager.white,
@@ -1150,21 +1155,9 @@ Widget AccountantProductWidget() => Container(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          // Container(
-          //   height: 100.h,
-          //   width: 100.w,
-          //   decoration: BoxDecoration(
-          //       color: ColorManager.parent,
-          //       borderRadius: BorderRadius.circular(70.r),
-          //       // image: const DecorationImage(image: AssetImage(ImageAssets.productTest),fit: BoxFit.cover)
-          //   ),
-          //     child: ClipOval(
-          //       child: Image.asset(ImageAssets.productTest,fit: BoxFit.contain,alignment: Alignment.topCenter,
-          //       ),
-          //     ),
-          // ),
+
           Container(
-            margin: EdgeInsets.only(top: 15.h, right: 15.w),
+            margin: EdgeInsets.symmetric(vertical: 20.h,horizontal: 15.w),
             decoration: BoxDecoration(boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.2),
@@ -1182,7 +1175,7 @@ Widget AccountantProductWidget() => Container(
           ),
 
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+            padding: EdgeInsets.symmetric(vertical: 10.h,),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -1201,7 +1194,7 @@ Widget AccountantProductWidget() => Container(
                 Row(
                   children: [
                     Text(
-                      'الكمية المتوفرة في المخزن',
+                      'الكمية المتوفرة ',
                       style: getMediumStyle(
                           color: ColorManager.gray, fontSize: FontSize.s10.sp),
                     ),
@@ -1226,7 +1219,7 @@ Widget AccountantProductWidget() => Container(
                 Row(
                   children: [
                     Text(
-                      'الكمية المتوفرة في المخزن',
+                      'الكمية المتوفرة',
                       style: getMediumStyle(
                           color: ColorManager.gray, fontSize: FontSize.s10.sp),
                     ),
@@ -1255,7 +1248,7 @@ Widget AccountantProductWidget() => Container(
                       width: 70.w,
                       height: 20.h,
                       child: ElevatedButton(
-                        onPressed: () => Get.to(() => NavScreen()),
+                        onPressed: () => Get.to(() => AccountantNavBar()),
                         child: Text(
                           'تعديل',
                           style: getRegularStyle(
@@ -1277,7 +1270,7 @@ Widget AccountantProductWidget() => Container(
                       width: 70.w,
                       height: 20.h,
                       child: ElevatedButton(
-                        onPressed: () => Get.to(() => NavScreen()),
+                        onPressed: () => Get.to(() => AccountantNavBar()),
                         child: Text(
                           'حذف',
                           style: getRegularStyle(
@@ -1307,7 +1300,7 @@ Widget AccountantProductWidget() => Container(
 
 Widget AdminMember(UserApp userApp) => Container(
       width: 350.w,
-      height: 135.h,
+      height: 160.h,
       margin: EdgeInsets.symmetric(vertical: 10.h),
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
@@ -1471,7 +1464,7 @@ Widget StoreKeeperToDriver() => Container(
                   width: 129.w,
                   height: 20.h,
                   child: ElevatedButton(
-                    onPressed: () => Get.to(() => NavScreen()),
+                    onPressed: () => Get.to(() => AccountantNavBar()),
                     child: Text(
                       'تحويل الى السائق',
                       style: getRegularStyle(
@@ -1602,7 +1595,7 @@ Widget DriverAccetpOrder({
 }) => Padding(
   padding: const EdgeInsets.all(8.0),
   child: Container(
-    height: 150.h,
+    height: 180.h,
 
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8.r),
@@ -1616,12 +1609,15 @@ Widget DriverAccetpOrder({
         ),
       ],
     ),
+
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
+
         Container(
-          padding: EdgeInsets.only(top: 5.h, right: 5.w),
+          padding: EdgeInsets.only(top: 50.h, right: 2.w),
+          decoration: BoxDecoration(),
           child: const CircleAvatar(
             radius: 38.0,
             backgroundImage: NetworkImage(
@@ -1629,8 +1625,9 @@ Widget DriverAccetpOrder({
             backgroundColor: Colors.transparent,
           ),
         ),
+
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.h),
+          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 2.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1645,105 +1642,103 @@ Widget DriverAccetpOrder({
               ),
               Row(
                 children: [
-                  Text(
-                    'وزن 25 كجم: ',
-                    style: getMediumStyle(
-                        color: ColorManager.black,
-                        fontSize: FontSize.s14.sp),
-                  ),
-                  Text(
-                    '100',
-                    style: getMediumStyle(
-                        color: ColorManager.gray,
-                        fontSize: FontSize.s14.sp),
-                  ),
-                  SizedBox(
-                    width: 15.w,
-                  ),
+
+
                   Text(
                     'الزبون: ',
                     style: getMediumStyle(
-                        color: ColorManager.black,
-                        fontSize: FontSize.s14.sp),
+                        color: ColorManager.black, fontSize: FontSize.s14.sp),
                   ),
                   Text(
                     'احمد سعيد',
                     style: getMediumStyle(
-                        color: ColorManager.gray,
-                        fontSize: FontSize.s14.sp),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 4.h,
-              ),
-              Row(
-                children: [
-                  Text(
-                    'وزن 50 كجم: ',
-                    style: getMediumStyle(
-                        color: ColorManager.black,
-                        fontSize: FontSize.s14.sp),
-                  ),
-                  Text(
-                    '50',
-                    style: getMediumStyle(
-                        color: ColorManager.gray,
-                        fontSize: FontSize.s14.sp),
+                        color: ColorManager.gray, fontSize: FontSize.s14.sp),
                   ),
                   SizedBox(
-                    width: 15.w,
+                    width: 30.w,
                   ),
-                  Text(
-                    'رقم الهاتف :  ',
-                    style: getMediumStyle(
-                        color: ColorManager.black,
-                        fontSize: FontSize.s14.sp),
-                  ),
-                  Text(
-                    '5217143',
-                    style: getMediumStyle(
-                        color: ColorManager.gray,
-                        fontSize: FontSize.s14.sp),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 4.h,
-              ),
-              Row(
-                children: [
                   Text(
                     'الكمية: ',
                     style: getMediumStyle(
-                        color: ColorManager.black,
-                        fontSize: FontSize.s14.sp),
+                        color: ColorManager.black, fontSize: FontSize.s14.sp),
                   ),
                   Text(
                     '150',
                     style: getMediumStyle(
-                        color: ColorManager.gray,
-                        fontSize: FontSize.s14.sp),
-                  ),
-                  SizedBox(
-                    width: 15.w,
-                  ),
-                  Text(
-                    ': تاريخ الطلب: ',
-                    style: getMediumStyle(
-                        color: ColorManager.black,
-                        fontSize: FontSize.s14.sp),
-                  ),
-                  Text(
-                    '12/12/2021',
-                    style: getMediumStyle(
-                        color: ColorManager.gray,
-                        fontSize: FontSize.s14.sp),
+                        color: ColorManager.gray, fontSize: FontSize.s14.sp),
                   ),
                 ],
               ),
               SizedBox(
                 height: 4.h,
+              ),
+              Row(
+                children: [
+
+                  Text(
+                    'رقم الهاتف :  ',
+                    style: getMediumStyle(
+                        color: ColorManager.black, fontSize: FontSize.s14.sp),
+                  ),
+                  Text(
+                    '5217143',
+                    style: getMediumStyle(
+                        color: ColorManager.gray, fontSize: FontSize.s14.sp),
+                  ),
+
+
+                ],
+              ),
+              SizedBox(
+                height: 4.h,
+              ),
+              Row(
+                children: [
+                  Text(
+                    'وزن 25 كجم: ',
+                    style: getMediumStyle(
+                        color: ColorManager.black, fontSize: FontSize.s14.sp),
+                  ),
+                  Text(
+                    '100',
+                    style: getMediumStyle(
+                        color: ColorManager.gray, fontSize: FontSize.s14.sp),
+                  ),
+                  SizedBox(
+                    width: 15.w,
+                  ),
+                  Text(
+                    'وزن 50 كجم: ',
+                    style: getMediumStyle(
+                        color: ColorManager.black, fontSize: FontSize.s14.sp),
+                  ),
+                  Text(
+                    '50',
+                    style: getMediumStyle(
+                        color: ColorManager.gray, fontSize: FontSize.s14.sp),
+                  ),
+                ],
+              ),
+
+
+              SizedBox(
+                height: 4.h,
+              ),
+
+              Row(
+                children: [
+                  Text(
+                    ' تاريخ الطلب: ',
+                    style: getMediumStyle(
+                        color: ColorManager.black, fontSize: FontSize.s14.sp),
+                  ),
+                  Text(
+                    '12/12/2021',
+                    style: getMediumStyle(
+                        color: ColorManager.gray, fontSize: FontSize.s14.sp),
+                  ),
+
+                ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -1772,7 +1767,7 @@ Widget DriverAccetpOrder({
                     width: 15.w,
                   ),
                   SizedBox(
-                    width: 55.w,
+                    width: 60.w,
                     height: 20.h,
                     child: ElevatedButton(
                       onPressed: onReject,
@@ -1797,7 +1792,7 @@ Widget DriverAccetpOrder({
                     ),
                   ),
                   SizedBox(
-                    width: 15.w,
+                    width: 10.w,
                   ),
                   SvgPicture.asset(
                     IconAssets.time,
@@ -1815,7 +1810,7 @@ Widget DriverAccetpOrder({
               ),
             ],
           ),
-        )
+        ),
       ],
     ),
   ),
@@ -1826,7 +1821,7 @@ Widget DriverToCustomer({
 }) => Padding(
   padding: const EdgeInsets.all(8.0),
   child: Container(
-    height: 150.h,
+    height: 180.h,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8.r),
       color: ColorManager.white,
@@ -1853,7 +1848,7 @@ Widget DriverToCustomer({
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.h),
+          padding: EdgeInsets.symmetric(vertical: 10.h,horizontal: 3.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -1866,6 +1861,36 @@ Widget DriverToCustomer({
               SizedBox(
                 height: 6.h,
               ),
+              Row(children: [
+                Text(
+                  'الزبون: ',
+                  style: getMediumStyle(
+                      color: ColorManager.black,
+                      fontSize: FontSize.s14.sp),
+                ),
+                Text(
+                  'احمد سعيد',
+                  style: getMediumStyle(
+                      color: ColorManager.gray,
+                      fontSize: FontSize.s14.sp),
+                ),
+                SizedBox(width: 10.w,),
+                Text(
+                  'الكمية: ',
+                  style: getMediumStyle(
+                      color: ColorManager.black,
+                      fontSize: FontSize.s14.sp),
+                ),
+                Text(
+                  '150',
+                  style: getMediumStyle(
+                      color: ColorManager.gray,
+                      fontSize: FontSize.s14.sp),
+                ),
+                SizedBox(
+                  width: 15.w,
+                ),
+              ],),
               Row(
                 children: [
                   Text(
@@ -1881,27 +1906,8 @@ Widget DriverToCustomer({
                         fontSize: FontSize.s14.sp),
                   ),
                   SizedBox(
-                    width: 15.w,
+                    width: 6.w,
                   ),
-                  Text(
-                    'الزبون: ',
-                    style: getMediumStyle(
-                        color: ColorManager.black,
-                        fontSize: FontSize.s14.sp),
-                  ),
-                  Text(
-                    'احمد سعيد',
-                    style: getMediumStyle(
-                        color: ColorManager.gray,
-                        fontSize: FontSize.s14.sp),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 4.h,
-              ),
-              Row(
-                children: [
                   Text(
                     'وزن 50 كجم: ',
                     style: getMediumStyle(
@@ -1914,6 +1920,14 @@ Widget DriverToCustomer({
                         color: ColorManager.gray,
                         fontSize: FontSize.s14.sp),
                   ),
+                ],
+              ),
+              SizedBox(
+                height: 4.h,
+              ),
+              Row(
+                children: [
+
                   SizedBox(
                     width: 15.w,
                   ),
@@ -1936,21 +1950,7 @@ Widget DriverToCustomer({
               ),
               Row(
                 children: [
-                  Text(
-                    'الكمية: ',
-                    style: getMediumStyle(
-                        color: ColorManager.black,
-                        fontSize: FontSize.s14.sp),
-                  ),
-                  Text(
-                    '150',
-                    style: getMediumStyle(
-                        color: ColorManager.gray,
-                        fontSize: FontSize.s14.sp),
-                  ),
-                  SizedBox(
-                    width: 15.w,
-                  ),
+
                   Text(
                     ': تاريخ الطلب: ',
                     style: getMediumStyle(

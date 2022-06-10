@@ -13,7 +13,7 @@ import '../../resources/color_manager.dart';
 import '../../resources/font_manager.dart';
 import '../../resources/styles_manager.dart';
 import '../registration/login.dart';
-import 'admin_nav_bar.dart';
+import '../navigations_bar/admin_nav_bar.dart';
 
 class AdminHome extends StatelessWidget {
 
@@ -136,42 +136,7 @@ class AdminHome extends StatelessWidget {
                   style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
                 ),
               ),
-              ElevatedButton(onPressed: (){
-                Provider.of<FireBaseProvider>(context,listen: false).getAllWaitingUser();
-              }, child: Text('test'))
-              // Container(
-              //   height: 320,
-              //   child: Column(
-              //     children: [
-              //       Expanded(
-              //         child: Scrollbar(
-              //           isAlwaysShown: true,
-              //           showTrackOnHover: true,
-              //           hoverThickness: 15.0,
-              //           child: ListView.builder(
-              //             physics: const BouncingScrollPhysics(),
-              //             padding: const EdgeInsets.only(bottom: 60),
-              //             controller: rrectController,
-              //             itemCount: 15,
-              //             itemBuilder: (context, index) {
-              //               return AccountantNotification();
-              //             },
-              //           ),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // SingleChildScrollView(
-              //   child: Expanded(
-              //     child: ListView.builder(
-              //         itemCount: 5,
-              //         itemBuilder: (context, ind) {
-              //           return AccountantNotification();
-              //         }),
-              //   ),
-              // ),
-              ,Padding(
+             Padding(
                 padding: EdgeInsets.all(15),
                 child: Column(
                   children: [

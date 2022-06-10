@@ -14,180 +14,184 @@ class DriverCustomerOrder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Center(
+          backgroundColor: ColorManager.white,
+
+          body: Center(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  Text(
-                    'طلبات الزبائن',
-                    style: getBoldStyle(
-                        color: ColorManager.primary, fontSize: FontSize.s22),
-                  ),
-                  ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (ctx, index) {
-                      return DriverAccetpOrder(
-                        onAccept: () => showDialog(
-                          context: ctx,
-                          builder: (ctx) => AlertDialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.r),
-                            ),
-                            title: Center(
-                                child: Text(
-                              'هل استلمت اكمية ؟',
-                              style: getBoldStyle(
-                                  color: ColorManager.textOrange,
-                                  fontSize: FontSize.s24),
-                            )),
-                            actions: <Widget>[
-                              Container(
-                                margin: EdgeInsets.only(bottom: 15.h),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    SizedBox(
-                                      width: 100.w,
-                                      height: 30.h,
-                                      child: ElevatedButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          'نعم',
-                                          style: getRegularStyle(
-                                              color: ColorManager.white,
-                                              fontSize: FontSize.s13),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                            primary: ColorManager.primary,
-                                            elevation: 1,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        AppSize.s5))),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 100.w,
-                                      height: 30.h,
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          Get.back();
-                                        },
-                                        child: Text(
-                                          'لا',
-                                          style: getRegularStyle(
-                                              color: ColorManager.black,
-                                              fontSize: FontSize.s13),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                            primary: ColorManager.white,
-                                            side: BorderSide(
-                                              width: 1.0,
-                                              color: ColorManager.black,
-                                            ),
-                                            elevation: 1,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        AppSize.s5))),
-                                      ),
-                                    ),
-                                  ],
+                  Expanded(child: Column(
+                    children: [
+                      Text('طلبات الزبائن',style: getBoldStyle(color: ColorManager.primary),),
+                      ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (ctx, index) {
+                          return DriverAccetpOrder(
+                            onAccept: () => showDialog(
+                              context: ctx,
+                              builder: (ctx) => AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.r),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        onReject: () => showDialog(
-                          context: ctx,
-                          builder: (ctx) => AlertDialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.r),
-                            ),
-                            title: Center(
-                                child: Text(
-                              'هل أنت متأكد من الرفض ؟',
-                              style: getBoldStyle(
-                                  color: ColorManager.textOrange,
-                                  fontSize: FontSize.s24),
-                            )),
-                            actions: <Widget>[
-                              Container(
-                                margin: EdgeInsets.only(bottom: 15.h),
-                                child: Row(
-                                  mainAxisAlignment:
+                                title: Center(
+                                    child: Text(
+                                      'هل استلمت اكمية ؟',
+                                      style: getBoldStyle(
+                                          color: ColorManager.textOrange,
+                                          fontSize: FontSize.s24),
+                                    )),
+                                actions: <Widget>[
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 15.h),
+                                    child: Row(
+                                      mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    SizedBox(
-                                      width: 100.w,
-                                      height: 30.h,
-                                      child: ElevatedButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                          'نعم',
-                                          style: getRegularStyle(
-                                              color: ColorManager.white,
-                                              fontSize: FontSize.s13),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                            primary: ColorManager.primary,
-                                            elevation: 1,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        AppSize.s5))),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 100.w,
-                                      height: 30.h,
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          Get.back();
-                                        },
-                                        child: Text(
-                                          'لا',
-                                          style: getRegularStyle(
-                                              color: ColorManager.black,
-                                              fontSize: FontSize.s13),
-                                        ),
-                                        style: ElevatedButton.styleFrom(
-                                            primary: ColorManager.white,
-                                            side: BorderSide(
-                                              width: 1.0,
-                                              color: ColorManager.black,
+                                      children: [
+                                        SizedBox(
+                                          width: 100.w,
+                                          height: 30.h,
+                                          child: ElevatedButton(
+                                            onPressed: () {},
+                                            child: Text(
+                                              'نعم',
+                                              style: getRegularStyle(
+                                                  color: ColorManager.white,
+                                                  fontSize: FontSize.s13),
                                             ),
-                                            elevation: 1,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
+                                            style: ElevatedButton.styleFrom(
+                                                primary: ColorManager.primary,
+                                                elevation: 1,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
                                                     BorderRadius.circular(
                                                         AppSize.s5))),
-                                      ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 100.w,
+                                          height: 30.h,
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                            child: Text(
+                                              'لا',
+                                              style: getRegularStyle(
+                                                  color: ColorManager.black,
+                                                  fontSize: FontSize.s13),
+                                            ),
+                                            style: ElevatedButton.styleFrom(
+                                                primary: ColorManager.white,
+                                                side: BorderSide(
+                                                  width: 1.0,
+                                                  color: ColorManager.black,
+                                                ),
+                                                elevation: 1,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        AppSize.s5))),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                    itemCount: 10,
-                  ),
+                            ),
+                            onReject: () => showDialog(
+                              context: ctx,
+                              builder: (ctx) => AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.r),
+                                ),
+                                title: Center(
+                                    child: Text(
+                                      'هل أنت متأكد من الرفض ؟',
+                                      style: getBoldStyle(
+                                          color: ColorManager.textOrange,
+                                          fontSize: FontSize.s24),
+                                    )),
+                                actions: <Widget>[
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 15.h),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        SizedBox(
+                                          width: 100.w,
+                                          height: 30.h,
+                                          child: ElevatedButton(
+                                            onPressed: () {},
+                                            child: Text(
+                                              'نعم',
+                                              style: getRegularStyle(
+                                                  color: ColorManager.white,
+                                                  fontSize: FontSize.s13),
+                                            ),
+                                            style: ElevatedButton.styleFrom(
+                                                primary: ColorManager.primary,
+                                                elevation: 1,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        AppSize.s5))),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 100.w,
+                                          height: 30.h,
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                            child: Text(
+                                              'لا',
+                                              style: getRegularStyle(
+                                                  color: ColorManager.black,
+                                                  fontSize: FontSize.s13),
+                                            ),
+                                            style: ElevatedButton.styleFrom(
+                                                primary: ColorManager.white,
+                                                side: BorderSide(
+                                                  width: 1.0,
+                                                  color: ColorManager.black,
+                                                ),
+                                                elevation: 1,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.circular(
+                                                        AppSize.s5))),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                        itemCount: 1,
+                      ),
+                    ],
+                  )),
+
+
+
                 ],
               ),
             ),
-          ),
-        ),
+          )
       ),
     );
+
+
+
   }
 }
