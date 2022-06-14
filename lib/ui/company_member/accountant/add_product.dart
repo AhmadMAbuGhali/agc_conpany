@@ -28,7 +28,7 @@ class AddProductScreen extends StatelessWidget {
 
     @override
     Widget build(BuildContext context) {
-      final AddProductController controller = Get.put(AddProductController());
+      final AddProductController controller = Get.put(AddProductController(),permanent:true );
       return SafeArea(
           child: Scaffold(
             body: SingleChildScrollView(

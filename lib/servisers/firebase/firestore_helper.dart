@@ -13,11 +13,20 @@ class FirestoreHelper {
   acceptedUser(UserApp user) async {
     await firebaseFirestore.collection('users').doc(user.id).set(user.toMap());
   }
+  acceptedCustomer(CustomerModel customerModel) async {
+    await firebaseFirestore.collection('Customer').doc(customerModel.id).set(customerModel.toMap());
+  }
   rejectedUser(UserApp user) async {
     await firebaseFirestore.collection('usersRejected').doc(user.id).set(user.toMap());
   }
+  rejectedCustomer(CustomerModel customerModel) async {
+    await firebaseFirestore.collection('CustomersRejected').doc(customerModel.id).set(customerModel.toMap());
+  }
   deletefromUsersAwaiting(String userID)async{
     await firebaseFirestore.collection('usersWaiting').doc(userID).delete();
+  }
+  deletefromCustomerAwaiting(String userID)async{
+    await firebaseFirestore.collection('customersWaiting').doc(userID).delete();
   }
   Future<UserApp> getUserFromWaiting(String userid) async {
     DocumentSnapshot<Map<String, dynamic>> document =
@@ -74,6 +83,19 @@ class FirestoreHelper {
       log("firestore helper documentMap['id']: ${documentMap['id']}");
       UserApp userApp = UserApp.fromMap(documentMap);
       return userApp;
+    }).toList();
+    return allAsset;
+  }
+  Future<List<CustomerModel>> getAllCustomer() async {
+    QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
+    await firebaseFirestore.collection('Customer').get();
+    List<CustomerModel> allAsset = allAssetSnapshot.docs.map((e) {
+      Map<String, dynamic> documentMap = e.data();
+      documentMap['id'] = e.id;
+      log('firestore helper e.id: ${e.id}');
+      log("firestore helper documentMap['id']: ${documentMap['id']}");
+      CustomerModel customerModel = CustomerModel.fromMap(documentMap);
+      return customerModel;
     }).toList();
     return allAsset;
   }

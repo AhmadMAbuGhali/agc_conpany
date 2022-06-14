@@ -1,6 +1,8 @@
+import 'package:agc_conpany/servisers/firebase_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 import '../../../componant/componant.dart';
 
@@ -15,30 +17,31 @@ class SecretaryCustomerList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text("الزبائن ",
-                    style: getBoldStyle(color: ColorManager.primary,fontSize: FontSize.s22),
-                  ),
-                  SizedBox(height: 48.h,),
-                  SecreraryShowCustomerList(),
-                  SizedBox(height: 48.h,),
-                  SecreraryShowCustomerList(),
-                  SizedBox(height: 48.h,),
-                  SecreraryShowCustomerList(),
-                  SizedBox(height: 48.h,),
-                  SecreraryShowCustomerList(),
-                  SizedBox(height: 48.h,),
-                  SecreraryShowCustomerList(),
-                ],
+        body: Consumer<FireBaseProvider>(
+          builder: (context,provider,x){
+            return  Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text("الزبائن ",
+                      style: getBoldStyle(color: ColorManager.primary,fontSize: FontSize.s22),
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                          itemCount:provider.allCustomer.length ,itemBuilder:
+                          (context,index){
+                        return  SecreraryShowCustomerList(provider.allCustomer[index]);
+                      }),
+                    )
+
+
+                  ],
+                ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );

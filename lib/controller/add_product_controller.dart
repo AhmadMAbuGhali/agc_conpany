@@ -10,6 +10,10 @@ class AddProductController extends GetxController {
   var checkBox50 = false.obs;
   var checkBox100 = false.obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+  }
   void getImage(ImageSource imageSource) async {
     final pikedFile = await ImagePicker().pickImage(source: imageSource);
     if (pikedFile != null) {
