@@ -2,9 +2,7 @@ class CategoryModel {
   late String categoryName;
   late String id;
 
-  CategoryModel({
-    required this.categoryName,
-  });
+  CategoryModel();
 
   CategoryModel.formMap(Map<String, dynamic> map) {
     id = map['id'];
