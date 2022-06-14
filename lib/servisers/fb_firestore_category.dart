@@ -1,8 +1,7 @@
 import 'package:agc_conpany/model/categpry_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
 
-class FbFireStoreCategory extends GetxController{
+class FbFireStoreCategory{
 
   final FirebaseFirestore _firebaseFirestore=FirebaseFirestore.instance;
 
