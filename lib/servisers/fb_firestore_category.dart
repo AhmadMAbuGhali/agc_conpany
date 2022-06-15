@@ -2,7 +2,7 @@ import 'package:agc_conpany/model/categpry_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FbFireStoreCategory{
-
+  final CollectionReference<Map<String, dynamic>> _collectionReference=FirebaseFirestore.instance.collection('Category');
   final FirebaseFirestore _firebaseFirestore=FirebaseFirestore.instance;
 
   Future<bool> createCategory({required CategoryModel categoryModel}) async {

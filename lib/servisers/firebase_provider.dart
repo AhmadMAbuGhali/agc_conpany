@@ -1,6 +1,7 @@
 
 import 'dart:developer';
 
+import 'package:agc_conpany/model/categpry_model.dart';
 import 'package:agc_conpany/model/users.dart';
 import 'package:agc_conpany/servisers/firebase/firestore_helper.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class FireBaseProvider extends ChangeNotifier {
     getAllWaitingUser();
     getAllUser();
     getAllCustomer();
+    getAllCategory();
 
   }
 
@@ -20,6 +22,7 @@ class FireBaseProvider extends ChangeNotifier {
   List<CustomerModel> watingCustomer=[];
   List<UserApp> allUser=[];
   List<CustomerModel> allCustomer=[];
+  List<CategoryModel> allCategory=[];
 
 
 
@@ -33,6 +36,13 @@ getAllUser()async{
   log(allUser.length.toString());
   notifyListeners();
 }
+
+  getAllCategory()async{
+    allCategory =await FirestoreHelper.firestoreHelper.getAllCategory();
+    log(allCategory.length.toString());
+    notifyListeners();
+  }
+
 disableUser(String userId)async{
    await FirestoreHelper.firestoreHelper.disableUser(userId);
   notifyListeners();

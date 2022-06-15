@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:agc_conpany/model/categpry_model.dart';
 import 'package:agc_conpany/model/customer_model.dart';
 import 'package:agc_conpany/model/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,6 +8,7 @@ class FirestoreHelper {
   FirestoreHelper._();
   static FirestoreHelper firestoreHelper = FirestoreHelper._();
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
   waitingUser(UserApp user) async {
     await firebaseFirestore.collection('usersWaiting').doc(user.id).set(user.toMap());
   }
@@ -19,6 +21,10 @@ class FirestoreHelper {
   rejectedUser(UserApp user) async {
     await firebaseFirestore.collection('usersRejected').doc(user.id).set(user.toMap());
   }
+addCategory(CategoryModel categoryModel)async{
+  await firebaseFirestore.collection('Category').doc(categoryModel.id).set(categoryModel.toMap());
+
+}
   rejectedCustomer(CustomerModel customerModel) async {
     await firebaseFirestore.collection('CustomersRejected').doc(customerModel.id).set(customerModel.toMap());
   }
@@ -83,6 +89,19 @@ class FirestoreHelper {
       log("firestore helper documentMap['id']: ${documentMap['id']}");
       UserApp userApp = UserApp.fromMap(documentMap);
       return userApp;
+    }).toList();
+    return allAsset;
+  }
+  Future<List<CategoryModel>> getAllCategory() async {
+    QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
+    await firebaseFirestore.collection('Category').get();
+    List<CategoryModel> allAsset = allAssetSnapshot.docs.map((e) {
+      Map<String, dynamic> documentMap = e.data();
+      documentMap['id'] = e.id;
+      log('firestore helper e.id: ${e.id}');
+      log("firestore helper documentMap['id']: ${documentMap['id']}");
+      CategoryModel categoryModel = CategoryModel.formMap(documentMap);
+      return categoryModel;
     }).toList();
     return allAsset;
   }
