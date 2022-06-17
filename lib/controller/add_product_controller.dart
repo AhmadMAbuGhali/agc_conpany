@@ -9,6 +9,9 @@ class AddProductController extends GetxController {
   var selectedImageSize = ''.obs;
   var checkBox50 = false.obs;
   var checkBox100 = false.obs;
+  final selected = "ختر تصنيف".obs;
+
+
 
   @override
   void onInit() {
@@ -28,5 +31,8 @@ class AddProductController extends GetxController {
         colorText: ColorManager.white
       );
     }
+  }
+  void setSelected(String value){
+    selected.value = value;
   }
 }
