@@ -5,6 +5,7 @@ class CategoryModel {
 
   // CategoryModel();
   CategoryModel({
+    required this.id,
     required this.categoryName
 });
 

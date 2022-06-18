@@ -27,7 +27,7 @@ class FbFireStoreCategory{
 
   Stream<QuerySnapshot<CategoryModel>> getCategory() async* {
     yield* _firebaseFirestore
-        .collection('CategoryModel')
+        .collection('Category')
         .withConverter<CategoryModel>(
         fromFirestore: (snapshot, options) =>
             CategoryModel.formMap(snapshot.data()!),

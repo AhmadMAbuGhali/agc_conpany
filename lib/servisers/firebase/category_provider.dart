@@ -12,7 +12,7 @@ class CategoryProvider extends ChangeNotifier{
   addCategory(BuildContext context,String categoryName,)async{
     log('start add category');
 
-    CategoryModel categoryModel  = CategoryModel(categoryName: "");
+    CategoryModel categoryModel  = CategoryModel(categoryName: "",id: "");
     try{
       categoryModel.id =
       await FirestoreHelper.firestoreHelper.addCategory(categoryModel);

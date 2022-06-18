@@ -171,7 +171,7 @@ class _AccountantCategoeiesState extends State<AccountantCategoeies> {
   }
 
   CategoryModel get categoryModel {
-    CategoryModel categoryModel = CategoryModel(categoryName: "");
+    CategoryModel categoryModel = CategoryModel(categoryName: "",id: "");
     if (widget._categoryModel != null) {
       categoryModel.id = widget._categoryModel!.id;
     }

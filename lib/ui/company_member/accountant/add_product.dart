@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
+import '../../../model/categpry_model.dart';
 import '../../../resources/styles_manager.dart';
 import '../../../servisers/firebase_provider.dart';
 
@@ -30,12 +31,14 @@ class AddProductScreen extends StatefulWidget {
   @override
   State<AddProductScreen> createState() => _AddProductScreenState();
   ProductModel? _productModel;
+  CategoryModel? _categoryModel;
   final  AddProductController controller =
   Get.put(AddProductController(), permanent: true);
 }
 
 class _AddProductScreenState extends State<AddProductScreen> {
-  CollectionReference category = FirebaseFirestore.instance.collection('Category');
+  Future<List<CategoryModel>>? category;
+
 
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -301,4 +304,5 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
     return productModel;
   }
+
 }
