@@ -103,11 +103,7 @@ class FireBaseProvider extends ChangeNotifier {
     log(allProduct.length.toString());
     notifyListeners();
   }
-  AllProduct(ProductModel productModel) async {
-    await FirestoreHelper.firestoreHelper.getAllProduct();
-    getAllProduct();
-    notifyListeners();
-  }
+
   addProduct(ProductModel productModel)async{
     log('start add product');
      try{
@@ -116,6 +112,7 @@ class FireBaseProvider extends ChangeNotifier {
        productModel.imagePath=imageUrl;
        }
       await FirestoreHelper.firestoreHelper.addProduct(productModel);
+       getAllProduct();
       notifyListeners();
     }catch (e){
       print(e);
@@ -124,10 +121,8 @@ class FireBaseProvider extends ChangeNotifier {
 
   addCategory(String name)async{
     log('start add category');
-    // String docId =  FirestoreHelper.firestoreHelper.doc().id;
-    CategoryModel categoryModel  = CategoryModel(categoryName: name,id:'1234');
     try{
-      await FirestoreHelper.firestoreHelper.addCategory(categoryModel);
+      await FirestoreHelper.firestoreHelper.addCategory(name);
       getAllCategory();
       notifyListeners();
     }catch (e){

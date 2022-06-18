@@ -145,11 +145,15 @@ class FirestoreHelper {
   Future disableUser(String userId)async{
   await firebaseFirestore.collection('users').doc(userId).update({'disable': false});
 }
-  addCategory(CategoryModel categoryModel)async{
-    await firebaseFirestore.collection('Category').doc(categoryModel.id).set(categoryModel.toMap());
+  addCategory(String name)async{
+    String id = firebaseFirestore.collection('Category').doc().id;
+    CategoryModel categoryModel  = CategoryModel(categoryName: name,id:id);
+    await firebaseFirestore.collection('Category').doc(id).set(categoryModel.toMap());
   }
   addProduct(ProductModel productModel) async{
-    await firebaseFirestore.collection('Product').doc(productModel.id).set(productModel.toMap());
+    String id = firebaseFirestore.collection('Product').doc().id;
+    productModel.id=id;
+    await firebaseFirestore.collection('Product').doc(id).set(productModel.toMap());
   }
   Future<String> uploadImage(File file) async {
     String filePath = file.path;
