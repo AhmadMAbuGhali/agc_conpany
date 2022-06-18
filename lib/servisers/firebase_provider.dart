@@ -1,11 +1,11 @@
 import 'dart:developer';
-
+import 'dart:io';
 import 'package:agc_conpany/model/categpry_model.dart';
 import 'package:agc_conpany/model/product_model.dart';
 import 'package:agc_conpany/model/users.dart';
 import 'package:agc_conpany/servisers/firebase/firestore_helper.dart';
 import 'package:flutter/material.dart';
-
+import 'package:image_picker/image_picker.dart';
 import '../model/customer_model.dart';
 
 class FireBaseProvider extends ChangeNotifier {
@@ -16,14 +16,13 @@ class FireBaseProvider extends ChangeNotifier {
     getAllCustomer();
     getAllCategory();
   }
-
+  File? file;
   List<UserApp> watingUser = [];
   List<CustomerModel> watingCustomer = [];
   List<UserApp> allUser = [];
   List<CustomerModel> allCustomer = [];
   List<CategoryModel> allCategory = [];
   List<ProductModel> allProduct = [];
-
   getAllWaitingUser() async {
     watingUser = await FirestoreHelper.firestoreHelper.getAllUsersWaiting();
     log(watingUser.length.toString());
@@ -98,11 +97,7 @@ class FireBaseProvider extends ChangeNotifier {
     log(allCategory.length.toString());
     notifyListeners();
   }
-  AllCategory(CategoryModel categoryModel) async {
-    await FirestoreHelper.firestoreHelper.getAllCategory();
-    getAllCategory();
-    notifyListeners();
-  }
+
   getAllProduct() async {
     allProduct= await FirestoreHelper.firestoreHelper.getAllProduct();
     log(allProduct.length.toString());
@@ -112,6 +107,32 @@ class FireBaseProvider extends ChangeNotifier {
     await FirestoreHelper.firestoreHelper.getAllProduct();
     getAllProduct();
     notifyListeners();
+  }
+  addProduct(ProductModel productModel)async{
+    log('start add product');
+     try{
+       if(file !=null){
+       String imageUrl =  await FirestoreHelper.firestoreHelper.uploadImage(file!);
+       productModel.imagePath=imageUrl;
+       }
+      await FirestoreHelper.firestoreHelper.addProduct(productModel);
+      notifyListeners();
+    }catch (e){
+      print(e);
+    }
+  }
+
+  addCategory(String name)async{
+    log('start add category');
+    // String docId =  FirestoreHelper.firestoreHelper.doc().id;
+    CategoryModel categoryModel  = CategoryModel(categoryName: name,id:'1234');
+    try{
+      await FirestoreHelper.firestoreHelper.addCategory(categoryModel);
+      getAllCategory();
+      notifyListeners();
+    }catch (e){
+      print(e);
+    }
   }
 
 }

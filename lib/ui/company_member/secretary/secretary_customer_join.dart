@@ -34,7 +34,6 @@ class SecretaryCustomerReq extends StatelessWidget {
                       return SecretaryJoinReq(provider.watingCustomer[index]);
                     })
                 )
-
               ],
             );}
           ),

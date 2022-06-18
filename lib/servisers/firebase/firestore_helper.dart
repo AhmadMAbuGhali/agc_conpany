@@ -1,8 +1,10 @@
 import 'dart:developer';
+import 'dart:io';
 import 'package:agc_conpany/model/categpry_model.dart';
 import 'package:agc_conpany/model/customer_model.dart';
 import 'package:agc_conpany/model/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import '../../model/product_model.dart';
 
@@ -10,7 +12,7 @@ class FirestoreHelper {
   FirestoreHelper._();
   static FirestoreHelper firestoreHelper = FirestoreHelper._();
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-
+  FirebaseStorage firebaseStorage = FirebaseStorage.instance;
   waitingUser(UserApp user) async {
     await firebaseFirestore.collection('usersWaiting').doc(user.id).set(user.toMap());
   }
@@ -23,14 +25,6 @@ class FirestoreHelper {
   rejectedUser(UserApp user) async {
     await firebaseFirestore.collection('usersRejected').doc(user.id).set(user.toMap());
   }
-addCategory(CategoryModel categoryModel)async{
-  await firebaseFirestore.collection('Category').doc(categoryModel.id).set(categoryModel.toMap());
-
-}
-
-addProduct(ProductModel productModel) async{
-  await firebaseFirestore.collection('Product').doc(productModel.id).set(productModel.toMap());
-}
   rejectedCustomer(CustomerModel customerModel) async {
     await firebaseFirestore.collection('CustomersRejected').doc(customerModel.id).set(customerModel.toMap());
   }
@@ -151,4 +145,18 @@ addProduct(ProductModel productModel) async{
   Future disableUser(String userId)async{
   await firebaseFirestore.collection('users').doc(userId).update({'disable': false});
 }
+  addCategory(CategoryModel categoryModel)async{
+    await firebaseFirestore.collection('Category').doc(categoryModel.id).set(categoryModel.toMap());
+  }
+  addProduct(ProductModel productModel) async{
+    await firebaseFirestore.collection('Product').doc(productModel.id).set(productModel.toMap());
+  }
+  Future<String> uploadImage(File file) async {
+    String filePath = file.path;
+    String fileName = filePath.split('/').last;
+    Reference reference = firebaseStorage.ref('products/$fileName');
+    await reference.putFile(file);
+    String imageUrl = await reference.getDownloadURL();
+    return imageUrl;
+  }
 }

@@ -1,43 +1,16 @@
-import 'package:agc_conpany/model/categpry_model.dart';
 import 'package:agc_conpany/resources/color_manager.dart';
 import 'package:agc_conpany/resources/font_manager.dart';
 import 'package:agc_conpany/resources/styles_manager.dart';
 import 'package:agc_conpany/resources/values_manager.dart';
 import 'package:agc_conpany/servisers/firebase_provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-
 import '../../../componant/componant.dart';
-import '../../../servisers/fb_firestore_category.dart';
-
-class AccountantCategoeies extends StatefulWidget {
-  @override
-  State<AccountantCategoeies> createState() => _AccountantCategoeiesState();
-  CategoryModel? _categoryModel;
-}
-
-class _AccountantCategoeiesState extends State<AccountantCategoeies> {
+class AccountantCategoeies extends StatelessWidget{
   TextEditingController categoryNameController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-    Stream categoryStream = FirebaseFirestore.instance.collection('Category').snapshots();
-    categoryNameController = TextEditingController();
-
-
-    // _tapGestureRecognizer.onTap = _navigateToRegister;
-  }
-
-  @override
-  void dispose() {
-    categoryNameController.dispose();
-
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +44,7 @@ class _AccountantCategoeiesState extends State<AccountantCategoeies> {
         ),
         floatingActionButton: FloatingActionButton(
             elevation: 0.0,
-            child: new Icon(
+            child:  const Icon(
               Icons.add,
               size: 40,
             ),
@@ -93,9 +66,9 @@ class _AccountantCategoeiesState extends State<AccountantCategoeies> {
                           )),
                       content: TextField(
                         controller: categoryNameController,
-                        decoration: new InputDecoration(
-                          border: new OutlineInputBorder(
-                              borderSide: new BorderSide(color: Colors.teal)),
+                        decoration: const  InputDecoration(
+                          border:   OutlineInputBorder(
+                              borderSide:   BorderSide(color: Colors.teal)),
                           hintText: 'ادخل اسم التصنيف',
                         ),
                       ),
@@ -110,7 +83,8 @@ class _AccountantCategoeiesState extends State<AccountantCategoeies> {
                                 height: 30.h,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    _save();
+                                    Provider.of<FireBaseProvider>(context,listen: false).addCategory(categoryNameController.text);
+                                    categoryNameController.clear();
                                     Get.back();
                                   },
                                   child: Text(
@@ -162,21 +136,5 @@ class _AccountantCategoeiesState extends State<AccountantCategoeies> {
         // u
       ),
     );
-  }
-
-  Future<void> _save() async {
-    widget._categoryModel ==
-        await FbFireStoreCategory()
-            .createCategory(categoryModel: categoryModel);
-  }
-
-  CategoryModel get categoryModel {
-    CategoryModel categoryModel = CategoryModel(categoryName: "",id: "");
-    if (widget._categoryModel != null) {
-      categoryModel.id = widget._categoryModel!.id;
-    }
-    categoryModel.categoryName = categoryNameController.text;
-
-    return categoryModel;
   }
 }

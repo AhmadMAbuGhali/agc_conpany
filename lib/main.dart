@@ -21,7 +21,6 @@ Future <void> main() async {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider()),
     ChangeNotifierProvider<FireBaseProvider>(create: (_) => FireBaseProvider()),
-   ChangeNotifierProvider<CategoryProvider>(create: (_)=> CategoryProvider()),
   ], child: MyApp()));
 }
 

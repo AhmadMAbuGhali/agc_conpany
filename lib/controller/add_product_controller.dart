@@ -11,8 +11,6 @@ class AddProductController extends GetxController {
   var checkBox100 = false.obs;
   final selected = "ختر تصنيف".obs;
 
-
-
   @override
   void onInit() {
     super.onInit();

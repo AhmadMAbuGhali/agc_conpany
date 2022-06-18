@@ -684,6 +684,7 @@ Widget SecretaryJoinReq(CustomerModel customerModel) =>
     Container(
       width: 330.w,
       height: 170.h,
+      margin: EdgeInsets.symmetric(vertical: 10.h),
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
           color: ColorManager.black.withOpacity(0.16),
