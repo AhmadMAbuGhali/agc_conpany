@@ -1,21 +1,21 @@
 class ProductModel {
   late String productName;
   late String description;
-  late String category;
-  late String imagePath;
-  late bool wight50;
-  late bool wight100;
+  late String? categoryName;
+  late String? imagePath;
+  late String wight;
+bool? disAble;
   late int quantity;
 
    String? id;
   ProductModel({
     required this.productName,
     required this.description,
-    required this.imagePath,
-    required this.wight50,
-    required this.category,
-    required this.wight100,
+     this.imagePath,
+    required this.categoryName,
+    required this.wight,
     this.quantity = 0,
+    this.disAble=false
 
   });
   ProductModel.fromMap(Map<String, dynamic> map) {
@@ -23,10 +23,11 @@ class ProductModel {
     productName = map['productName'];
     description = map['description'];
     imagePath = map['imagePath'];
-    wight50 = map['wight50'];
-    wight100 = map['wight100'];
-    category = map['category'];
+
+    wight = map['wight'];
+    categoryName = map['categoryName'];
     quantity = map['quantity'];
+    disAble = map['disAble'];
 
   }
   Map<String, dynamic> toMap() {
@@ -35,10 +36,11 @@ class ProductModel {
     map['productName'] = productName;
     map['description'] = description;
     map['imagePath'] = imagePath;
-    map['wight50'] = wight50;
-    map['wight100'] = wight100;
-    map['category'] = category;
+    map['wight'] = wight;
+
+    map['categoryName'] = categoryName;
     map['quantity'] = quantity;
+    map['disAble'] = disAble;
 
     return map;
   }

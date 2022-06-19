@@ -4,6 +4,7 @@ import 'package:agc_conpany/model/categpry_model.dart';
 import 'package:agc_conpany/model/product_model.dart';
 import 'package:agc_conpany/model/users.dart';
 import 'package:agc_conpany/servisers/firebase/firestore_helper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../model/customer_model.dart';
@@ -15,6 +16,21 @@ class FireBaseProvider extends ChangeNotifier {
     getAllUser();
     getAllCustomer();
     getAllCategory();
+    getAllProduct();
+  }
+  String? dropdownValue = 'اختر التصنيف' ;
+  changeDrobDown(String value){
+    dropdownValue=value;
+    notifyListeners();
+  }
+  List<String> wigthw=[  'اختر وزن',
+      '٥٠ كيلو غرام ',
+     '١٠٠ كيلو غرام ',
+  ];
+  String? dropdownValue2 = 'اختر وزن' ;
+  changeDrobDown2(String value){
+    dropdownValue2=value;
+    notifyListeners();
   }
   File? file;
   List<UserApp> watingUser = [];
@@ -22,6 +38,7 @@ class FireBaseProvider extends ChangeNotifier {
   List<UserApp> allUser = [];
   List<CustomerModel> allCustomer = [];
   List<CategoryModel> allCategory = [];
+  List<String> allCategoryname = [];
   List<ProductModel> allProduct = [];
   getAllWaitingUser() async {
     watingUser = await FirestoreHelper.firestoreHelper.getAllUsersWaiting();
@@ -44,6 +61,11 @@ class FireBaseProvider extends ChangeNotifier {
   acceptedUser(UserApp userApp) async {
     await FirestoreHelper.firestoreHelper.acceptedUser(userApp);
     getAllWaitingUser();
+    notifyListeners();
+  }
+  updateCatogryname(String catName,String catId) async{
+    await FirestoreHelper.firestoreHelper.updateCatogryname(catName,catId);
+    getAllCategory();
     notifyListeners();
   }
 
@@ -94,7 +116,12 @@ class FireBaseProvider extends ChangeNotifier {
 
   getAllCategory() async {
     allCategory = await FirestoreHelper.firestoreHelper.getAllCategory();
-    log(allCategory.length.toString());
+    allCategoryname=[];
+    allCategoryname.add('اختر التصنيف');
+    for(CategoryModel item in allCategory){
+      allCategoryname.add(item.categoryName!);
+    }
+
     notifyListeners();
   }
 
@@ -103,11 +130,27 @@ class FireBaseProvider extends ChangeNotifier {
     log(allProduct.length.toString());
     notifyListeners();
   }
+  updateProduct({required String name,required String disc,required String imagePath,required String productId}) async{
+    if(file !=null){
+      log('add image');
+      imagePath=  await FirestoreHelper.firestoreHelper.uploadImage(file!);
+    }
+    await FirestoreHelper.firestoreHelper.updateProduct(name: name,disc: disc,imagePath: imagePath,productId: productId);
+    getAllProduct();
+    notifyListeners();
+  }
+  updateProductQuntity({required String quantity,required String productId}) async{
+
+    await FirestoreHelper.firestoreHelper.updateProductQuntity(quantity:quantity,productId: productId);
+    getAllProduct();
+    notifyListeners();
+  }
 
   addProduct(ProductModel productModel)async{
     log('start add product');
      try{
        if(file !=null){
+         log('add image');
        String imageUrl =  await FirestoreHelper.firestoreHelper.uploadImage(file!);
        productModel.imagePath=imageUrl;
        }
@@ -128,6 +171,12 @@ class FireBaseProvider extends ChangeNotifier {
     }catch (e){
       print(e);
     }
+  }
+  pickNewImage() async {
+    XFile? file = await ImagePicker().pickImage(source: ImageSource.gallery);
+    this.file = File(file!.path);
+    print('ad  d image ');
+    notifyListeners();
   }
 
 }

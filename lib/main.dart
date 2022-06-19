@@ -13,6 +13,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:provider/provider.dart';
 
+import 'ui/navigations_bar/storekeeper_nav_bar.dart';
+
 Future <void> main() async {
   await ScreenUtil.ensureScreenSize();
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,7 +65,7 @@ class _MyAppState extends State<MyApp> {
           );
 
           },
-            child:  AccountantNavBar(),
+            child:  StoreKeeperNavBar(),
 
          );
 

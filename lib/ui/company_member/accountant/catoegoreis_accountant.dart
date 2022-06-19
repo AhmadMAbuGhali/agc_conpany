@@ -11,6 +11,7 @@ import '../../../componant/componant.dart';
 
 class AccountantCategoeies extends StatelessWidget {
   TextEditingController categoryNameController = TextEditingController();
+  TextEditingController editCategoryNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class AccountantCategoeies extends StatelessWidget {
                         itemCount: provider.allCategory.length,
                         itemBuilder: (context, index) {
                           return AccountantAddCategory(
-                              provider.allCategory[index], context);
+                              provider.allCategory[index], context,editCategoryNameController);
                         }))
               ],
             ),

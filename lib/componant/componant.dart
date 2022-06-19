@@ -3,8 +3,10 @@
 import 'dart:developer';
 import 'package:agc_conpany/model/categpry_model.dart';
 import 'package:agc_conpany/model/customer_model.dart';
+import 'package:agc_conpany/model/product_model.dart';
 import 'package:agc_conpany/model/users.dart';
 import 'package:agc_conpany/servisers/firebase_provider.dart';
+import 'package:agc_conpany/ui/company_member/accountant/update_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -829,7 +831,7 @@ Widget SecretaryJoinReq(CustomerModel customerModel) =>
     );
 
 Widget AccountantAddCategory(CategoryModel categoryModel,
-    BuildContext context) =>
+    BuildContext context,TextEditingController controller) =>
     GestureDetector
       (
       onTap: () =>
@@ -848,9 +850,10 @@ Widget AccountantAddCategory(CategoryModel categoryModel,
                         fontSize: FontSize.s24),
                   )),
               content: TextFormField(
-                decoration: new InputDecoration(
-                  border: new OutlineInputBorder(
-                      borderSide: new BorderSide(color: Colors.teal)),
+                controller:controller ,
+                decoration: const  InputDecoration(
+                  border:   OutlineInputBorder(
+                      borderSide:   BorderSide(color: Colors.teal)),
                   hintText: 'عدل اسم التصنيف',
                 ),
               ),
@@ -864,7 +867,10 @@ Widget AccountantAddCategory(CategoryModel categoryModel,
                         width: 100.w,
                         height: 30.h,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Provider.of<FireBaseProvider>(context,listen: false).updateCatogryname(controller.text,categoryModel.id.toString());
+                         Get.back();
+                          },
                           child: Text(
                             'اضافة',
                             style: getRegularStyle(
@@ -1345,7 +1351,7 @@ Widget AccountantTransferorders() =>
       ),
     );
 
-Widget AccountantProductWidget() =>
+Widget AccountantProductWidget(ProductModel productModel) =>
     Container(
       height: 150.h,
       margin: EdgeInsets.symmetric(
@@ -1377,10 +1383,10 @@ Widget AccountantProductWidget() =>
                 offset: Offset(0, 0), // changes position of shadow
               ),
             ], borderRadius: BorderRadius.circular(30.r)),
-            child: const CircleAvatar(
+            child:   CircleAvatar(
               radius: 45.0,
               backgroundImage: NetworkImage(
-                  'https://miro.medium.com/max/1000/1*wnKTi_JRAZJ58WeWaCn7yw.jpeg'),
+                  productModel.imagePath!),
               backgroundColor: Colors.transparent,
             ),
           ),
@@ -1396,55 +1402,30 @@ Widget AccountantProductWidget() =>
                   height: 6.h,
                 ),
                 Text(
-                  'دقيق حيفا',
+                  productModel.productName +productModel.wight,
                   style: getBoldStyle(
                       color: ColorManager.black, fontSize: FontSize.s14),
                 ),
                 SizedBox(
-                  height: 6.h,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'الكمية المتوفرة ',
-                      style: getMediumStyle(
-                          color: ColorManager.gray, fontSize: FontSize.s10.sp),
-                    ),
-                    SizedBox(
-                      width: 15.w,
-                    ),
-                    Text(
-                      'وزن 25 كجم: ',
-                      style: getMediumStyle(
-                          color: ColorManager.black, fontSize: FontSize.s12.sp),
-                    ),
-                    Text(
-                      '100',
-                      style: getRegularStyle(
-                          color: ColorManager.gray, fontSize: FontSize.s14.sp),
-                    ),
-                  ],
-                ),
-                SizedBox(
                   height: 10.h,
                 ),
+
+                SizedBox(
+                  height: 15.h,
+                ),
                 Row(
                   children: [
                     Text(
-                      'الكمية المتوفرة',
+                      'الكمية المتوفرة في المخزن:',
                       style: getMediumStyle(
                           color: ColorManager.gray, fontSize: FontSize.s10.sp),
                     ),
                     SizedBox(
                       width: 15.w,
                     ),
+
                     Text(
-                      'وزن 50 كجم: ',
-                      style: getMediumStyle(
-                          color: ColorManager.black, fontSize: FontSize.s12.sp),
-                    ),
-                    Text(
-                      '50',
+                        productModel.quantity.toString(),
                       style: getRegularStyle(
                           color: ColorManager.gray, fontSize: FontSize.s14.sp),
                     ),
@@ -1460,7 +1441,7 @@ Widget AccountantProductWidget() =>
                       width: 70.w,
                       height: 20.h,
                       child: ElevatedButton(
-                        onPressed: () => Get.to(() => AccountantNavBar()),
+                        onPressed: () => Get.to(() => UpdateProductScreen(productModel: productModel )),
                         child: Text(
                           'تعديل',
                           style: getRegularStyle(
@@ -1715,13 +1696,13 @@ Widget StoreKeeperToDriver() =>
       ),
     );
 
-Widget addToStake({required Function() onTap}) =>
+Widget addToStake({required Function() onTap,required ProductModel productModel}) =>
     InkWell(
       onTap: onTap,
       child: Container(
         height: 70.h,
         width: 350.w,
-        margin: EdgeInsets.symmetric(vertical: 18.h, horizontal: 20.w),
+        margin: EdgeInsets.symmetric(vertical: 18.h),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
           color: ColorManager.white,
@@ -1739,7 +1720,7 @@ Widget addToStake({required Function() onTap}) =>
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 7.h),
+              // margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 7.h),
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.2),
@@ -1747,11 +1728,11 @@ Widget addToStake({required Function() onTap}) =>
                   blurRadius: 6,
                   offset: Offset(0, 0), // changes position of shadow
                 ),
-              ], borderRadius: BorderRadius.circular(30.r)),
-              child: const CircleAvatar(
+              ], borderRadius:BorderRadius.circular(30.r)),
+              child:   CircleAvatar(
                 radius: 30.0,
                 backgroundImage: NetworkImage(
-                    'https://miro.medium.com/max/1000/1*wnKTi_JRAZJ58WeWaCn7yw.jpeg'),
+                    productModel.imagePath!),
                 backgroundColor: Colors.transparent,
               ),
             ),
@@ -1765,7 +1746,7 @@ Widget addToStake({required Function() onTap}) =>
                     height: 6.h,
                   ),
                   Text(
-                    'دقيق حيفا',
+                    productModel.productName,
                     style: getBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
                   ),
@@ -1773,11 +1754,11 @@ Widget addToStake({required Function() onTap}) =>
                     height: 6.h,
                   ),
                   SizedBox(
-                    width: 290,
+                    width: 240.w,
                     child: Row(
                       children: [
                         Text(
-                          'وزن 25 كجم: ',
+                          productModel.wight,
                           style: getMediumStyle(
                               color: ColorManager.black,
                               fontSize: FontSize.s12.sp),

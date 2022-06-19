@@ -98,8 +98,6 @@ class FirestoreHelper {
     List<CategoryModel> allAsset = allAssetSnapshot.docs.map((e) {
       Map<String, dynamic> documentMap = e.data();
       documentMap['id'] = e.id;
-      log('firestore helper e.id: ${e.id}');
-      log("firestore helper documentMap['id']: ${documentMap['id']}");
       CategoryModel categoryModel = CategoryModel.formMap(documentMap);
       return categoryModel;
     }).toList();
@@ -162,5 +160,17 @@ class FirestoreHelper {
     await reference.putFile(file);
     String imageUrl = await reference.getDownloadURL();
     return imageUrl;
+  }
+  updateCatogryname(String name,String catId)async{
+    await firebaseFirestore.collection('Category').doc(catId).update({'categoryName': name});
+  }
+  updateProduct(
+      {required String name,required String disc,required String imagePath,required String productId})async{
+    await firebaseFirestore.collection('Product').doc(productId).update({'productName': name,'description': disc,'imagePath': imagePath});
+  }
+  updateProductQuntity(
+      {required String quantity,required String productId})async{
+   int quantity2=int.parse(quantity);
+    await firebaseFirestore.collection('Product').doc(productId).update({'quantity': quantity2});
   }
 }

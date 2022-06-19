@@ -1,7 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.powerteam.agc_conpany">
+    <uses-permission android:name="android.permission.INTERNET"/>
 
-   <application
+
+    <application
         android:label="agc_conpany"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

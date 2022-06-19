@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:agc_conpany/componant/componant.dart';
+import 'package:agc_conpany/componant/dropDown.dart';
 import 'package:agc_conpany/controller/add_product_controller.dart';
 import 'package:agc_conpany/model/product_model.dart';
 import 'package:agc_conpany/resources/color_manager.dart';
@@ -18,30 +19,11 @@ import '../../../resources/styles_manager.dart';
 import '../../../servisers/firebase_provider.dart';
 
 class AddProductScreen extends StatelessWidget {
-  static const Map<String, bool> wight = {'50': false, '100': true};
-  static const Map<int, String> categoryList = {
-    0: 'اختر تصنيف',
-    1: 'حيفا',
-    2: 'القدس',
-    3: 'مندوب مبيعات ',
-    4: 'أمين مخازن',
-    5: 'سائق',
-  };
-  static const Map<int, String> wightList = {
-    0: 'اختر وزن',
-    1: '50 كيلو غرام ',
-    2: '100 كيلو غرام ',
-
-  };
-
   Future<List<CategoryModel>>? category;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-  final AddProductController controller =
-      Get.put(AddProductController(), permanent: true);
-  String? dropdownValue = "اختر تصنيف";
-  String? dropdownWightValue ='اختر وزن';
+  final AddProductController controller = Get.put(AddProductController());
 
   @override
   Widget build(BuildContext context) {
@@ -54,11 +36,11 @@ class AddProductScreen extends StatelessWidget {
             children: [
               Row(children: [
                 Expanded(
-                    child: Text(
-                      'أضافة منتج',
-                      style: getBoldStyle(color: Colors.black),
-                      textAlign: TextAlign.center,
-                    ),
+                  child: Text(
+                    'أضافة منتج',
+                    style: getBoldStyle(color: Colors.black),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
                 IconButton(
                   onPressed: () => Get.back(),
@@ -82,7 +64,7 @@ class AddProductScreen extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(15.r)),
                     child: InkWell(
                       onTap: () {
-                        controller.getImage(ImageSource.gallery);
+                        provider.pickNewImage();
                       },
                       child: Container(
                         height: 195.h,
@@ -98,15 +80,11 @@ class AddProductScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child:
-                            Obx(() => controller.selectedImagePath.value == ''
-                                ? Center(
-                                    child: Text('اضف صورة المنتج'),
-                                  )
-                                : Image.file(
-                                    File(controller.selectedImagePath.value),
-                                    fit: BoxFit.contain,
-                                  )),
+                        child: provider.file == null
+                            ? Center(
+                                child: Text('اضف صورة المنتج'),
+                              )
+                            : Image(image: FileImage(provider.file!)),
                       ),
                     ),
                   )),
@@ -120,93 +98,59 @@ class AddProductScreen extends StatelessWidget {
               SizedBox(
                 height: 25.h,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.r),
-                  color: ColorManager.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 0,
-                      blurRadius: 6,
-                      offset: Offset(0, 2), // changes position of shadow
-                    ),
-                  ],
-                ),
-                width: double.infinity,
-                height: 70.h,
-                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
-                child: DropdownButtonFormField<String>(
-                  // margin: EdgeInsets.only(top: 20.h, left: 40.w, right: 40.w),
-                  decoration: const InputDecoration(
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
+              SizedBox(
+                height: 60.h,
+                child: CustomDropdownButton22(
+                  buttonWidth: 335.w,
+                  buttonHeight: 45.h,
+                  dropdownWidth: 330.w,
+                  dropdownHeight: 200.h,
+                  buttonDecoration: BoxDecoration(
+                      color: ColorManager.white,
+                      borderRadius: BorderRadius.circular(12.r)),
+                  valueAlignment: Alignment.centerRight,
+                  icon: const Icon(
+                    Icons.keyboard_arrow_down_outlined,
+                    color: Colors.black,
                   ),
-                  value: dropdownValue,
-                  items: AddProductScreen.categoryList
-                      .map((int num, String value) {
-                        return MapEntry(
-                            num,
-                            DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            ));
-                      })
-                      .values
-                      .toList(),
-                  onChanged: (newValue) {
-                    controller.selectedCategory(newValue!);
+                  iconSize: 25,
+                  hint: 'اختر التصنيف',
+                  dropdownItems: provider.allCategoryname,
+                  value: provider.dropdownValue,
+                  onChanged: (value) {
+                    provider.changeDrobDown(value!);
                   },
                 ),
               ),
               SizedBox(
-                height: 15.h,
+                height: 25.h,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15.r),
-                  color: ColorManager.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 0,
-                      blurRadius: 6,
-                      offset: Offset(0, 2), // changes position of shadow
-                    ),
-                  ],
-                ),
-                width: double.infinity,
-                height: 70.h,
-                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
-                child: DropdownButtonFormField<String>(
-                  // margin: EdgeInsets.only(top: 20.h, left: 40.w, right: 40.w),
-                  decoration: const InputDecoration(
-                    focusedBorder: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    errorBorder: InputBorder.none,
-                    disabledBorder: InputBorder.none,
+              SizedBox(
+                height: 60.h,
+                child: CustomDropdownButton22(
+                  buttonWidth: 335.w,
+                  buttonHeight: 45.h,
+                  dropdownWidth: 330.w,
+                  dropdownHeight: 200.h,
+                  buttonDecoration: BoxDecoration(
+                      color: ColorManager.white,
+                      borderRadius: BorderRadius.circular(12.r)),
+                  valueAlignment: Alignment.centerRight,
+                  icon: const Icon(
+                    Icons.keyboard_arrow_down_outlined,
+                    color: Colors.black,
                   ),
-                  value: dropdownWightValue,
-                  items: AddProductScreen.wightList
-                      .map((int num, String value) {
-                    return MapEntry(
-                        num,
-                        DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        ));
-                  })
-                      .values
-                      .toList(),
-                  onChanged: (newValue) {
-                    controller.selectedWight(newValue!);
+                  iconSize: 25,
+                  hint: '',
+                  dropdownItems: provider.wigthw,
+                  value: provider.dropdownValue2,
+                  onChanged: (value) {
+                    provider.changeDrobDown2(value!);
                   },
                 ),
               ),
               SizedBox(
-                height: 10.h,
+                height: 25.h,
               ),
               Container(
                 decoration: BoxDecoration(
@@ -248,7 +192,18 @@ class AddProductScreen extends StatelessWidget {
                   ),
                   child: GestureDetector(
                     onTap: () {
-
+                      ProductModel productModel = ProductModel(
+                          wight: provider.dropdownValue2!,
+                          productName: nameController.text,
+                          categoryName: provider.dropdownValue,
+                          description: descriptionController.text);
+                      provider.addProduct(productModel);
+                      provider.file=null;
+                      nameController.clear();
+                      descriptionController.clear();
+                      provider.dropdownValue2=provider.wigthw.first;
+                      provider.dropdownValue=provider.allCategoryname.first;
+                      Get.back();
                     },
                     child: Container(
                       width: 253,
