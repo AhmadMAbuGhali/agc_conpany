@@ -23,9 +23,13 @@ class AccountantCategoeies extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(
-                  'الأصناف',
-                  style: getBoldStyle(color: ColorManager.primary),
+                Center(
+                  child: Text(
+                    'الأصناف',
+
+                    style: getBoldStyle(color: ColorManager.primary,),
+
+                  ),
                 ),
                 Expanded(
                     child: ListView.builder(

@@ -27,6 +27,12 @@ class AddProductScreen extends StatelessWidget {
     4: 'أمين مخازن',
     5: 'سائق',
   };
+  static const Map<int, String> wightList = {
+    0: 'اختر وزن',
+    1: '50 كيلو غرام ',
+    2: '100 كيلو غرام ',
+
+  };
 
   Future<List<CategoryModel>>? category;
 
@@ -35,6 +41,7 @@ class AddProductScreen extends StatelessWidget {
   final AddProductController controller =
       Get.put(AddProductController(), permanent: true);
   String? dropdownValue = "اختر تصنيف";
+  String? dropdownWightValue ='اختر وزن';
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +54,11 @@ class AddProductScreen extends StatelessWidget {
             children: [
               Row(children: [
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 32.0),
                     child: Text(
                       'أضافة منتج',
                       style: getBoldStyle(color: Colors.black),
                       textAlign: TextAlign.center,
                     ),
-                  ),
                 ),
                 IconButton(
                   onPressed: () => Get.back(),
@@ -162,7 +166,7 @@ class AddProductScreen extends StatelessWidget {
               ),
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(27.r),
+                  borderRadius: BorderRadius.circular(15.r),
                   color: ColorManager.white,
                   boxShadow: [
                     BoxShadow(
@@ -174,32 +178,31 @@ class AddProductScreen extends StatelessWidget {
                   ],
                 ),
                 width: double.infinity,
-                child: Obx(
-                  () => Column(
-                    children: [
-                      Text("الاوزان المتاحة"),
-                      CheckboxListTile(
-                        title: Text("50 كيلو"),
-                        value: controller.checkBox50.value,
-                        onChanged: (value) {
-                          controller.checkBox50.value =
-                              !controller.checkBox50.value;
-                        },
-                        controlAffinity: ListTileControlAffinity
-                            .leading, //  <-- leading Checkbox
-                      ),
-                      CheckboxListTile(
-                        title: Text("100 كيلو"),
-                        value: controller.checkBox100.value,
-                        onChanged: (value) {
-                          controller.checkBox100.value =
-                              !controller.checkBox100.value;
-                        },
-                        controlAffinity: ListTileControlAffinity
-                            .leading, //  <-- leading Checkbox
-                      ),
-                    ],
+                height: 60.h,
+                padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
+                child: DropdownButtonFormField<String>(
+                  // margin: EdgeInsets.only(top: 20.h, left: 40.w, right: 40.w),
+                  decoration: const InputDecoration(
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
                   ),
+                  value: dropdownWightValue,
+                  items: AddProductScreen.wightList
+                      .map((int num, String value) {
+                    return MapEntry(
+                        num,
+                        DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        ));
+                  })
+                      .values
+                      .toList(),
+                  onChanged: (newValue) {
+                    controller.setSelected(newValue!);
+                  },
                 ),
               ),
               SizedBox(
