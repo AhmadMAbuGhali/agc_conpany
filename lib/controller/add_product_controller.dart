@@ -7,9 +7,9 @@ import 'package:image_picker/image_picker.dart';
 class AddProductController extends GetxController {
   var selectedImagePath = ''.obs;
   var selectedImageSize = ''.obs;
-  var checkBox50 = false.obs;
-  var checkBox100 = false.obs;
-  final selected = "ختر تصنيف".obs;
+
+  final selectedCategory = "ختر تصنيف".obs;
+  final selectedWight = "ختر وزن".obs;
 
   @override
   void onInit() {
@@ -30,7 +30,10 @@ class AddProductController extends GetxController {
       );
     }
   }
-  void setSelected(String value){
-    selected.value = value;
+  void setSelectedCategory(String value){
+    selectedCategory.value = value;
+  }
+  void setSelectedWight(String value){
+    selectedWight.value = value;
   }
 }

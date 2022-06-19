@@ -134,7 +134,7 @@ class AddProductScreen extends StatelessWidget {
                   ],
                 ),
                 width: double.infinity,
-                height: 60.h,
+                height: 70.h,
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
                 child: DropdownButtonFormField<String>(
                   // margin: EdgeInsets.only(top: 20.h, left: 40.w, right: 40.w),
@@ -157,7 +157,7 @@ class AddProductScreen extends StatelessWidget {
                       .values
                       .toList(),
                   onChanged: (newValue) {
-                    controller.setSelected(newValue!);
+                    controller.selectedCategory(newValue!);
                   },
                 ),
               ),
@@ -178,7 +178,7 @@ class AddProductScreen extends StatelessWidget {
                   ],
                 ),
                 width: double.infinity,
-                height: 60.h,
+                height: 70.h,
                 padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 3.h),
                 child: DropdownButtonFormField<String>(
                   // margin: EdgeInsets.only(top: 20.h, left: 40.w, right: 40.w),
@@ -201,7 +201,7 @@ class AddProductScreen extends StatelessWidget {
                       .values
                       .toList(),
                   onChanged: (newValue) {
-                    controller.setSelected(newValue!);
+                    controller.selectedWight(newValue!);
                   },
                 ),
               ),
@@ -248,15 +248,7 @@ class AddProductScreen extends StatelessWidget {
                   ),
                   child: GestureDetector(
                     onTap: () {
-                      Provider.of<FireBaseProvider>(context, listen: false)
-                          .addProduct(ProductModel(
-                              productName: nameController.text,
-                              description: descriptionController.text,
-                              imagePath: controller.selectedImagePath.value,
-                              wight50: controller.checkBox50.value,
-                              category: controller.selected.value ,
-                              wight100: controller.checkBox100.value));
-                      Get.back();
+
                     },
                     child: Container(
                       width: 253,
