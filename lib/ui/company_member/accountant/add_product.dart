@@ -17,7 +17,7 @@ import '../../../model/categpry_model.dart';
 import '../../../resources/styles_manager.dart';
 import '../../../servisers/firebase_provider.dart';
 
-class AddProductScreen extends StatefulWidget {
+class AddProductScreen extends StatelessWidget {
   static const Map<String, bool> wight = {'50': false, '100': true};
   static const Map<int, String> categoryList = {
     0: 'اختر تصنيف',
@@ -28,31 +28,18 @@ class AddProductScreen extends StatefulWidget {
     5: 'سائق',
   };
 
-  @override
-  State<AddProductScreen> createState() => _AddProductScreenState();
-  ProductModel? _productModel;
-  CategoryModel? _categoryModel;
-  final  AddProductController controller =
-  Get.put(AddProductController(), permanent: true);
-}
-
-class _AddProductScreenState extends State<AddProductScreen> {
   Future<List<CategoryModel>>? category;
-
 
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   final AddProductController controller =
-  Get.put(AddProductController(), permanent: true);
+      Get.put(AddProductController(), permanent: true);
   String? dropdownValue = "اختر تصنيف";
 
   @override
   Widget build(BuildContext context) {
-
-    return SafeArea(
-        child: Scaffold(
-      body: Consumer<FireBaseProvider>(
-        builder: (context, provider, x) {
+    return SafeArea(child: Scaffold(
+        body: Consumer<FireBaseProvider>(builder: (context, provider, x) {
       return SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 27.h),
@@ -258,8 +245,15 @@ class _AddProductScreenState extends State<AddProductScreen> {
                   ),
                   child: GestureDetector(
                     onTap: () {
-                    _save();
-                    Get.back();
+                      Provider.of<FireBaseProvider>(context, listen: false)
+                          .addProduct(ProductModel(
+                              productName: nameController.text,
+                              description: descriptionController.text,
+                              imagePath: controller.selectedImagePath.value,
+                              wight50: controller.checkBox50.value,
+                              category: controller.selected.value ,
+                              wight100: controller.checkBox100.value));
+                      Get.back();
                     },
                     child: Container(
                       width: 253,
@@ -278,31 +272,35 @@ class _AddProductScreenState extends State<AddProductScreen> {
             ],
           ),
         ),
-      );}
-    )));
+      );
+    })));
   }
 
-  Future<void> _save() async {
-    widget._productModel ==
-        await FbFireStoreProduct()
-            .createProduct(productModel:productModel );
-  }
-
-  ProductModel get productModel {
-    ProductModel productModel  = ProductModel(wight50: false,wight100: false,imagePath: "",productName: "",description: "", category: '');
-    if (widget._productModel != null) {
-      productModel.id = widget._productModel!.id;
-    }
-    productModel.wight50 = controller.checkBox50.value ;
-    productModel.wight100 = controller.checkBox100.value ;
-    productModel.quantity = 0;
-    productModel.imagePath = controller.selectedImagePath.value;
-    productModel.category = controller.selected.value;
-    productModel.productName = nameController.text;
-    productModel.description = descriptionController.text;
-
-
-    return productModel;
-  }
+// Future<void> _save() async {
+//   widget._productModel ==
+//       await FbFireStoreProduct().createProduct(productModel: productModel);
+// }
+//
+// ProductModel get productModel {
+//   ProductModel productModel = ProductModel(
+//       wight50: false,
+//       wight100: false,
+//       imagePath: "",
+//       productName: "",
+//       description: "",
+//       category: '');
+//   if (widget._productModel != null) {
+//     productModel.id = widget._productModel!.id;
+//   }
+//   productModel.wight50 = controller.checkBox50.value;
+//   productModel.wight100 = controller.checkBox100.value;
+//   productModel.quantity = 0;
+//   productModel.imagePath = controller.selectedImagePath.value;
+//   productModel.category = controller.selected.value;
+//   productModel.productName = nameController.text;
+//   productModel.description = descriptionController.text;
+//
+//   return productModel;
+// }
 
 }
