@@ -1,5 +1,6 @@
 import 'package:agc_conpany/servisers/auth_provider.dart';
 import 'package:agc_conpany/ui/navigations_bar/admin_nav_bar.dart';
+import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:agc_conpany/ui/registration/sign_up.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class SplashScreen extends StatelessWidget {
 
     return Scaffold(
       body:  SplashScreenView(
-        navigateRoute:( user == null&& user!.email=='admin@admin.com' )?AdminNavBar(): SingUP(),
+        navigateRoute:( user != null&& user!.email=='admin@admin.com' )?AdminNavBar(): Login(),
         duration: 5000,
         imageSize: 233,
         imageSrc: 'assets/images/splahlogo.png',

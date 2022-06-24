@@ -3,6 +3,7 @@
 import 'dart:developer';
 import 'package:agc_conpany/model/categpry_model.dart';
 import 'package:agc_conpany/model/customer_model.dart';
+import 'package:agc_conpany/model/order.dart';
 import 'package:agc_conpany/model/product_model.dart';
 import 'package:agc_conpany/model/users.dart';
 import 'package:agc_conpany/servisers/firebase_provider.dart';
@@ -19,13 +20,14 @@ import '../resources/styles_manager.dart';
 import '../resources/values_manager.dart';
 import '../ui/navigations_bar/accountant_nav_bar.dart';
 
-Widget WidgetTextField({required String hintText,
-  required TextInputType inputType,
-  required TextEditingController controller,
-  Icon? icon,
-  Icon? endIcon,
-  bool isPassword = false,
-  required TextInputAction textInputAction}) =>
+Widget WidgetTextField(
+        {required String hintText,
+        required TextInputType inputType,
+        required TextEditingController controller,
+        Icon? icon,
+        Icon? endIcon,
+        bool isPassword = false,
+        required TextInputAction textInputAction}) =>
     TextFormField(
       style: TextStyle(color: Colors.black),
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -46,8 +48,7 @@ Widget WidgetTextField({required String hintText,
       ),
     );
 
-Widget AdminJR(UserApp userApp) =>
-    Container(
+Widget AdminJR(UserApp userApp) => Container(
       width: 330.w,
       height: 180.h,
       decoration: BoxDecoration(boxShadow: [
@@ -116,7 +117,7 @@ Widget AdminJR(UserApp userApp) =>
                               elevation: 1,
                               shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.circular(AppSize.s5))),
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
                       ),
                       SizedBox(
@@ -146,7 +147,7 @@ Widget AdminJR(UserApp userApp) =>
                               elevation: 1,
                               shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.circular(AppSize.s5))),
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
                       ),
                       SizedBox(
@@ -190,8 +191,7 @@ Widget AdminJR(UserApp userApp) =>
       ),
     );
 
-Widget OrderDetails() =>
-    Container(
+Widget OrderDetails() => Container(
       height: 70.h,
       margin: EdgeInsets.symmetric(vertical: 18.h),
       decoration: BoxDecoration(
@@ -266,7 +266,8 @@ Widget OrderDetails() =>
     );
 
 Widget CustomerOrder(
-    {required Function() onAccept, required Function() onReject}) =>
+  Order order,
+) =>
     Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -287,16 +288,6 @@ Widget CustomerOrder(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              padding: EdgeInsets.only(top: 50.h, right: 2.w),
-              decoration: BoxDecoration(),
-              child: const CircleAvatar(
-                radius: 38.0,
-                backgroundImage: NetworkImage(
-                    'https://miro.medium.com/max/1000/1*wnKTi_JRAZJ58WeWaCn7yw.jpeg'),
-                backgroundColor: Colors.transparent,
-              ),
-            ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 2.w),
               child: Column(
@@ -304,7 +295,7 @@ Widget CustomerOrder(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'هذا النص هو مثال لنص',
+                    order.company!,
                     style: getBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
                   ),
@@ -320,25 +311,13 @@ Widget CustomerOrder(
                             fontSize: FontSize.s14.sp),
                       ),
                       Text(
-                        'احمد سعيد',
+                        order.customerName!,
                         style: getMediumStyle(
                             color: ColorManager.gray,
                             fontSize: FontSize.s14.sp),
                       ),
                       SizedBox(
                         width: 30.w,
-                      ),
-                      Text(
-                        'الكمية: ',
-                        style: getMediumStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      Text(
-                        '150',
-                        style: getMediumStyle(
-                            color: ColorManager.gray,
-                            fontSize: FontSize.s14.sp),
                       ),
                     ],
                   ),
@@ -354,7 +333,7 @@ Widget CustomerOrder(
                             fontSize: FontSize.s14.sp),
                       ),
                       Text(
-                        '5217143',
+                        order.phone!,
                         style: getMediumStyle(
                             color: ColorManager.gray,
                             fontSize: FontSize.s14.sp),
@@ -363,37 +342,6 @@ Widget CustomerOrder(
                   ),
                   SizedBox(
                     height: 4.h,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'وزن 25 كجم: ',
-                        style: getMediumStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      Text(
-                        '100',
-                        style: getMediumStyle(
-                            color: ColorManager.gray,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      SizedBox(
-                        width: 15.w,
-                      ),
-                      Text(
-                        'وزن 50 كجم: ',
-                        style: getMediumStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      Text(
-                        '50',
-                        style: getMediumStyle(
-                            color: ColorManager.gray,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                    ],
                   ),
                   SizedBox(
                     height: 4.h,
@@ -407,78 +355,89 @@ Widget CustomerOrder(
                             fontSize: FontSize.s14.sp),
                       ),
                       Text(
-                        '12/12/2021',
+                        order.date!,
                         style: getMediumStyle(
                             color: ColorManager.gray,
                             fontSize: FontSize.s14.sp),
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 55.w,
-                        height: 20.h,
-                        child: ElevatedButton(
-                          onPressed: onAccept,
-                          child: Text(
-                            'قبول',
-                            style: getRegularStyle(
-                                color: ColorManager.white,
-                                fontSize: FontSize.s10.sp),
+                  Consumer<FireBaseProvider>(builder: (context, provider, x) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 55.w,
+                          height: 20.h,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              log('accept order');
+                              order.status = "accept";
+                              provider.acceptedOrder(order);
+                              provider.deleteFromOrderSalesPerson(
+                                  order.id.toString());
+                            },
+                            child: Text(
+                              'قبول',
+                              style: getRegularStyle(
+                                  color: ColorManager.white,
+                                  fontSize: FontSize.s10.sp),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                primary: ColorManager.primary,
+                                elevation: 1,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(AppSize.s5))),
                           ),
-                          style: ElevatedButton.styleFrom(
-                              primary: ColorManager.primary,
-                              elevation: 1,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(AppSize.s5))),
                         ),
-                      ),
-                      SizedBox(
-                        width: 15.w,
-                      ),
-                      SizedBox(
-                        width: 60.w,
-                        height: 20.h,
-                        child: ElevatedButton(
-                          onPressed: onReject,
-                          child: Text(
-                            'رفض',
-                            style: getRegularStyle(
-                                color: ColorManager.reject,
-                                fontSize: FontSize.s10.sp),
+                        SizedBox(
+                          width: 15.w,
+                        ),
+                        SizedBox(
+                          width: 60.w,
+                          height: 20.h,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              provider.deleteFromOrderSalesPerson(
+                                  order.id.toString());
+                            },
+                            child: Text(
+                              'رفض',
+                              style: getRegularStyle(
+                                  color: ColorManager.reject,
+                                  fontSize: FontSize.s10.sp),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                primary: ColorManager.white,
+                                side: BorderSide(
+                                  width: 1.0,
+                                  color: ColorManager.reject,
+                                ),
+                                elevation: 1,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(AppSize.s5))),
                           ),
-                          style: ElevatedButton.styleFrom(
-                              primary: ColorManager.white,
-                              side: BorderSide(
-                                width: 1.0,
-                                color: ColorManager.reject,
-                              ),
-                              elevation: 1,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                  BorderRadius.circular(AppSize.s5))),
                         ),
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      SvgPicture.asset(
-                        IconAssets.time,
-                        width: 13.w,
-                        height: 13.h,
-                      ),
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Text('منذ 3 ساعات ',
-                          style: getRegularStyle(
-                              color: ColorManager.grayTime,
-                              fontSize: FontSize.s13)),
-                    ],
-                  ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        SvgPicture.asset(
+                          IconAssets.time,
+                          width: 13.w,
+                          height: 13.h,
+                        ),
+                        SizedBox(
+                          width: 6.w,
+                        ),
+                        Text('منذ 3 ساعات ',
+                            style: getRegularStyle(
+                                color: ColorManager.grayTime,
+                                fontSize: FontSize.s13)),
+                      ],
+                    );
+                  })
                 ],
               ),
             ),
@@ -487,8 +446,7 @@ Widget CustomerOrder(
       ),
     );
 
-Widget SalespersonToAccountant() =>
-    Container(
+Widget SalespersonToAccountant(Order order) => Container(
       height: 150.h,
       margin: EdgeInsets.symmetric(
         vertical: 20.h,
@@ -510,7 +468,7 @@ Widget SalespersonToAccountant() =>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'الزبون :أحمد محمود',
+                      'الزبون :' + "" + order.customerName!,
                       style: TextStyle(fontSize: 12.sp),
                     ),
                   ],
@@ -520,72 +478,65 @@ Widget SalespersonToAccountant() =>
                 ),
                 Row(
                   children: [
-                    Text('المخبز :العائلات', style: TextStyle(fontSize: 12.sp)),
+                    Text('المخبز :' + "" + order.company!,
+                        style: TextStyle(fontSize: 12.sp)),
                     SizedBox(
                       width: 70.w,
                     ),
-                    Text('رقم الهاتف :8765432',
+                    Text('رقم الهاتف :' + "" + order.phone!,
                         style: TextStyle(fontSize: 12.sp)),
                   ],
                 ),
                 SizedBox(
                   height: 11.h,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'الصنف :شوال زيرو 200',
-                      style: TextStyle(fontSize: 12.sp),
-                    ),
-                    SizedBox(
-                      width: 40.w,
-                    ),
-                    Text('الكمية :250 ', style: TextStyle(fontSize: 12.sp)),
-                  ],
-                ),
-                SizedBox(
-                  height: 11.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 129.w,
-                      height: 20.h,
-                      child: ElevatedButton(
-                        onPressed: () => Get.to(() => AccountantNavBar()),
-                        child: Text(
-                          'تحويل الى المحاسب',
-                          style: getRegularStyle(
-                              color: ColorManager.white,
-                              fontSize: FontSize.s10.sp),
+                Consumer<FireBaseProvider>(builder: (context, provider, x) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 129.w,
+                        height: 20.h,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            log('accept order to Accountent');
+                            order.status = "acceptToAccountent";
+                            provider.acceptedOrdertoAccountent(order);
+                            provider
+                                .deleteFromOrderAccountant(order.id.toString());
+                          },
+                          child: Text(
+                            'تحويل الى المحاسب',
+                            style: getRegularStyle(
+                                color: ColorManager.white,
+                                fontSize: FontSize.s10.sp),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              primary: ColorManager.primary,
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            primary: ColorManager.primary,
-                            elevation: 1,
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.circular(AppSize.s5))),
                       ),
-                    ),
-                    SizedBox(
-                      width: 15.w,
-                    ),
-                    SvgPicture.asset(
-                      IconAssets.time,
-                      width: 13.w,
-                      height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 6.w,
-                    ),
-                    Text('منذ 3 ساعات ',
-                        style: getRegularStyle(
-                            color: ColorManager.grayTime,
-                            fontSize: FontSize.s13)),
-                  ],
-                ),
+                      SizedBox(
+                        width: 15.w,
+                      ),
+                      SvgPicture.asset(
+                        IconAssets.time,
+                        width: 13.w,
+                        height: 13.h,
+                      ),
+                      SizedBox(
+                        width: 6.w,
+                      ),
+                      Text(order.date!,
+                          style: getRegularStyle(
+                              color: ColorManager.grayTime,
+                              fontSize: FontSize.s13)),
+                    ],
+                  );
+                })
               ],
             ),
           )
@@ -633,8 +584,7 @@ Widget WidgetSearchField({
       ),
     );
 
-Widget SecreraryShowCustomerList(CustomerModel customerModel) =>
-    Container(
+Widget SecreraryShowCustomerList(CustomerModel customerModel) => Container(
       width: 350.w,
       height: 135.h,
       decoration: BoxDecoration(boxShadow: [
@@ -682,8 +632,7 @@ Widget SecreraryShowCustomerList(CustomerModel customerModel) =>
       ),
     );
 
-Widget SecretaryJoinReq(CustomerModel customerModel) =>
-    Container(
+Widget SecretaryJoinReq(CustomerModel customerModel) => Container(
       width: 330.w,
       height: 170.h,
       margin: EdgeInsets.symmetric(vertical: 10.h),
@@ -755,7 +704,7 @@ Widget SecretaryJoinReq(CustomerModel customerModel) =>
                               elevation: 1,
                               shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.circular(AppSize.s5))),
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
                       ),
                       SizedBox(
@@ -786,7 +735,7 @@ Widget SecretaryJoinReq(CustomerModel customerModel) =>
                               elevation: 1,
                               shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.circular(AppSize.s5))),
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
                       ),
                       SizedBox(
@@ -830,244 +779,214 @@ Widget SecretaryJoinReq(CustomerModel customerModel) =>
       ),
     );
 
-Widget AccountantAddCategory(CategoryModel categoryModel,
-    BuildContext context,TextEditingController controller) =>
-    GestureDetector
-      (
-      onTap: () =>
-      { showDialog(
-        context: context,
-        builder: (ctx) =>
-            AlertDialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30.r),
-              ),
-              title: Center(
-                  child: Text(
-                    'عدل اسم الصنف',
-                    style: getBoldStyle(
-                        color: ColorManager.primary,
-                        fontSize: FontSize.s24),
-                  )),
-              content: TextFormField(
-                controller:controller ,
-                decoration: const  InputDecoration(
-                  border:   OutlineInputBorder(
-                      borderSide:   BorderSide(color: Colors.teal)),
-                  hintText: 'عدل اسم التصنيف',
-                ),
-              ),
-              actions: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(bottom: 15.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(
-                        width: 100.w,
-                        height: 30.h,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Provider.of<FireBaseProvider>(context,listen: false).updateCatogryname(controller.text,categoryModel.id.toString());
-                         Get.back();
-                          },
-                          child: Text(
-                            'اضافة',
-                            style: getRegularStyle(
-                                color: ColorManager.white,
-                                fontSize: FontSize.s13),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: ColorManager.primary,
-                              elevation: 1,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      AppSize.s5))),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 100.w,
-                        height: 30.h,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          child: Text(
-                            'الغاء',
-                            style: getRegularStyle(
-                                color: ColorManager.black,
-                                fontSize: FontSize.s13),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: ColorManager.white,
-                              side: BorderSide(
-                                width: 1.0,
-                                color: ColorManager.black,
-                              ),
-                              elevation: 1,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      AppSize.s5))),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+Widget AccountantAddCategory(CategoryModel categoryModel, BuildContext context,
+        TextEditingController controller) =>
+    GestureDetector(
+      onTap: () => {
+        showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.r),
             ),
-      ),},
-
+            title: Center(
+                child: Text(
+              'عدل اسم الصنف',
+              style: getBoldStyle(
+                  color: ColorManager.primary, fontSize: FontSize.s24),
+            )),
+            content: TextFormField(
+              controller: controller,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.teal)),
+                hintText: 'عدل اسم التصنيف',
+              ),
+            ),
+            actions: <Widget>[
+              Container(
+                margin: EdgeInsets.only(bottom: 15.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      width: 100.w,
+                      height: 30.h,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Provider.of<FireBaseProvider>(context, listen: false)
+                              .updateCatogryname(
+                                  controller.text, categoryModel.id.toString());
+                          Get.back();
+                        },
+                        child: Text(
+                          'اضافة',
+                          style: getRegularStyle(
+                              color: ColorManager.white,
+                              fontSize: FontSize.s13),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            primary: ColorManager.primary,
+                            elevation: 1,
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(AppSize.s5))),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 100.w,
+                      height: 30.h,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: Text(
+                          'الغاء',
+                          style: getRegularStyle(
+                              color: ColorManager.black,
+                              fontSize: FontSize.s13),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                            primary: ColorManager.white,
+                            side: BorderSide(
+                              width: 1.0,
+                              color: ColorManager.black,
+                            ),
+                            elevation: 1,
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.circular(AppSize.s5))),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      },
       child: Container(
           margin: EdgeInsets.symmetric(vertical: 15.h),
-          padding: EdgeInsets
-              .symmetric(horizontal: 20
-              .
-          w),
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
           width: double.infinity,
-          height: 41
-              .
-          h,
-          decoration: BoxDecoration
-            (
-              borderRadius: BorderRadius.circular(15
-                  .
-              r),
-              color: ColorManager.white, boxShadow: [
-            BoxShadow
-              (
-              color: ColorManager.black.withOpacity(0.16
-              )
-              ,
-              blurRadius: 10
-              ,
-              offset: Offset
-                (0,
-                  3
-              )
-              , // changes position of shadow
-            )
-            ,
-          ]
-              ,
-              border: Border.all(color: Colors.white60, width: 1
-                ,
-              )
-          )
-          ,
-          child: Row
-            (
-            crossAxisAlignment: CrossAxisAlignment.center, children: [
-            Text
-              (
-              categoryModel.categoryName!, style: getBoldStyle
-              (
-                color: ColorManager.black, fontSize: FontSize.s15),
-            )
-            ,
-            Spacer
-              (
-            ), IconButton
-              (
-                onPressed: () =>
-                { showDialog(
-                  context: context,
-                  builder: (ctx) =>
-                      AlertDialog(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.r),
-                        ),
-                        title: Center(
-                            child: Text(
+          height: 41.h,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15.r),
+              color: ColorManager.white,
+              boxShadow: [
+                BoxShadow(
+                  color: ColorManager.black.withOpacity(0.16),
+                  blurRadius: 10,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+              border: Border.all(
+                color: Colors.white60,
+                width: 1,
+              )),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                categoryModel.categoryName!,
+                style: getBoldStyle(
+                    color: ColorManager.black, fontSize: FontSize.s15),
+              ),
+              Spacer(),
+              IconButton(
+                  onPressed: () => {
+                        showDialog(
+                          context: context,
+                          builder: (ctx) => AlertDialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.r),
+                            ),
+                            title: Center(
+                                child: Text(
                               'عدل اسم الصنف',
                               style: getBoldStyle(
                                   color: ColorManager.primary,
                                   fontSize: FontSize.s24),
                             )),
-                        content: TextFormField(
-                          decoration: new InputDecoration(
-                            border: new OutlineInputBorder(
-                                borderSide: new BorderSide(color: Colors.teal)),
-                            hintText: 'عدل اسم التصنيف',
+                            content: TextFormField(
+                              decoration: new InputDecoration(
+                                border: new OutlineInputBorder(
+                                    borderSide:
+                                        new BorderSide(color: Colors.teal)),
+                                hintText: 'عدل اسم التصنيف',
+                              ),
+                            ),
+                            actions: <Widget>[
+                              Container(
+                                margin: EdgeInsets.only(bottom: 15.h),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    SizedBox(
+                                      width: 100.w,
+                                      height: 30.h,
+                                      child: ElevatedButton(
+                                        onPressed: () {},
+                                        child: Text(
+                                          'اضافة',
+                                          style: getRegularStyle(
+                                              color: ColorManager.white,
+                                              fontSize: FontSize.s13),
+                                        ),
+                                        style: ElevatedButton.styleFrom(
+                                            primary: ColorManager.primary,
+                                            elevation: 1,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        AppSize.s5))),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 100.w,
+                                      height: 30.h,
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        child: Text(
+                                          'الغاء',
+                                          style: getRegularStyle(
+                                              color: ColorManager.black,
+                                              fontSize: FontSize.s13),
+                                        ),
+                                        style: ElevatedButton.styleFrom(
+                                            primary: ColorManager.white,
+                                            side: BorderSide(
+                                              width: 1.0,
+                                              color: ColorManager.black,
+                                            ),
+                                            elevation: 1,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        AppSize.s5))),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        actions: <Widget>[
-                          Container(
-                            margin: EdgeInsets.only(bottom: 15.h),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                SizedBox(
-                                  width: 100.w,
-                                  height: 30.h,
-                                  child: ElevatedButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      'اضافة',
-                                      style: getRegularStyle(
-                                          color: ColorManager.white,
-                                          fontSize: FontSize.s13),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                        primary: ColorManager.primary,
-                                        elevation: 1,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                AppSize.s5))),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 100.w,
-                                  height: 30.h,
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                    child: Text(
-                                      'الغاء',
-                                      style: getRegularStyle(
-                                          color: ColorManager.black,
-                                          fontSize: FontSize.s13),
-                                    ),
-                                    style: ElevatedButton.styleFrom(
-                                        primary: ColorManager.white,
-                                        side: BorderSide(
-                                          width: 1.0,
-                                          color: ColorManager.black,
-                                        ),
-                                        elevation: 1,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                AppSize.s5))),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                ),}, icon: Icon
-              (
-                Icons.edit, size: 17
-                ,
-                color: ColorManager.gray))
-            ,
-            Text
-              ("تعديل"
-
-              ,
-              style: getMediumStyle
-                (
-                  color: ColorManager.gray, fontSize: FontSize.s15),
-            )
-          ]
-            ,
-          )
-      )
-      ,
+                      },
+                  icon: Icon(Icons.edit, size: 17, color: ColorManager.gray)),
+              Text(
+                "تعديل",
+                style: getMediumStyle(
+                    color: ColorManager.gray, fontSize: FontSize.s15),
+              )
+            ],
+          )),
     );
 
-Widget CompletedOrder() =>
-    Container(
+Widget CompletedOrder() => Container(
       height: 180.h,
 
 // margin: EdgeInsets.symmetric(vertical: 18.h,horizontal: 20.w),
@@ -1229,8 +1148,7 @@ Widget CompletedOrder() =>
       ),
     );
 
-Widget AccountantTransferorders() =>
-    Container(
+Widget AccountantTransferorders(Order order) => Container(
       height: 120.h,
       margin: EdgeInsets.symmetric(
         vertical: 20.h,
@@ -1252,98 +1170,91 @@ Widget AccountantTransferorders() =>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'الزبون :أحمد محمود',
+                      'الزبون :' + "" + order.customerName!,
                       style: TextStyle(fontSize: 12.sp),
                     ),
-                    Text('المخبز :العائلات', style: TextStyle(fontSize: 12.sp)),
-                    Text('رقم الهاتف :8765432',
+                    Text('المخبز :' + "" + order.company!,
+                        style: TextStyle(fontSize: 12.sp)),
+                    Text('رقم الهاتف :' + "" + order.phone!,
                         style: TextStyle(fontSize: 12.sp)),
                   ],
                 ),
                 SizedBox(
                   height: 11.h,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'الصنف :شوال زيرو 200',
-                      style: TextStyle(fontSize: 12.sp),
-                    ),
-                    SizedBox(
-                      width: 20.w,
-                    ),
-                    Text('الكمية :250 ', style: TextStyle(fontSize: 12.sp)),
-                  ],
-                ),
-                SizedBox(
-                  height: 11.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 150.w,
-                      height: 25.h,
-                      child: ElevatedButton(
-                        onPressed: () => Get.to(() => AccountantNavBar()),
-                        child: Text(
-                          'تحويل الى امين المخزن',
-                          style: getRegularStyle(
-                              color: ColorManager.white,
-                              fontSize: FontSize.s10.sp),
+                Consumer<FireBaseProvider>(builder: (context, provider, x) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 150.w,
+                        height: 25.h,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            log('accept order');
+                            order.status = "shipping";
+                            provider.OrdertoStoreKeper(order);
+                            provider
+                                .deleteFromOrderAccountant(order.id.toString());
+                          },
+                          child: Text(
+                            'تحويل الى امين المخزن',
+                            style: getRegularStyle(
+                                color: ColorManager.white,
+                                fontSize: FontSize.s10.sp),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              primary: ColorManager.primary,
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            primary: ColorManager.primary,
-                            elevation: 1,
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.circular(AppSize.s5))),
                       ),
-                    ),
-                    SizedBox(
-                      width: 8.w,
-                    ),
-                    SizedBox(
-                      width: 69.w,
-                      height: 20.h,
-                      child: ElevatedButton(
-                        onPressed: () => Get.to(() => AccountantNavBar()),
-                        child: Text(
-                          'رفض',
-                          style: getRegularStyle(
-                              color: ColorManager.reject,
-                              fontSize: FontSize.s14.sp),
+                      SizedBox(
+                        width: 8.w,
+                      ),
+                      SizedBox(
+                        width: 69.w,
+                        height: 20.h,
+                        child: ElevatedButton(
+                          onPressed: () => Get.to(() => AccountantNavBar()),
+                          child: Text(
+                            'رفض',
+                            style: getRegularStyle(
+                                color: ColorManager.reject,
+                                fontSize: FontSize.s14.sp),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              primary: ColorManager.white,
+                              side: BorderSide(
+                                width: 1.0,
+                                color: ColorManager.reject,
+                              ),
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            primary: ColorManager.white,
-                            side: BorderSide(
-                              width: 1.0,
-                              color: ColorManager.reject,
-                            ),
-                            elevation: 1,
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.circular(AppSize.s5))),
                       ),
-                    ),
-                    SizedBox(
-                      width: 3.w,
-                    ),
-                    SvgPicture.asset(
-                      IconAssets.time,
-                      width: 13.w,
-                      height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 6.w,
-                    ),
-                    Text('منذ 3 ساعات ',
-                        style: getRegularStyle(
-                            color: ColorManager.grayTime,
-                            fontSize: FontSize.s13)),
-                  ],
-                ),
+                      SizedBox(
+                        width: 3.w,
+                      ),
+                      SvgPicture.asset(
+                        IconAssets.time,
+                        width: 13.w,
+                        height: 13.h,
+                      ),
+                      SizedBox(
+                        width: 6.w,
+                      ),
+                      Text('منذ 3 ساعات ',
+                          style: getRegularStyle(
+                              color: ColorManager.grayTime,
+                              fontSize: FontSize.s13)),
+                    ],
+                  );
+                })
               ],
             ),
           )
@@ -1351,8 +1262,7 @@ Widget AccountantTransferorders() =>
       ),
     );
 
-Widget AccountantProductWidget(ProductModel productModel) =>
-    Container(
+Widget AccountantProductWidget(ProductModel productModel) => Container(
       height: 150.h,
       margin: EdgeInsets.symmetric(
         vertical: 18.h,
@@ -1383,10 +1293,9 @@ Widget AccountantProductWidget(ProductModel productModel) =>
                 offset: Offset(0, 0), // changes position of shadow
               ),
             ], borderRadius: BorderRadius.circular(30.r)),
-            child:   CircleAvatar(
+            child: CircleAvatar(
               radius: 45.0,
-              backgroundImage: NetworkImage(
-                  productModel.imagePath!),
+              backgroundImage: NetworkImage(productModel.imagePath!),
               backgroundColor: Colors.transparent,
             ),
           ),
@@ -1402,14 +1311,13 @@ Widget AccountantProductWidget(ProductModel productModel) =>
                   height: 6.h,
                 ),
                 Text(
-                  productModel.productName +productModel.wight,
+                  productModel.productName + productModel.wight,
                   style: getBoldStyle(
                       color: ColorManager.black, fontSize: FontSize.s14),
                 ),
                 SizedBox(
                   height: 10.h,
                 ),
-
                 SizedBox(
                   height: 15.h,
                 ),
@@ -1423,9 +1331,8 @@ Widget AccountantProductWidget(ProductModel productModel) =>
                     SizedBox(
                       width: 15.w,
                     ),
-
                     Text(
-                        productModel.quantity.toString(),
+                      productModel.quantity.toString(),
                       style: getRegularStyle(
                           color: ColorManager.gray, fontSize: FontSize.s14.sp),
                     ),
@@ -1441,7 +1348,8 @@ Widget AccountantProductWidget(ProductModel productModel) =>
                       width: 70.w,
                       height: 20.h,
                       child: ElevatedButton(
-                        onPressed: () => Get.to(() => UpdateProductScreen(productModel: productModel )),
+                        onPressed: () => Get.to(() =>
+                            UpdateProductScreen(productModel: productModel)),
                         child: Text(
                           'تعديل',
                           style: getRegularStyle(
@@ -1453,7 +1361,7 @@ Widget AccountantProductWidget(ProductModel productModel) =>
                             elevation: 1,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                BorderRadius.circular(AppSize.s5))),
+                                    BorderRadius.circular(AppSize.s5))),
                       ),
                     ),
                     SizedBox(
@@ -1479,7 +1387,7 @@ Widget AccountantProductWidget(ProductModel productModel) =>
                             elevation: 1,
                             shape: RoundedRectangleBorder(
                                 borderRadius:
-                                BorderRadius.circular(AppSize.s5))),
+                                    BorderRadius.circular(AppSize.s5))),
                       ),
                     ),
                   ],
@@ -1491,8 +1399,7 @@ Widget AccountantProductWidget(ProductModel productModel) =>
       ),
     );
 
-Widget AdminMember(UserApp userApp) =>
-    Container(
+Widget AdminMember(UserApp userApp) => Container(
       width: 350.w,
       height: 160.h,
       margin: EdgeInsets.symmetric(vertical: 10.h),
@@ -1559,7 +1466,7 @@ Widget AdminMember(UserApp userApp) =>
                               elevation: 1,
                               shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.circular(AppSize.s5))),
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
                       ),
                       SizedBox(
@@ -1587,7 +1494,7 @@ Widget AdminMember(UserApp userApp) =>
                               elevation: 1,
                               shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.circular(AppSize.s5))),
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
                       ),
                       SizedBox(
@@ -1603,8 +1510,7 @@ Widget AdminMember(UserApp userApp) =>
       ),
     );
 
-Widget StoreKeeperToDriver() =>
-    Container(
+Widget StoreKeeperToDriver(Order order) => Container(
       width: 330.w,
       height: 130.h,
       margin: EdgeInsets.symmetric(vertical: 20.h),
@@ -1624,13 +1530,14 @@ Widget StoreKeeperToDriver() =>
                 Row(
                   children: [
                     Text(
-                      'الزبون :أحمد محمود',
+                      'الزبون :' + " " + order.customerName!,
                       style: TextStyle(fontSize: 12.sp),
                     ),
                     SizedBox(
                       width: 80.w,
                     ),
-                    Text('المخبز :العائلات', style: TextStyle(fontSize: 12.sp)),
+                    Text('المخبز :' + "" + order.company!,
+                        style: TextStyle(fontSize: 12.sp)),
                   ],
                 ),
                 SizedBox(
@@ -1639,56 +1546,63 @@ Widget StoreKeeperToDriver() =>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text('رقم الهاتف :8765432',
+                    Text('رقم الهاتف :' + "" + order.phone!,
                         style: TextStyle(fontSize: 12.sp)),
                     SizedBox(
                       width: 80.w,
                     ),
-                    Text('الكمية :250 ', style: TextStyle(fontSize: 12.sp)),
                   ],
                 ),
                 SizedBox(
                   height: 11.h,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 129.w,
-                      height: 20.h,
-                      child: ElevatedButton(
-                        onPressed: () => Get.to(() => AccountantNavBar()),
-                        child: Text(
-                          'تحويل الى السائق',
-                          style: getRegularStyle(
-                              color: ColorManager.white,
-                              fontSize: FontSize.s10.sp),
+                Consumer<FireBaseProvider>(builder: (context, provider, x) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 129.w,
+                        height: 20.h,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            log(' order To Driver');
+                            order.status = "shipped";
+                            provider.OrdertoDriver(order);
+                            provider.deleteFromOrderStoreKeeper(
+                                order.id.toString());
+                          },
+                          child: Text(
+                            'تحويل الى السائق',
+                            style: getRegularStyle(
+                                color: ColorManager.white,
+                                fontSize: FontSize.s10.sp),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                              primary: ColorManager.primary,
+                              elevation: 1,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            primary: ColorManager.primary,
-                            elevation: 1,
-                            shape: RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.circular(AppSize.s5))),
                       ),
-                    ),
-                    SizedBox(
-                      width: 15.w,
-                    ),
-                    SvgPicture.asset(
-                      IconAssets.time,
-                      width: 13.w,
-                      height: 13.h,
-                    ),
-                    SizedBox(
-                      width: 6.w,
-                    ),
-                    Text('منذ 3 ساعات ',
-                        style: getRegularStyle(
-                            color: ColorManager.grayTime,
-                            fontSize: FontSize.s13)),
-                  ],
-                ),
+                      SizedBox(
+                        width: 15.w,
+                      ),
+                      SvgPicture.asset(
+                        IconAssets.time,
+                        width: 13.w,
+                        height: 13.h,
+                      ),
+                      SizedBox(
+                        width: 6.w,
+                      ),
+                      Text('منذ 3 ساعات ',
+                          style: getRegularStyle(
+                              color: ColorManager.grayTime,
+                              fontSize: FontSize.s13)),
+                    ],
+                  );
+                })
               ],
             ),
           )
@@ -1696,7 +1610,8 @@ Widget StoreKeeperToDriver() =>
       ),
     );
 
-Widget addToStake({required Function() onTap,required ProductModel productModel}) =>
+Widget addToStake(
+        {required Function() onTap, required ProductModel productModel}) =>
     InkWell(
       onTap: onTap,
       child: Container(
@@ -1728,16 +1643,15 @@ Widget addToStake({required Function() onTap,required ProductModel productModel}
                   blurRadius: 6,
                   offset: Offset(0, 0), // changes position of shadow
                 ),
-              ], borderRadius:BorderRadius.circular(30.r)),
-              child:   CircleAvatar(
+              ], borderRadius: BorderRadius.circular(30.r)),
+              child: CircleAvatar(
                 radius: 30.0,
-                backgroundImage: NetworkImage(
-                    productModel.imagePath!),
+                backgroundImage: NetworkImage(productModel.imagePath!),
                 backgroundColor: Colors.transparent,
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
+              padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 10.w),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -1786,7 +1700,7 @@ Widget addToStake({required Function() onTap,required ProductModel productModel}
     );
 
 Widget DriverAccetpOrder(
-    {required Function() onAccept, required Function() onReject}) =>
+        {required Function() onAccept, required Function() onReject}) =>
     Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -1953,7 +1867,7 @@ Widget DriverAccetpOrder(
                               elevation: 1,
                               shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.circular(AppSize.s5))),
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
                       ),
                       SizedBox(
@@ -1979,7 +1893,7 @@ Widget DriverAccetpOrder(
                               elevation: 1,
                               shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.circular(AppSize.s5))),
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
                       ),
                       SizedBox(
@@ -2007,8 +1921,7 @@ Widget DriverAccetpOrder(
       ),
     );
 
-Widget DriverToCustomer({required Function() onPress}) =>
-    Padding(
+Widget DriverToCustomer({required Function() onPress}) => Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 180.h,
@@ -2179,7 +2092,7 @@ Widget DriverToCustomer({required Function() onPress}) =>
                               elevation: 1,
                               shape: RoundedRectangleBorder(
                                   borderRadius:
-                                  BorderRadius.circular(AppSize.s5))),
+                                      BorderRadius.circular(AppSize.s5))),
                         ),
                       ),
                     ],
@@ -2234,8 +2147,7 @@ Widget WidgetTextFieldProudct({
       ),
     );
 
-Widget ChooseCategory() =>
-    Container(
+Widget ChooseCategory() => Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.r),
         color: ColorManager.white,
@@ -2254,6 +2166,5 @@ Widget ChooseCategory() =>
           Text('إختر تصنيف'),
           Icon(Icons.keyboard_arrow_down_sharp),
         ],
-      )
-      ,
+      ),
     );

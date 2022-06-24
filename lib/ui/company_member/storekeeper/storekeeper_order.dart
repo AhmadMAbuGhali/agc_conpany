@@ -32,9 +32,8 @@ class StoreKeeperCustomerOrder extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return GestureDetector(
                           onTap: ()=> Get.to(OrderDetails()),
-                          child:
-                              CustomerOrder(onAccept: () {}, onReject: () {}));
-                    },
+                          child:  Text("a")
+                      );},
                     itemCount: 10,
                   ),
                 ],

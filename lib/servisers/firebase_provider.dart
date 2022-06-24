@@ -19,6 +19,10 @@ class FireBaseProvider extends ChangeNotifier {
     getAllCategory();
     getAllProduct();
     getOrderSalesPerson();
+    getOrderSalesPersontoAccountent();
+    getOrderAccountant();
+    getOrderStoreKeeper();
+
   }
   String? dropdownValue = 'اختر التصنيف' ;
   changeDrobDown(String value){
@@ -43,6 +47,9 @@ class FireBaseProvider extends ChangeNotifier {
   List<String> allCategoryname = [];
   List<ProductModel> allProduct = [];
   List<Order> orderSalesPerson = [];
+  List<Order> orderSalesPersontoAccountent = [];
+  List<Order> orderAccountent = [];
+  List<Order> orderStoreKeeper = [];
   getAllWaitingUser() async {
     watingUser = await FirestoreHelper.firestoreHelper.getAllUsersWaiting();
     log(watingUser.length.toString());
@@ -101,6 +108,26 @@ class FireBaseProvider extends ChangeNotifier {
   acceptedCustomer(CustomerModel customerModel) async {
     await FirestoreHelper.firestoreHelper.acceptedCustomer(customerModel);
     getAllWaitingUser();
+    notifyListeners();
+  }
+  acceptedOrder(Order order) async {
+    await FirestoreHelper.firestoreHelper.acceptedOrder(order);
+    getOrderSalesPerson();
+    notifyListeners();
+  }
+  acceptedOrdertoAccountent(Order order) async {
+    await FirestoreHelper.firestoreHelper.acceptedOrdertoAccountent(order);
+    getOrderSalesPersontoAccountent();
+    notifyListeners();
+  }
+  OrdertoStoreKeper(Order order) async {
+    await FirestoreHelper.firestoreHelper.orderAccountentToStoreKeeper(order);
+    getOrderSalesPerson();
+    notifyListeners();
+  }
+  OrdertoDriver(Order order) async {
+    await FirestoreHelper.firestoreHelper.orderStoreKeeperToDriver(order);
+    getOrderSalesPerson();
     notifyListeners();
   }
 
@@ -187,6 +214,31 @@ class FireBaseProvider extends ChangeNotifier {
   }
   deleteFromOrderSalesPerson(String orderId) async {
     await FirestoreHelper.firestoreHelper.deletefromOrderSalesPerson(orderId);
+    notifyListeners();
+  }
+  getOrderSalesPersontoAccountent() async {
+    orderSalesPersontoAccountent= await FirestoreHelper.firestoreHelper.getOrderSalesPersontoAccountent();
+    notifyListeners();
+  }
+  deleteFromOrderSalesPersontoAccountent(String orderId) async {
+    await FirestoreHelper.firestoreHelper.deletefromOrderSalesPersontoAccountent(orderId);
+    notifyListeners();
+  }
+  getOrderAccountant() async {
+    orderAccountent= await FirestoreHelper.firestoreHelper.getOrderAccountant();
+    notifyListeners();
+  }
+  deleteFromOrderAccountant(String orderId) async {
+    await FirestoreHelper.firestoreHelper.deletefromOrderAccountant(orderId);
+    notifyListeners();
+  }
+
+  getOrderStoreKeeper() async {
+    orderStoreKeeper= await FirestoreHelper.firestoreHelper.getOrderStoreKeeper();
+    notifyListeners();
+  }
+  deleteFromOrderStoreKeeper(String orderId) async {
+    await FirestoreHelper.firestoreHelper.deletefromOrderStoreKeeper(orderId);
     notifyListeners();
   }
 

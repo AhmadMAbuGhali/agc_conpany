@@ -28,8 +28,9 @@ class Order {
     date = map['date'];
     status = map['status'];
     phone = map['phone'];
-    if(map['lineItems'] !=null){
-      map['lineItems'].forEach((v){
+    if ( map['lineItems'] !=null){
+       lineItems = [];
+       map['lineItems'].forEach((v){
         lineItems!.add(LineItemsPost.fromMap(v));
       });
     }
