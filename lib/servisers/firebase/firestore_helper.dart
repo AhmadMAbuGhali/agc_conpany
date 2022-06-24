@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:agc_conpany/model/categpry_model.dart';
 import 'package:agc_conpany/model/customer_model.dart';
+import 'package:agc_conpany/model/order.dart';
 import 'package:agc_conpany/model/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -172,5 +173,20 @@ class FirestoreHelper {
       {required String quantity,required String productId})async{
    int quantity2=int.parse(quantity);
     await firebaseFirestore.collection('Product').doc(productId).update({'quantity': quantity2});
+  }
+
+  Future<List<Order>> getOrderSalesPerson() async{
+    QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
+    await firebaseFirestore.collection('SalesPersonOrderWaiting').get();
+    List<Order> allAsset = allAssetSnapshot.docs.map((e) {
+      Map<String, dynamic> documentMap = e.data();
+      documentMap['id'] = e.id;
+      Order productModel = Order.fromMap(documentMap);
+      return productModel;
+    }).toList();
+    return allAsset;
+  }
+  deletefromOrderSalesPerson(String orderID)async{
+    await firebaseFirestore.collection('SalesPersonOrderWaiting').doc(orderID).delete();
   }
 }

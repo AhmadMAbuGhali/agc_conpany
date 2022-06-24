@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:agc_conpany/model/categpry_model.dart';
+import 'package:agc_conpany/model/order.dart';
 import 'package:agc_conpany/model/product_model.dart';
 import 'package:agc_conpany/model/users.dart';
 import 'package:agc_conpany/servisers/firebase/firestore_helper.dart';
@@ -17,6 +18,7 @@ class FireBaseProvider extends ChangeNotifier {
     getAllCustomer();
     getAllCategory();
     getAllProduct();
+    getOrderSalesPerson();
   }
   String? dropdownValue = 'اختر التصنيف' ;
   changeDrobDown(String value){
@@ -40,6 +42,7 @@ class FireBaseProvider extends ChangeNotifier {
   List<CategoryModel> allCategory = [];
   List<String> allCategoryname = [];
   List<ProductModel> allProduct = [];
+  List<Order> orderSalesPerson = [];
   getAllWaitingUser() async {
     watingUser = await FirestoreHelper.firestoreHelper.getAllUsersWaiting();
     log(watingUser.length.toString());
@@ -178,5 +181,15 @@ class FireBaseProvider extends ChangeNotifier {
     print('ad  d image ');
     notifyListeners();
   }
+  getOrderSalesPerson() async {
+    orderSalesPerson= await FirestoreHelper.firestoreHelper.getOrderSalesPerson();
+    notifyListeners();
+  }
+  deleteFromOrderSalesPerson(String orderId) async {
+    await FirestoreHelper.firestoreHelper.deletefromOrderSalesPerson(orderId);
+    notifyListeners();
+  }
+
+
 
 }
