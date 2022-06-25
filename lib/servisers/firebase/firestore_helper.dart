@@ -180,12 +180,10 @@ class FirestoreHelper {
   updateCatogryname(String name,String catId)async{
     await firebaseFirestore.collection('Category').doc(catId).update({'categoryName': name});
   }
-  updateProduct(
-      {required String name,required String disc,required String imagePath,required String productId})async{
+  updateProduct({required String name,required String disc,required String imagePath,required String productId})async{
     await firebaseFirestore.collection('Product').doc(productId).update({'productName': name,'description': disc,'imagePath': imagePath});
   }
-  updateProductQuntity(
-      {required String quantity,required String productId})async{
+  updateProductQuntity({required String quantity,required String productId})async{
    int quantity2=int.parse(quantity);
     await firebaseFirestore.collection('Product').doc(productId).update({'quantity': quantity2});
   }
@@ -259,7 +257,6 @@ class FirestoreHelper {
   deletefromOrderDriver(String orderID)async{
     await firebaseFirestore.collection('DriverOrder').doc(orderID).delete();
   }
-
   Future<List<Order>> getOrderDriverPinding() async{
     QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
     await firebaseFirestore.collection('DriverOrderPinding').get();

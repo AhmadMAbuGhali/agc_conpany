@@ -12,7 +12,6 @@ import '../../../resources/styles_manager.dart';
 
 class StoreKeeperCustomerOrder extends StatelessWidget {
   const StoreKeeperCustomerOrder({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,9 +28,9 @@ class StoreKeeperCustomerOrder extends StatelessWidget {
                       style: getBoldStyle(
                           color: ColorManager.primary, fontSize: FontSize.s22),
                     ),
-                    Expanded(
-                      child: ListView.builder(
 
+                    Expanded(
+                      child:ListView.builder(
                         itemBuilder: (context, index) {
                           return GestureDetector(
                               onTap: () {

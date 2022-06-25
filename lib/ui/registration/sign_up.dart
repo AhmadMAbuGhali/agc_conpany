@@ -1,5 +1,4 @@
 import 'package:agc_conpany/servisers/auth_provider.dart';
-import 'package:agc_conpany/ui/navigations_bar/accountant_nav_bar.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +23,7 @@ class SingUP extends StatelessWidget {
   static const Map<int, String> companyMemberList = {
     1: 'محاسب',
     2: 'سكرتير',
-    3: 'مندوب مبيعات ',
+    3: 'مندوب مبيعات',
     4: 'أمين مخازن',
     5: 'سائق'
   };
@@ -184,8 +183,8 @@ class SingUP extends StatelessWidget {
                               nameController.text,
                               emailController.text,
                               passController.text,
-                              String,
-                              dropdownValue,
+
+                              dropdownValue!,
                               phoneController.text);
 
 

@@ -23,7 +23,7 @@ class AuthProvider extends ChangeNotifier {
     duration: Duration(milliseconds: 2000),
   );
 
-  register(BuildContext context,String name,String email,String password,String, jopTitel,String phoneNumber) async {
+  register(BuildContext context,String name,String email,String password,String jopTitel,String phoneNumber) async {
    log('start register');
     UserApp userApp = UserApp(name:name,password: password,phonenumber: phoneNumber,jobtitle: jopTitel,email: email );
     try {
@@ -123,12 +123,9 @@ class AuthProvider extends ChangeNotifier {
       ));
     }
   }
-
   getUserFromFirebase() async {
     String userId = FirebaseAuth.instance.currentUser!.uid;
     AppConstants.loggedUser = await FirestoreHelper.firestoreHelper.getUserFromWaiting(userId);
-    // AppConstants.loggedUser ??= await FirestoreHelper.firestoreHelper.getUserFromAccepted(userId);
-    // AppConstants.loggedUser ??= await FirestoreHelper.firestoreHelper.getUserFromReject(userId);
     notifyListeners();
   }
 
