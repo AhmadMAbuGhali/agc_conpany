@@ -1,4 +1,5 @@
 import 'package:agc_conpany/resources/constants_manager.dart';
+import 'package:agc_conpany/router_class.dart';
 import 'package:agc_conpany/servisers/auth_provider.dart';
 import 'package:agc_conpany/ui/navigations_bar/accountant_nav_bar.dart';
 import 'package:agc_conpany/ui/navigations_bar/admin_nav_bar.dart';
@@ -16,11 +17,12 @@ class Splash2 extends StatelessWidget {
    User? user;
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 0)).then((v) {
-      Provider.of<AuthProvider>(context,listen: false).getUserFromFirebase();
+    Future.delayed(const Duration(seconds: 0)).then((v) async{
+      await Provider.of<AuthProvider>(context,listen: false).getUserFromFirebase();
       user = FirebaseAuth.instance.currentUser;
     if(user != null&& user!.email=='admin@admin.com' ){
-      Get.off(AdminNavBar());
+      RouterClass.routerClass.pushWidgetReplacement(AdminNavBar());
+      // Get.off(AdminNavBar());
       // ?AdminNavBar(): Login()
     }else if (AppConstants.loggedUser != null) {
         if(AppConstants.loggedUser!.isaccept==false &&AppConstants.loggedUser!.isreject==false){
@@ -45,15 +47,24 @@ class Splash2 extends StatelessWidget {
           );
         }else if(AppConstants.loggedUser!.isaccept==true){
           if(AppConstants.loggedUser!.jobtitle == "محاسب"){
-            Get.to(AccountantNavBar());
+            RouterClass.routerClass.pushWidgetReplacement(AccountantNavBar());
+            // Get.to(AccountantNavBar());
           }else if(AppConstants.loggedUser!.jobtitle == "سكرتير"){
-            Get.to(SecretaryNavBar());
+            RouterClass.routerClass.pushWidgetReplacement(SecretaryNavBar());
+
+            // Get.to(SecretaryNavBar());
           }else if(AppConstants.loggedUser!.jobtitle == "مندوب مبيعات"){
-            Get.to(SalespersonNavBar());
+            RouterClass.routerClass.pushWidgetReplacement(SalespersonNavBar());
+
+            // Get.to(SalespersonNavBar());
           }else if(AppConstants.loggedUser!.jobtitle == "أمين مخازن"){
-            Get.to(StoreKeeperNavBar());
+            RouterClass.routerClass.pushWidgetReplacement(StoreKeeperNavBar());
+
+            // Get.to(StoreKeeperNavBar());
           }else{
-            Get.to(DriverNavBar());
+            RouterClass.routerClass.pushWidgetReplacement(DriverNavBar());
+
+            // Get.to(DriverNavBar());
           }
 
         }else{

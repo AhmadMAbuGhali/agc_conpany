@@ -1,8 +1,6 @@
+import 'package:agc_conpany/router_class.dart';
 import 'package:agc_conpany/servisers/auth_provider.dart';
 import 'package:agc_conpany/servisers/firebase_provider.dart';
-import 'package:agc_conpany/ui/navigations_bar/accountant_nav_bar.dart';
-import 'package:agc_conpany/ui/navigations_bar/driver_nav_bar.dart';
-import 'package:agc_conpany/ui/navigations_bar/salesperson_nav_bar.dart';
 import 'package:agc_conpany/ui/registration/splash_screen.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,8 +9,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:provider/provider.dart';
-
-import 'ui/navigations_bar/storekeeper_nav_bar.dart';
 
 Future <void> main() async {
   await ScreenUtil.ensureScreenSize();
@@ -40,13 +36,12 @@ class _MyAppState extends State<MyApp> {
         splitScreenMode: true,
         builder: (context , child) {
          return  GetMaterialApp(
-
             useInheritedMediaQuery: true,
             // locale: DevicePreview.locale(context),
             builder: DevicePreview.appBuilder,
             theme: ThemeData.light(),
             darkTheme: ThemeData.dark(),
-
+           navigatorKey: RouterClass.routerClass.navKey,
             localizationsDelegates: const [
               GlobalCupertinoLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
