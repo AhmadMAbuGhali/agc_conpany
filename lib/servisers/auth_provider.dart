@@ -126,6 +126,8 @@ class AuthProvider extends ChangeNotifier {
   getUserFromFirebase() async {
     String userId = FirebaseAuth.instance.currentUser!.uid;
     AppConstants.loggedUser = await FirestoreHelper.firestoreHelper.getUserFromWaiting(userId);
+    AppConstants.loggedUser ??= await FirestoreHelper.firestoreHelper.getUserFromAccepted(userId);
+    AppConstants.loggedUser ??= await FirestoreHelper.firestoreHelper.getUserFromReject(userId);
     notifyListeners();
   }
 

@@ -11,8 +11,6 @@ import '../../../resources/font_manager.dart';
 import '../../../resources/styles_manager.dart';
 import '../../registration/login.dart';
 
-
-
 class StoreKeeperHome extends StatelessWidget {
 
   List<String> MONTHS = [

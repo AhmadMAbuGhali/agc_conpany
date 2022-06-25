@@ -52,7 +52,7 @@ class FirestoreHelper {
   orderDriverPinding(Order order) async {
     await firebaseFirestore.collection('DriverOrderPinding').doc(order.id).set(order.toMap());
   }
-  Future<UserApp> getUserFromWaiting(String userid) async {
+  Future<UserApp?> getUserFromWaiting(String userid) async {
     DocumentSnapshot<Map<String, dynamic>> document =
         await firebaseFirestore.collection('usersWaiting').doc(userid).get();
       Map<String, dynamic>? userData = document.data();
@@ -61,9 +61,9 @@ class FirestoreHelper {
       UserApp gdUser = UserApp.fromMap(userData);
       return gdUser;
     }
-    return getUserFromAccepted(userid);
+    return null;
   }
-  Future<UserApp> getUserFromAccepted(String userid) async {
+  Future<UserApp?> getUserFromAccepted(String userid) async {
     DocumentSnapshot<Map<String, dynamic>> document =
         await firebaseFirestore.collection('users').doc(userid).get();
     Map<String, dynamic>? userData = document.data();
@@ -72,15 +72,21 @@ class FirestoreHelper {
       UserApp gdUser = UserApp.fromMap(userData);
       return gdUser;
     }
-    return getUserFromReject(userid);
+    return null;
   }
-  Future<UserApp> getUserFromReject(String userid) async {
+  Future<UserApp?> getUserFromReject(String userid) async {
     DocumentSnapshot<Map<String, dynamic>> document =
         await firebaseFirestore.collection('usersRejected').doc(userid).get();
     Map<String, dynamic>? userData = document.data();
     userData?['id'] = document.id;
-    UserApp gdUser = UserApp.fromMap(userData!);
-    return gdUser;
+    if(userData !=null) {
+      UserApp gdUser = UserApp.fromMap(userData);
+      return gdUser;
+    }else{
+      print('null user ');
+      return null;
+
+    }
   }
   Future<List<UserApp>> getAllUsersWaiting() async {
     QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =

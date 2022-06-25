@@ -45,15 +45,15 @@ class Splash2 extends StatelessWidget {
           );
         }else if(AppConstants.loggedUser!.isaccept==true){
           if(AppConstants.loggedUser!.jobtitle == "محاسب"){
-            Get.off(AccountantNavBar());
+            Get.to(AccountantNavBar());
           }else if(AppConstants.loggedUser!.jobtitle == "سكرتير"){
-            Get.off(SecretaryNavBar());
+            Get.to(SecretaryNavBar());
           }else if(AppConstants.loggedUser!.jobtitle == "مندوب مبيعات"){
-            Get.off(SalespersonNavBar());
+            Get.to(SalespersonNavBar());
           }else if(AppConstants.loggedUser!.jobtitle == "أمين مخازن"){
-            Get.off(StoreKeeperNavBar());
+            Get.to(StoreKeeperNavBar());
           }else{
-            Get.off(DriverNavBar());
+            Get.to(DriverNavBar());
           }
 
         }else{
