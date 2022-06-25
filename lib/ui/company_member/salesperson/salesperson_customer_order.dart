@@ -32,7 +32,7 @@ class SalespersonCustomerOrder extends StatelessWidget {
                   itemCount: provider.orderSalesPerson.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
-                        onTap: () {
+                        onTap: ()  {
                           provider.getProductFromOrder(provider.orderSalesPerson[index].lineItems!);
                           Get.to(SalespersonOrderDetails());
                         } ,

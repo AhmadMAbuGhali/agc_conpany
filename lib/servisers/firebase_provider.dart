@@ -24,7 +24,6 @@ class FireBaseProvider extends ChangeNotifier {
     getOrderStoreKeeper();
     getOrderDriver();
 
-
   }
   String? dropdownValue = 'اختر التصنيف' ;
   changeDrobDown(String value){
@@ -54,7 +53,8 @@ class FireBaseProvider extends ChangeNotifier {
   List<Order> orderAccountent = [];
   List<Order> orderStoreKeeper = [];
   List<Order> orderDriver = [];
-  List<Order> orderDriverPinding = [];
+  //product order
+  List<ProductModel> productOrder=[];
   getAllWaitingUser() async {
     watingUser = await FirestoreHelper.firestoreHelper.getAllUsersWaiting();
     log(watingUser.length.toString());
@@ -118,11 +118,6 @@ class FireBaseProvider extends ChangeNotifier {
   acceptedOrder(Order order) async {
     await FirestoreHelper.firestoreHelper.acceptedOrder(order);
     getOrderSalesPerson();
-    notifyListeners();
-  }
-  acceptedOrderDriver(Order order) async {
-    await FirestoreHelper.firestoreHelper.orderDriverPinding(order);
-    getOrderDriverPinding();
     notifyListeners();
   }
   acceptedOrdertoAccountent(Order order) async {
@@ -259,15 +254,14 @@ class FireBaseProvider extends ChangeNotifier {
     await FirestoreHelper.firestoreHelper.deletefromOrderDriver(orderId);
     notifyListeners();
   }
-  getOrderDriverPinding() async {
-    orderDriverPinding= await FirestoreHelper.firestoreHelper.getOrderDriverPinding();
+
+
+  getProductFromOrder(List<LineItemsPost> lineItemsPost){
+    for(int i=0;i<lineItemsPost.length;++i){
+      ProductModel productModel=allProduct.where((element) => element.id==lineItemsPost[i].productId).toList().first;
+      productModel.quantity=lineItemsPost[i].quantity!;
+      productOrder.add(productModel);
+    }
     notifyListeners();
   }
-  deleteFromOrderDriverPinding(String orderId) async {
-    await FirestoreHelper.firestoreHelper.deletefromOrderDriverPinding(orderId);
-    notifyListeners();
-  }
-
-
-
 }
