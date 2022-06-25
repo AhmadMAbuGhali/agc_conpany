@@ -23,6 +23,9 @@ class FireBaseProvider extends ChangeNotifier {
     getOrderAccountant();
     getOrderStoreKeeper();
     getOrderDriver();
+    getOrderStoreKeeperOrderAccept();
+    getOrderDriverpinding();
+
 
   }
   String? dropdownValue = 'اختر التصنيف' ;
@@ -55,6 +58,7 @@ class FireBaseProvider extends ChangeNotifier {
   List<Order> StoreKeeperOrderAccept = [];
   List<Order> orderStoreKeeperToDriver = [];
   List<Order> orderDriver = [];
+  List<Order> orderDriverpinding = [];
   //product order
   List<ProductModel> productOrder=[];
   getAllWaitingUser() async {
@@ -217,7 +221,12 @@ class FireBaseProvider extends ChangeNotifier {
 
   OrdertoDriver(Order order) async {
     await FirestoreHelper.firestoreHelper.orderStoreKeeperToDriver(order);
-    getOrderSalesPerson();
+    getOrderDriver();
+    notifyListeners();
+  }
+  OrdertriverPinding(Order order) async {
+    await FirestoreHelper.firestoreHelper.orderDriverPinding(order);
+    getOrderDriverpinding();
     notifyListeners();
   }
 
@@ -276,6 +285,14 @@ class FireBaseProvider extends ChangeNotifier {
   }
   deleteFromOrderDriver(String orderId) async {
     await FirestoreHelper.firestoreHelper.deletefromOrderDriver(orderId);
+    notifyListeners();
+  }
+  getOrderDriverpinding() async {
+    orderDriverpinding= await FirestoreHelper.firestoreHelper.getOrderDriverPinding();
+    notifyListeners();
+  }
+  deleteFromOrderDriverpinding(String orderId) async {
+    await FirestoreHelper.firestoreHelper.deletefromOrderDriverPinding(orderId);
     notifyListeners();
   }
   getProductFromOrder(List<LineItemsPost> lineItemsPost){

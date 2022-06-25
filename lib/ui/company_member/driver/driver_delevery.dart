@@ -32,7 +32,8 @@ class DriverDeleveryOrder extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder:(context, index) {
-                      return DriverToCustomer(onPress:()=> showDialog(
+                      return DriverToCustomer(
+                          onPress:()=> showDialog(
                         context: context,
 
                         builder: (ctx) =>  AlertDialog(

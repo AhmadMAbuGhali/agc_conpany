@@ -1753,6 +1753,7 @@ Widget StoreKeeperToDriver(Order order) => Container(
                             order.status = "shipped";
 
                             provider.OrdertoDriver(order);
+                            provider.deleteFromStoreKeeperOrderAccept(order.id.toString());
                           },
                           child: Text(
                             'تحويل الى السائق',
@@ -1930,21 +1931,7 @@ Widget DriverAccetpOrder(Order order) => Padding(
                             color: ColorManager.gray,
                             fontSize: FontSize.s14.sp),
                       ),
-                      SizedBox(
-                        width: 30.w,
-                      ),
-                      Text(
-                        'الكمية: ',
-                        style: getMediumStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      Text(
-                        '150',
-                        style: getMediumStyle(
-                            color: ColorManager.gray,
-                            fontSize: FontSize.s14.sp),
-                      ),
+
                     ],
                   ),
                   SizedBox(
@@ -1994,11 +1981,11 @@ Widget DriverAccetpOrder(Order order) => Padding(
                           height: 20.h,
                           child: ElevatedButton(
                             onPressed: () {
-                              // log('accept order');
-                              // order.status = "accept";
-                              // provider.orderDriverPinding(order);
-                              // provider
-                              //     .deleteFromOrderDriver(order.id.toString());
+                              log('accept order');
+                              order.status = "accept";
+                              provider.OrdertriverPinding(order);
+                              provider
+                                  .deleteFromOrderDriver(order.id.toString());
                             },
                             child: Text(
                               'قبول',
