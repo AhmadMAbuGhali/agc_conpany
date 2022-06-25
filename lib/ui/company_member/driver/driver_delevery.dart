@@ -62,6 +62,7 @@ TextEditingController numberOfOrder=TextEditingController();
                                   height: 30.h,
                                   child: ElevatedButton(onPressed: (){
                                     provider.orderDriverpinding[index].orderNumber=numberOfOrder.text;
+                                    provider.orderDriverpinding[index].status='Completed';
                                   provider.addToCompleteOrder(provider.orderDriverpinding[index]);
                                   provider.deleteFromOrderDriverpinding(provider.orderDriverpinding[index].id!);
                                   }, child: Text('ارسال',style: getRegularStyle(color: ColorManager.white,fontSize: FontSize.s13),),style: ElevatedButton.styleFrom(
