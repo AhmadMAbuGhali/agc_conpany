@@ -50,6 +50,9 @@ class FirestoreHelper {
   orderDriverToCustomer(Order order) async {
     await firebaseFirestore.collection('CompleteOrder').doc(order.id).set(order.toMap());
   }
+  orderDriverPinding(Order order) async {
+    await firebaseFirestore.collection('DriverOrderPinding').doc(order.id).set(order.toMap());
+  }
   Future<UserApp> getUserFromWaiting(String userid) async {
     DocumentSnapshot<Map<String, dynamic>> document =
         await firebaseFirestore.collection('usersWaiting').doc(userid).get();
@@ -259,5 +262,20 @@ class FirestoreHelper {
   }
   deletefromOrderDriver(String orderID)async{
     await firebaseFirestore.collection('DriverOrder').doc(orderID).delete();
+  }
+
+  Future<List<Order>> getOrderDriverPinding() async{
+    QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
+    await firebaseFirestore.collection('DriverOrderPinding').get();
+    List<Order> allAsset = allAssetSnapshot.docs.map((e) {
+      Map<String, dynamic> documentMap = e.data();
+      documentMap['id'] = e.id;
+      Order productModel = Order.fromMap(documentMap);
+      return productModel;
+    }).toList();
+    return allAsset;
+  }
+  deletefromOrderDriverPinding(String orderID)async{
+    await firebaseFirestore.collection('DriverOrderPinding').doc(orderID).delete();
   }
 }

@@ -1572,7 +1572,6 @@ Widget StoreKeeperToDriver(Order order) => Container(
                             order.status = "shipped";
 
                             provider.OrdertoDriver(order);
-
                           },
                           child: Text(
                             'تحويل الى السائق',
@@ -1702,7 +1701,7 @@ Widget addToStake(
       ),
     );
 
-Widget DriverAccetpOrder(BuildContext ctx, Order order) => Padding(
+Widget DriverAccetpOrder(Order order) => Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 180.h,
@@ -1722,24 +1721,14 @@ Widget DriverAccetpOrder(BuildContext ctx, Order order) => Padding(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              padding: EdgeInsets.only(top: 50.h, right: 2.w),
-              decoration: BoxDecoration(),
-              child: const CircleAvatar(
-                radius: 38.0,
-                backgroundImage: NetworkImage(
-                    'https://miro.medium.com/max/1000/1*wnKTi_JRAZJ58WeWaCn7yw.jpeg'),
-                backgroundColor: Colors.transparent,
-              ),
-            ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 2.w),
+              padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 2.w),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'هذا النص هو مثال لنص',
+                    order.company!,
                     style: getBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
                   ),
@@ -1823,85 +1812,13 @@ Widget DriverAccetpOrder(BuildContext ctx, Order order) => Padding(
                           width: 55.w,
                           height: 20.h,
                           child: ElevatedButton(
-                            onPressed: () => showDialog(
-                              context: ctx,
-                              builder: (ctx) => AlertDialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.r),
-                                ),
-                                title: Center(
-                                    child: Text(
-                                  'هل استلمت اكمية ؟',
-                                  style: getBoldStyle(
-                                      color: ColorManager.textOrange,
-                                      fontSize: FontSize.s24),
-                                )),
-                                actions: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.only(bottom: 15.h),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        SizedBox(
-                                          width: 100.w,
-                                          height: 30.h,
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              log(' Watting Accept');
-                                              order.status = "shipped";
-                                              order.isQuantityFull =true;
-                                              provider.OrdertoDriver(order);
-                                              provider.deleteFromOrderStoreKeeper(
-                                                  order.id.toString());
-                                            },
-                                            child: Text(
-                                              'نعم',
-                                              style: getRegularStyle(
-                                                  color: ColorManager.white,
-                                                  fontSize: FontSize.s13),
-                                            ),
-                                            style: ElevatedButton.styleFrom(
-                                                primary: ColorManager.primary,
-                                                elevation: 1,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            AppSize.s5))),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 100.w,
-                                          height: 30.h,
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              Get.back();
-                                            },
-                                            child: Text(
-                                              'لا',
-                                              style: getRegularStyle(
-                                                  color: ColorManager.black,
-                                                  fontSize: FontSize.s13),
-                                            ),
-                                            style: ElevatedButton.styleFrom(
-                                                primary: ColorManager.white,
-                                                side: BorderSide(
-                                                  width: 1.0,
-                                                  color: ColorManager.black,
-                                                ),
-                                                elevation: 1,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            AppSize.s5))),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            onPressed: () {
+                              log('accept order');
+                              order.status = "accept";
+                              // provider.orderDriverPinding(order);
+                              // provider
+                              //     .deleteFromOrderDriver(order.id.toString());
+                            },
                             child: Text(
                               'قبول',
                               style: getRegularStyle(
@@ -1923,80 +1840,7 @@ Widget DriverAccetpOrder(BuildContext ctx, Order order) => Padding(
                           width: 60.w,
                           height: 20.h,
                           child: ElevatedButton(
-                            onPressed: () => showDialog(
-                              context: ctx,
-                              builder: (ctx) => AlertDialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.r),
-                                ),
-                                title: Center(
-                                    child: Text(
-                                  'هل أنت متأكد من الرفض ؟',
-                                  style: getBoldStyle(
-                                      color: ColorManager.textOrange,
-                                      fontSize: FontSize.s24),
-                                )),
-                                actions: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.only(bottom: 15.h),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        SizedBox(
-                                          width: 100.w,
-                                          height: 30.h,
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              order.isQuantityFull = false;
-                                            },
-                                            child: Text(
-                                              'نعم',
-                                              style: getRegularStyle(
-                                                  color: ColorManager.white,
-                                                  fontSize: FontSize.s13),
-                                            ),
-                                            style: ElevatedButton.styleFrom(
-                                                primary: ColorManager.primary,
-                                                elevation: 1,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            AppSize.s5))),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 100.w,
-                                          height: 30.h,
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              Get.back();
-                                            },
-                                            child: Text(
-                                              'لا',
-                                              style: getRegularStyle(
-                                                  color: ColorManager.black,
-                                                  fontSize: FontSize.s13),
-                                            ),
-                                            style: ElevatedButton.styleFrom(
-                                                primary: ColorManager.white,
-                                                side: BorderSide(
-                                                  width: 1.0,
-                                                  color: ColorManager.black,
-                                                ),
-                                                elevation: 1,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            AppSize.s5))),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            onPressed: () {},
                             child: Text(
                               'رفض',
                               style: getRegularStyle(

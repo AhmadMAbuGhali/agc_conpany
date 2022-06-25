@@ -8,8 +8,8 @@ class Order {
   String? customerName;
   String? company;
   String? phone;
-  bool  isQuantityFull = false;
-  bool  isCompleteOrder = false;
+  bool?  isQuantityFull = false;
+  bool?  isCompleteOrder = false;
   int? orderNumber=0;
   Order(
       {
@@ -39,8 +39,8 @@ class Order {
     orderNumber = map['orderNumber'];
     isCompleteOrder = map['isCompleteOrder'];
     if(map['lineItems'] !=null){
-      map['lineItems'].forEach((v){
-        lineItems!.add(LineItemsPost.fromMap(v));
+      map['lineItems']?.forEach((v){
+        lineItems?.add(LineItemsPost.fromMap(v));
       });
     }
   }

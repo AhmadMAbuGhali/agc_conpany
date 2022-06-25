@@ -1,6 +1,7 @@
 import 'package:agc_conpany/servisers/auth_provider.dart';
 import 'package:agc_conpany/servisers/firebase_provider.dart';
 import 'package:agc_conpany/ui/navigations_bar/accountant_nav_bar.dart';
+import 'package:agc_conpany/ui/navigations_bar/driver_nav_bar.dart';
 import 'package:agc_conpany/ui/navigations_bar/salesperson_nav_bar.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -62,7 +63,7 @@ class _MyAppState extends State<MyApp> {
           );
 
           },
-            child:  SalespersonNavBar(),
+            child:  DriverNavBar(),
 
          );
 
