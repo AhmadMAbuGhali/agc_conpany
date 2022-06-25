@@ -191,7 +191,7 @@ Widget AdminJR(UserApp userApp) => Container(
       ),
     );
 
-Widget OrderDetails() => Container(
+Widget OrderDetails(ProductModel productModel) => Container(
       height: 70.h,
       margin: EdgeInsets.symmetric(vertical: 18.h),
       decoration: BoxDecoration(

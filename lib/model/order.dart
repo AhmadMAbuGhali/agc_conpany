@@ -1,5 +1,5 @@
 
-class Order {
+class Order{
   String? id;
   List<LineItemsPost>? lineItems;
   String? customerId;
@@ -12,8 +12,7 @@ class Order {
   bool  isCompleteOrder = false;
   int? orderNumber=0;
   Order(
-      {
-        this.id,
+      {this.id,
         this.lineItems,
         this.customerId,
         this.date,
@@ -24,9 +23,7 @@ class Order {
         this.customerName,
         this.isQuantityFull =false,
         this.isCompleteOrder =false,
-
       });
-
   Order.fromMap(Map<String, dynamic> map) {
     id=map['id'];
     customerId = map['customerId'];

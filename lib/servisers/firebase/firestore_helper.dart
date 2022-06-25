@@ -6,7 +6,6 @@ import 'package:agc_conpany/model/order.dart';
 import 'package:agc_conpany/model/users.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-
 import '../../model/product_model.dart';
 
 class FirestoreHelper {
@@ -53,10 +52,8 @@ class FirestoreHelper {
   Future<UserApp> getUserFromWaiting(String userid) async {
     DocumentSnapshot<Map<String, dynamic>> document =
         await firebaseFirestore.collection('usersWaiting').doc(userid).get();
-
       Map<String, dynamic>? userData = document.data();
       userData?['id'] = document.id;
-
     if(userData !=null) {
       UserApp gdUser = UserApp.fromMap(userData);
       return gdUser;
@@ -189,7 +186,6 @@ class FirestoreHelper {
    int quantity2=int.parse(quantity);
     await firebaseFirestore.collection('Product').doc(productId).update({'quantity': quantity2});
   }
-
   Future<List<Order>> getOrderSalesPerson() async{
     QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
     await firebaseFirestore.collection('SalesPersonOrderWaiting').get();

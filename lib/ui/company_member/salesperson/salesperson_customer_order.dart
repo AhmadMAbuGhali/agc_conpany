@@ -1,3 +1,4 @@
+import 'package:agc_conpany/ui/company_member/salesperson/salesperson_order_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,13 +29,14 @@ class SalespersonCustomerOrder extends StatelessWidget {
               ),
               Expanded(
                 child: ListView.builder(
-
-
                   itemCount: provider.orderSalesPerson.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
-                        onTap: () => Get.to(OrderDetails()),
-                        child:      CustomerOrder(provider.orderSalesPerson[index])
+                        onTap: () {
+                          provider.getProductFromOrder(provider.orderSalesPerson[index].lineItems!);
+                          Get.to(SalespersonOrderDetails());
+                        } ,
+                        child: CustomerOrder(provider.orderSalesPerson[index])
                     );},
 
                 ),
