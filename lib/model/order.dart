@@ -8,6 +8,9 @@ class Order {
   String? customerName;
   String? company;
   String? phone;
+  bool  isQuantityFull = false;
+  bool  isCompleteOrder = false;
+  int? orderNumber=0;
   Order(
       {
         this.id,
@@ -17,7 +20,11 @@ class Order {
         this.status,
         this.company,
         this.phone,
+        this.orderNumber,
         this.customerName,
+        this.isQuantityFull =false,
+        this.isCompleteOrder =false,
+
       });
 
   Order.fromMap(Map<String, dynamic> map) {
@@ -28,9 +35,11 @@ class Order {
     date = map['date'];
     status = map['status'];
     phone = map['phone'];
-    if ( map['lineItems'] !=null){
-       lineItems = [];
-       map['lineItems'].forEach((v){
+    isQuantityFull = map['isQuantityFull'];
+    orderNumber = map['orderNumber'];
+    isCompleteOrder = map['isCompleteOrder'];
+    if(map['lineItems'] !=null){
+      map['lineItems'].forEach((v){
         lineItems!.add(LineItemsPost.fromMap(v));
       });
     }
@@ -45,6 +54,9 @@ class Order {
     map['company'] = company;
     map['phone'] = phone;
     map['customerName'] = customerName;
+    map['isQuantityFull']= isQuantityFull;
+    map['orderNumber']= orderNumber;
+    map['isCompleteOrder']= isCompleteOrder;
     if(lineItems != null){
       map['lineItems']=lineItems!.map((e) => e.toMap()).toList();
     }

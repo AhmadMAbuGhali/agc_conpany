@@ -1191,7 +1191,7 @@ Widget AccountantTransferorders(Order order) => Container(
                         height: 25.h,
                         child: ElevatedButton(
                           onPressed: () {
-                            log('accept order');
+                            log('Accountent Order');
                             order.status = "shipping";
                             provider.OrdertoStoreKeper(order);
                             provider
@@ -1218,7 +1218,10 @@ Widget AccountantTransferorders(Order order) => Container(
                         width: 69.w,
                         height: 20.h,
                         child: ElevatedButton(
-                          onPressed: () => Get.to(() => AccountantNavBar()),
+                          onPressed: () {
+                            provider
+                                .deleteFromOrderAccountant(order.id.toString());
+                          },
                           child: Text(
                             'رفض',
                             style: getRegularStyle(
@@ -1567,9 +1570,9 @@ Widget StoreKeeperToDriver(Order order) => Container(
                           onPressed: () {
                             log(' order To Driver');
                             order.status = "shipped";
+
                             provider.OrdertoDriver(order);
-                            provider.deleteFromOrderStoreKeeper(
-                                order.id.toString());
+
                           },
                           child: Text(
                             'تحويل الى السائق',
@@ -1699,9 +1702,7 @@ Widget addToStake(
       ),
     );
 
-Widget DriverAccetpOrder(
-        {required Function() onAccept, required Function() onReject}) =>
-    Padding(
+Widget DriverAccetpOrder(BuildContext ctx, Order order) => Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 180.h,
@@ -1754,7 +1755,7 @@ Widget DriverAccetpOrder(
                             fontSize: FontSize.s14.sp),
                       ),
                       Text(
-                        'احمد سعيد',
+                        order.customerName!,
                         style: getMediumStyle(
                             color: ColorManager.gray,
                             fontSize: FontSize.s14.sp),
@@ -1788,41 +1789,7 @@ Widget DriverAccetpOrder(
                             fontSize: FontSize.s14.sp),
                       ),
                       Text(
-                        '5217143',
-                        style: getMediumStyle(
-                            color: ColorManager.gray,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 4.h,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        'وزن 25 كجم: ',
-                        style: getMediumStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      Text(
-                        '100',
-                        style: getMediumStyle(
-                            color: ColorManager.gray,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      SizedBox(
-                        width: 15.w,
-                      ),
-                      Text(
-                        'وزن 50 كجم: ',
-                        style: getMediumStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      Text(
-                        '50',
+                        order.phone!,
                         style: getMediumStyle(
                             color: ColorManager.gray,
                             fontSize: FontSize.s14.sp),
@@ -1841,78 +1808,231 @@ Widget DriverAccetpOrder(
                             fontSize: FontSize.s14.sp),
                       ),
                       Text(
-                        '12/12/2021',
+                        order.date!,
                         style: getMediumStyle(
                             color: ColorManager.gray,
                             fontSize: FontSize.s14.sp),
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 55.w,
-                        height: 20.h,
-                        child: ElevatedButton(
-                          onPressed: onAccept,
-                          child: Text(
-                            'قبول',
-                            style: getRegularStyle(
-                                color: ColorManager.white,
-                                fontSize: FontSize.s10.sp),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: ColorManager.primary,
-                              elevation: 1,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(AppSize.s5))),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 15.w,
-                      ),
-                      SizedBox(
-                        width: 60.w,
-                        height: 20.h,
-                        child: ElevatedButton(
-                          onPressed: onReject,
-                          child: Text(
-                            'رفض',
-                            style: getRegularStyle(
-                                color: ColorManager.reject,
-                                fontSize: FontSize.s10.sp),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              primary: ColorManager.white,
-                              side: BorderSide(
-                                width: 1.0,
-                                color: ColorManager.reject,
+                  Consumer<FireBaseProvider>(builder: (context, provider, x) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 55.w,
+                          height: 20.h,
+                          child: ElevatedButton(
+                            onPressed: () => showDialog(
+                              context: ctx,
+                              builder: (ctx) => AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.r),
+                                ),
+                                title: Center(
+                                    child: Text(
+                                  'هل استلمت اكمية ؟',
+                                  style: getBoldStyle(
+                                      color: ColorManager.textOrange,
+                                      fontSize: FontSize.s24),
+                                )),
+                                actions: <Widget>[
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 15.h),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        SizedBox(
+                                          width: 100.w,
+                                          height: 30.h,
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              log(' Watting Accept');
+                                              order.status = "shipped";
+                                              order.isQuantityFull =true;
+                                              provider.OrdertoDriver(order);
+                                              provider.deleteFromOrderStoreKeeper(
+                                                  order.id.toString());
+                                            },
+                                            child: Text(
+                                              'نعم',
+                                              style: getRegularStyle(
+                                                  color: ColorManager.white,
+                                                  fontSize: FontSize.s13),
+                                            ),
+                                            style: ElevatedButton.styleFrom(
+                                                primary: ColorManager.primary,
+                                                elevation: 1,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            AppSize.s5))),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 100.w,
+                                          height: 30.h,
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                            child: Text(
+                                              'لا',
+                                              style: getRegularStyle(
+                                                  color: ColorManager.black,
+                                                  fontSize: FontSize.s13),
+                                            ),
+                                            style: ElevatedButton.styleFrom(
+                                                primary: ColorManager.white,
+                                                side: BorderSide(
+                                                  width: 1.0,
+                                                  color: ColorManager.black,
+                                                ),
+                                                elevation: 1,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            AppSize.s5))),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                              elevation: 1,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(AppSize.s5))),
+                            ),
+                            child: Text(
+                              'قبول',
+                              style: getRegularStyle(
+                                  color: ColorManager.white,
+                                  fontSize: FontSize.s10.sp),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                primary: ColorManager.primary,
+                                elevation: 1,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(AppSize.s5))),
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 10.w,
-                      ),
-                      SvgPicture.asset(
-                        IconAssets.time,
-                        width: 13.w,
-                        height: 13.h,
-                      ),
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Text('منذ 3 ساعات ',
-                          style: getRegularStyle(
-                              color: ColorManager.grayTime,
-                              fontSize: FontSize.s13)),
-                    ],
-                  ),
+                        SizedBox(
+                          width: 15.w,
+                        ),
+                        SizedBox(
+                          width: 60.w,
+                          height: 20.h,
+                          child: ElevatedButton(
+                            onPressed: () => showDialog(
+                              context: ctx,
+                              builder: (ctx) => AlertDialog(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.r),
+                                ),
+                                title: Center(
+                                    child: Text(
+                                  'هل أنت متأكد من الرفض ؟',
+                                  style: getBoldStyle(
+                                      color: ColorManager.textOrange,
+                                      fontSize: FontSize.s24),
+                                )),
+                                actions: <Widget>[
+                                  Container(
+                                    margin: EdgeInsets.only(bottom: 15.h),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        SizedBox(
+                                          width: 100.w,
+                                          height: 30.h,
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              order.isQuantityFull = false;
+                                            },
+                                            child: Text(
+                                              'نعم',
+                                              style: getRegularStyle(
+                                                  color: ColorManager.white,
+                                                  fontSize: FontSize.s13),
+                                            ),
+                                            style: ElevatedButton.styleFrom(
+                                                primary: ColorManager.primary,
+                                                elevation: 1,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            AppSize.s5))),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 100.w,
+                                          height: 30.h,
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                            child: Text(
+                                              'لا',
+                                              style: getRegularStyle(
+                                                  color: ColorManager.black,
+                                                  fontSize: FontSize.s13),
+                                            ),
+                                            style: ElevatedButton.styleFrom(
+                                                primary: ColorManager.white,
+                                                side: BorderSide(
+                                                  width: 1.0,
+                                                  color: ColorManager.black,
+                                                ),
+                                                elevation: 1,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            AppSize.s5))),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            child: Text(
+                              'رفض',
+                              style: getRegularStyle(
+                                  color: ColorManager.reject,
+                                  fontSize: FontSize.s10.sp),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                primary: ColorManager.white,
+                                side: BorderSide(
+                                  width: 1.0,
+                                  color: ColorManager.reject,
+                                ),
+                                elevation: 1,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.circular(AppSize.s5))),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        SvgPicture.asset(
+                          IconAssets.time,
+                          width: 13.w,
+                          height: 13.h,
+                        ),
+                        SizedBox(
+                          width: 6.w,
+                        ),
+                        Text('منذ 3 ساعات ',
+                            style: getRegularStyle(
+                                color: ColorManager.grayTime,
+                                fontSize: FontSize.s13)),
+                      ],
+                    );
+                  })
                 ],
               ),
             ),

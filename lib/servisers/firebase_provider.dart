@@ -22,6 +22,7 @@ class FireBaseProvider extends ChangeNotifier {
     getOrderSalesPersontoAccountent();
     getOrderAccountant();
     getOrderStoreKeeper();
+    getOrderDriver();
 
   }
   String? dropdownValue = 'اختر التصنيف' ;
@@ -30,8 +31,9 @@ class FireBaseProvider extends ChangeNotifier {
     notifyListeners();
   }
   List<String> wigthw=[  'اختر وزن',
-      '٥٠ كيلو غرام ',
-     '١٠٠ كيلو غرام ',
+    '25 كيلو غرام ',
+    '50 كيلو غرام ',
+
   ];
   String? dropdownValue2 = 'اختر وزن' ;
   changeDrobDown2(String value){
@@ -50,6 +52,7 @@ class FireBaseProvider extends ChangeNotifier {
   List<Order> orderSalesPersontoAccountent = [];
   List<Order> orderAccountent = [];
   List<Order> orderStoreKeeper = [];
+  List<Order> orderDriver = [];
   getAllWaitingUser() async {
     watingUser = await FirestoreHelper.firestoreHelper.getAllUsersWaiting();
     log(watingUser.length.toString());
@@ -239,6 +242,14 @@ class FireBaseProvider extends ChangeNotifier {
   }
   deleteFromOrderStoreKeeper(String orderId) async {
     await FirestoreHelper.firestoreHelper.deletefromOrderStoreKeeper(orderId);
+    notifyListeners();
+  }
+  getOrderDriver() async {
+    orderDriver= await FirestoreHelper.firestoreHelper.getOrderDriver();
+    notifyListeners();
+  }
+  deleteFromOrderDriver(String orderId) async {
+    await FirestoreHelper.firestoreHelper.deletefromOrderDriver(orderId);
     notifyListeners();
   }
 

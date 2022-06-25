@@ -5,7 +5,6 @@ import 'package:agc_conpany/componant/dropDown.dart';
 import 'package:agc_conpany/controller/add_product_controller.dart';
 import 'package:agc_conpany/model/product_model.dart';
 import 'package:agc_conpany/resources/color_manager.dart';
-import 'package:agc_conpany/servisers/fb_firestore_product.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
