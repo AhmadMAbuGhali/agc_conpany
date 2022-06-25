@@ -36,8 +36,10 @@ class Order{
     orderNumber = map['orderNumber'];
     isCompleteOrder = map['isCompleteOrder'];
     if(map['lineItems'] !=null){
+      lineItems=[];
       map['lineItems']?.forEach((v){
         lineItems?.add(LineItemsPost.fromMap(v));
+
       });
     }
   }

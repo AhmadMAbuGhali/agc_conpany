@@ -25,11 +25,13 @@ class SalespersonOrderDetails extends StatelessWidget {
               style: getBoldStyle(color: ColorManager.primary,fontSize: FontSize.s22),
             ),
                 SizedBox(height: 48.h,),
-                ListView.builder(
-                    itemCount:provider.productOrder.length ,
-                    itemBuilder: (context,index){
-                      return  OrderDetails(provider.productOrder[index]);
-                    })
+                Expanded(
+                  child: ListView.builder(
+                      itemCount:provider.productOrder.length ,
+                      itemBuilder: (context,index){
+                        return  OrderDetails(provider.productOrder[index]);
+                      }),
+                )
               ],
             ),
           );}
