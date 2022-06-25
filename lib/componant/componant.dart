@@ -552,8 +552,8 @@ Widget CustomerOrderStoreKeeper(
                           height: 20.h,
                           child: ElevatedButton(
                             onPressed: () {
-                              log('accept order');
-                              order.status = "accept";
+
+                              order.status = "storeKeperAccept";
                               provider.OrdertoStoreKeperAccept(order);
                               provider.deleteFromOrderStoreKeeper(
                                   order.id.toString());
@@ -1167,7 +1167,7 @@ Widget AccountantAddCategory(CategoryModel categoryModel, BuildContext context,
           )),
     );
 
-Widget CompletedOrder() => Container(
+Widget CompletedOrder(Order order) => Container(
       height: 180.h,
 
 // margin: EdgeInsets.symmetric(vertical: 18.h,horizontal: 20.w),
@@ -1187,16 +1187,7 @@ Widget CompletedOrder() => Container(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Container(
-            padding: EdgeInsets.only(top: 5.h, right: 3.w),
-            decoration: BoxDecoration(),
-            child: const CircleAvatar(
-              radius: 38.0,
-              backgroundImage: NetworkImage(
-                  'https://miro.medium.com/max/1000/1*wnKTi_JRAZJ58WeWaCn7yw.jpeg'),
-              backgroundColor: Colors.transparent,
-            ),
-          ),
+
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
             child: Column(
@@ -1204,7 +1195,7 @@ Widget CompletedOrder() => Container(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'هذا النص هو مثال لنص',
+                 order.company!,
                   style: getBoldStyle(
                       color: ColorManager.black, fontSize: FontSize.s14),
                 ),
@@ -1219,23 +1210,11 @@ Widget CompletedOrder() => Container(
                           color: ColorManager.black, fontSize: FontSize.s14.sp),
                     ),
                     Text(
-                      'احمد سعيد',
+                     order.customerName!,
                       style: getMediumStyle(
                           color: ColorManager.gray, fontSize: FontSize.s14.sp),
                     ),
-                    SizedBox(
-                      width: 30.w,
-                    ),
-                    Text(
-                      'الكمية: ',
-                      style: getMediumStyle(
-                          color: ColorManager.black, fontSize: FontSize.s14.sp),
-                    ),
-                    Text(
-                      '150',
-                      style: getMediumStyle(
-                          color: ColorManager.gray, fontSize: FontSize.s14.sp),
-                    ),
+
                   ],
                 ),
                 SizedBox(
@@ -1249,7 +1228,7 @@ Widget CompletedOrder() => Container(
                           color: ColorManager.black, fontSize: FontSize.s14.sp),
                     ),
                     Text(
-                      '5217143',
+                      order.phone!,
                       style: getMediumStyle(
                           color: ColorManager.gray, fontSize: FontSize.s14.sp),
                     ),
@@ -1258,36 +1237,7 @@ Widget CompletedOrder() => Container(
                 SizedBox(
                   height: 4.h,
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'وزن 25 كجم: ',
-                      style: getMediumStyle(
-                          color: ColorManager.black, fontSize: FontSize.s14.sp),
-                    ),
-                    Text(
-                      '100',
-                      style: getMediumStyle(
-                          color: ColorManager.gray, fontSize: FontSize.s14.sp),
-                    ),
-                    SizedBox(
-                      width: 15.w,
-                    ),
-                    Text(
-                      'وزن 50 كجم: ',
-                      style: getMediumStyle(
-                          color: ColorManager.black, fontSize: FontSize.s14.sp),
-                    ),
-                    Text(
-                      '50',
-                      style: getMediumStyle(
-                          color: ColorManager.gray, fontSize: FontSize.s14.sp),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 4.h,
-                ),
+
                 Row(
                   children: [
                     Text(
@@ -1296,7 +1246,7 @@ Widget CompletedOrder() => Container(
                           color: ColorManager.black, fontSize: FontSize.s14.sp),
                     ),
                     Text(
-                      '400',
+                      order.orderNumber!,
                       style: getMediumStyle(
                           color: ColorManager.gray, fontSize: FontSize.s14.sp),
                     ),
@@ -1316,7 +1266,7 @@ Widget CompletedOrder() => Container(
                           color: ColorManager.black, fontSize: FontSize.s14.sp),
                     ),
                     Text(
-                      '12/12/2021',
+                      order.date!,
                       style: getMediumStyle(
                           color: ColorManager.gray, fontSize: FontSize.s14.sp),
                     ),
@@ -1750,7 +1700,7 @@ Widget StoreKeeperToDriver(Order order) => Container(
                         child: ElevatedButton(
                           onPressed: () {
                             log(' order To Driver');
-                            order.status = "shipped";
+                            order.status = "watingshipped";
 
                             provider.OrdertoDriver(order);
                             provider.deleteFromStoreKeeperOrderAccept(order.id.toString());
@@ -1982,7 +1932,7 @@ Widget DriverAccetpOrder(Order order) => Padding(
                           child: ElevatedButton(
                             onPressed: () {
                               log('accept order');
-                              order.status = "accept";
+                              order.status = "shipped";
                               provider.OrdertriverPinding(order);
                               provider
                                   .deleteFromOrderDriver(order.id.toString());
@@ -2073,15 +2023,7 @@ Widget DriverToCustomer({required Order order,required Function() onPress}) => P
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              padding: EdgeInsets.only(top: 5.h, right: 5.w),
-              child: const CircleAvatar(
-                radius: 38.0,
-                backgroundImage: NetworkImage(
-                    'https://miro.medium.com/max/1000/1*wnKTi_JRAZJ58WeWaCn7yw.jpeg'),
-                backgroundColor: Colors.transparent,
-              ),
-            ),
+
             Padding(
               padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 3.w),
               child: Column(
@@ -2089,7 +2031,7 @@ Widget DriverToCustomer({required Order order,required Function() onPress}) => P
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'هذا النص هو مثال لنص',
+                    order.company!,
                     style: getBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
                   ),
@@ -2113,54 +2055,10 @@ Widget DriverToCustomer({required Order order,required Function() onPress}) => P
                       SizedBox(
                         width: 10.w,
                       ),
-                      Text(
-                        'الكمية: ',
-                        style: getMediumStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      Text(
-                        '150',
-                        style: getMediumStyle(
-                            color: ColorManager.gray,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      SizedBox(
-                        width: 15.w,
-                      ),
+
                     ],
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        'وزن 25 كجم: ',
-                        style: getMediumStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      Text(
-                        '100',
-                        style: getMediumStyle(
-                            color: ColorManager.gray,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Text(
-                        'وزن 50 كجم: ',
-                        style: getMediumStyle(
-                            color: ColorManager.black,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                      Text(
-                        '50',
-                        style: getMediumStyle(
-                            color: ColorManager.gray,
-                            fontSize: FontSize.s14.sp),
-                      ),
-                    ],
-                  ),
+
                   SizedBox(
                     height: 4.h,
                   ),
@@ -2189,7 +2087,7 @@ Widget DriverToCustomer({required Order order,required Function() onPress}) => P
                   Row(
                     children: [
                       Text(
-                        ': تاريخ الطلب: ',
+                        ' تاريخ الطلب: ',
                         style: getMediumStyle(
                             color: ColorManager.black,
                             fontSize: FontSize.s14.sp),

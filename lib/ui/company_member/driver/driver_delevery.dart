@@ -66,6 +66,7 @@ TextEditingController numberOfOrder=TextEditingController();
                                       provider.orderDriverpinding[index].status='Completed';
                                     provider.addToCompleteOrder(provider.orderDriverpinding[index]);
                                     provider.deleteFromOrderDriverpinding(provider.orderDriverpinding[index].id!);
+                                    Get.back();
                                     }, child: Text('ارسال',style: getRegularStyle(color: ColorManager.white,fontSize: FontSize.s13),),style: ElevatedButton.styleFrom(
                                         primary: ColorManager.primary,
                                         elevation: 1,
