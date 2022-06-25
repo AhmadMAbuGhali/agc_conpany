@@ -34,7 +34,7 @@ class StoreKeeperCustomerOrder extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                               onTap: () {
-                              provider.getProductFromOrder(provider.orderSalesPerson[index].lineItems!);
+                              provider.getProductFromOrder(provider.orderStoreKeeper[index].lineItems!);
                               Get.to(StoreKeeperOrderDetails());
                           } ,
                               child:  CustomerOrderStoreKeeper(provider.orderStoreKeeper[index])

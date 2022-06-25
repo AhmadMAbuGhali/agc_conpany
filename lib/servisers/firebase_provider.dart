@@ -52,6 +52,8 @@ class FireBaseProvider extends ChangeNotifier {
   List<Order> orderSalesPersontoAccountent = [];
   List<Order> orderAccountent = [];
   List<Order> orderStoreKeeper = [];
+  List<Order> StoreKeeperOrderAccept = [];
+  List<Order> orderStoreKeeperToDriver = [];
   List<Order> orderDriver = [];
   //product order
   List<ProductModel> productOrder=[];
@@ -96,7 +98,10 @@ class FireBaseProvider extends ChangeNotifier {
     await FirestoreHelper.firestoreHelper.deletefromUsersAwaiting(userId);
     notifyListeners();
   }
-
+  deleteFromWatingCustomer(String userId) async {
+    await FirestoreHelper.firestoreHelper.deletefromCustomerAwaiting(userId);
+    notifyListeners();
+  }
   getAllCustomerWaiting() async {
     watingCustomer =
         await FirestoreHelper.firestoreHelper.getAllCustomerWaiting();
@@ -109,45 +114,16 @@ class FireBaseProvider extends ChangeNotifier {
     log(allUser.length.toString());
     notifyListeners();
   }
-
-  acceptedCustomer(CustomerModel customerModel) async {
-    await FirestoreHelper.firestoreHelper.acceptedCustomer(customerModel);
-    getAllWaitingUser();
-    notifyListeners();
-  }
-  acceptedOrder(Order order) async {
-    await FirestoreHelper.firestoreHelper.acceptedOrder(order);
-    getOrderSalesPerson();
-    notifyListeners();
-  }
-  acceptedOrdertoAccountent(Order order) async {
-    await FirestoreHelper.firestoreHelper.acceptedOrdertoAccountent(order);
-    getOrderSalesPersontoAccountent();
-    notifyListeners();
-  }
-  OrdertoStoreKeper(Order order) async {
-    await FirestoreHelper.firestoreHelper.orderAccountentToStoreKeeper(order);
-    getOrderSalesPerson();
-    notifyListeners();
-  }
-  OrdertoDriver(Order order) async {
-    await FirestoreHelper.firestoreHelper.orderStoreKeeperToDriver(order);
-    getOrderSalesPerson();
-    notifyListeners();
-  }
-
   rejectedCustomer(CustomerModel customerModel) async {
     await FirestoreHelper.firestoreHelper.rejectedCustomer(customerModel);
     getAllWaitingUser();
     notifyListeners();
   }
-
-  deleteFromWatingCustomer(String userId) async {
-    await FirestoreHelper.firestoreHelper.deletefromCustomerAwaiting(userId);
+  acceptedCustomer(CustomerModel customerModel) async {
+    await FirestoreHelper.firestoreHelper.acceptedCustomer(customerModel);
+    getAllWaitingUser();
     notifyListeners();
   }
-
-
 
   getAllCategory() async {
     allCategory = await FirestoreHelper.firestoreHelper.getAllCategory();
@@ -183,14 +159,14 @@ class FireBaseProvider extends ChangeNotifier {
 
   addProduct(ProductModel productModel)async{
     log('start add product');
-     try{
-       if(file !=null){
-         log('add image');
-       String imageUrl =  await FirestoreHelper.firestoreHelper.uploadImage(file!);
-       productModel.imagePath=imageUrl;
-       }
+    try{
+      if(file !=null){
+        log('add image');
+        String imageUrl =  await FirestoreHelper.firestoreHelper.uploadImage(file!);
+        productModel.imagePath=imageUrl;
+      }
       await FirestoreHelper.firestoreHelper.addProduct(productModel);
-       getAllProduct();
+      getAllProduct();
       notifyListeners();
     }catch (e){
       print(e);
@@ -213,12 +189,59 @@ class FireBaseProvider extends ChangeNotifier {
     print('ad  d image ');
     notifyListeners();
   }
+
+
+
+
+  acceptedOrder(Order order) async {
+    await FirestoreHelper.firestoreHelper.acceptedOrder(order);
+    getOrderSalesPerson();
+    notifyListeners();
+  }
+
+  acceptedOrdertoAccountent(Order order) async {
+    await FirestoreHelper.firestoreHelper.acceptedOrdertoAccountent(order);
+    getOrderSalesPersontoAccountent();
+    notifyListeners();
+  }
+  OrdertoStoreKeper(Order order) async {
+    await FirestoreHelper.firestoreHelper.orderAccountentToStoreKeeper(order);
+    getOrderSalesPerson();
+    notifyListeners();
+  }
+  OrdertoStoreKeperAccept(Order order) async {
+    await FirestoreHelper.firestoreHelper.orderStoreKeeperAccept(order);
+    getOrderSalesPerson();
+    notifyListeners();
+  }
+
+  OrdertoDriver(Order order) async {
+    await FirestoreHelper.firestoreHelper.orderStoreKeeperToDriver(order);
+    getOrderSalesPerson();
+    notifyListeners();
+  }
+
+
+
+
+
+
+
   getOrderSalesPerson() async {
     orderSalesPerson= await FirestoreHelper.firestoreHelper.getOrderSalesPerson();
     notifyListeners();
   }
   deleteFromOrderSalesPerson(String orderId) async {
     await FirestoreHelper.firestoreHelper.deletefromOrderSalesPerson(orderId);
+    notifyListeners();
+  }
+
+  getOrderStoreKeeperOrderAccept() async {
+    StoreKeeperOrderAccept= await FirestoreHelper.firestoreHelper.getOrderStoreKeeperOrderAccept();
+    notifyListeners();
+  }
+  deleteFromStoreKeeperOrderAccept(String orderId) async {
+    await FirestoreHelper.firestoreHelper.deletefromStoreKeeperOrderAccept(orderId);
     notifyListeners();
   }
   getOrderSalesPersontoAccountent() async {
@@ -246,6 +269,7 @@ class FireBaseProvider extends ChangeNotifier {
     await FirestoreHelper.firestoreHelper.deletefromOrderStoreKeeper(orderId);
     notifyListeners();
   }
+
   getOrderDriver() async {
     orderDriver= await FirestoreHelper.firestoreHelper.getOrderDriver();
     notifyListeners();
@@ -254,8 +278,6 @@ class FireBaseProvider extends ChangeNotifier {
     await FirestoreHelper.firestoreHelper.deletefromOrderDriver(orderId);
     notifyListeners();
   }
-
-
   getProductFromOrder(List<LineItemsPost> lineItemsPost){
     for(int i=0;i<lineItemsPost.length;++i){
       ProductModel productModel=allProduct.where((element) => element.id==lineItemsPost[i].productId).toList().first;
@@ -264,4 +286,6 @@ class FireBaseProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+
 }

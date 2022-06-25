@@ -192,7 +192,7 @@ Widget AdminJR(UserApp userApp) => Container(
     );
 
 Widget OrderDetails(ProductModel productModel) => Container(
-      height: 70.h,
+      height: 90.h,
       margin: EdgeInsets.symmetric(vertical: 18.h),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
@@ -247,12 +247,12 @@ Widget OrderDetails(ProductModel productModel) => Container(
                 Row(
                   children: [
                     Text(
-                      productModel.wight,
+                     " وزن "+ productModel.wight,
                       style: getMediumStyle(
                           color: ColorManager.black, fontSize: FontSize.s12.sp),
                     ),
                     Text(
-                      productModel.quantity.toString(),
+                       " الكمية = "+productModel.quantity.toString(),
                       style: getRegularStyle(
                           color: ColorManager.gray, fontSize: FontSize.s14.sp),
                     ),
@@ -554,8 +554,8 @@ Widget CustomerOrderStoreKeeper(
                             onPressed: () {
                               log('accept order');
                               order.status = "accept";
-                              provider.acceptedOrder(order);
-                              provider.deleteFromOrderSalesPerson(
+                              provider.OrdertoStoreKeperAccept(order);
+                              provider.deleteFromOrderStoreKeeper(
                                   order.id.toString());
                             },
                             child: Text(
@@ -580,7 +580,7 @@ Widget CustomerOrderStoreKeeper(
                           height: 20.h,
                           child: ElevatedButton(
                             onPressed: () {
-                              provider.deleteFromOrderSalesPerson(
+                              provider.deleteFromOrderStoreKeeper(
                                   order.id.toString());
                             },
                             child: Text(

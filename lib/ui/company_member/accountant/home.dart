@@ -4,11 +4,13 @@ import 'package:agc_conpany/resources/color_manager.dart';
 import 'package:agc_conpany/resources/constants_manager.dart';
 import 'package:agc_conpany/resources/font_manager.dart';
 import 'package:agc_conpany/resources/styles_manager.dart';
+import 'package:agc_conpany/servisers/auth_provider.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../../../componant/componant.dart';
 
@@ -58,7 +60,7 @@ class HomeAccountant extends StatelessWidget {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: 133.h,
+              height: 180.h,
               decoration: const BoxDecoration(
                   color: Color(0xFF182B4C),
                   borderRadius: BorderRadius.only(
@@ -106,7 +108,10 @@ class HomeAccountant extends StatelessWidget {
                           ),
                           const Spacer(),
                           InkWell(
-                              onTap: () => Get.to(()=>Login()),
+                              onTap: () {
+                                Provider.of<AuthProvider>(context,listen: false).logOut();
+                                Get.off(Login());
+                              },
                               child: Container(
                                 child: Row(
                                   children: [
