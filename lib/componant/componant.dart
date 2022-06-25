@@ -220,10 +220,10 @@ Widget OrderDetails(ProductModel productModel) => Container(
                 offset: Offset(0, 0), // changes position of shadow
               ),
             ], borderRadius: BorderRadius.circular(30.r)),
-            child: const CircleAvatar(
+            child:   CircleAvatar(
               radius: 30.0,
               backgroundImage: NetworkImage(
-                  'https://miro.medium.com/max/1000/1*wnKTi_JRAZJ58WeWaCn7yw.jpeg'),
+                  productModel.imagePath!),
               backgroundColor: Colors.transparent,
             ),
           ),
@@ -237,7 +237,7 @@ Widget OrderDetails(ProductModel productModel) => Container(
                   height: 6.h,
                 ),
                 Text(
-                  'دقيق حيفا',
+                  productModel.productName,
                   style: getBoldStyle(
                       color: ColorManager.black, fontSize: FontSize.s14),
                 ),
@@ -247,12 +247,12 @@ Widget OrderDetails(ProductModel productModel) => Container(
                 Row(
                   children: [
                     Text(
-                      'وزن 25 كجم: ',
+                      productModel.wight,
                       style: getMediumStyle(
                           color: ColorManager.black, fontSize: FontSize.s12.sp),
                     ),
                     Text(
-                      '100',
+                      productModel.quantity.toString(),
                       style: getRegularStyle(
                           color: ColorManager.gray, fontSize: FontSize.s14.sp),
                     ),
