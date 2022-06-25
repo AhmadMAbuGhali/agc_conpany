@@ -446,6 +446,187 @@ Widget CustomerOrder(
       ),
     );
 
+Widget CustomerOrderStoreKeeper(
+    Order order,
+    ) =>
+    Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 180.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.r),
+          color: ColorManager.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 0,
+              blurRadius: 6,
+              offset: Offset(0, 2), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 2.w),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    order.company!,
+                    style: getBoldStyle(
+                        color: ColorManager.black, fontSize: FontSize.s14),
+                  ),
+                  SizedBox(
+                    height: 6.h,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'الزبون: ',
+                        style: getMediumStyle(
+                            color: ColorManager.black,
+                            fontSize: FontSize.s14.sp),
+                      ),
+                      Text(
+                        order.customerName!,
+                        style: getMediumStyle(
+                            color: ColorManager.gray,
+                            fontSize: FontSize.s14.sp),
+                      ),
+                      SizedBox(
+                        width: 30.w,
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 4.h,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'رقم الهاتف :  ',
+                        style: getMediumStyle(
+                            color: ColorManager.black,
+                            fontSize: FontSize.s14.sp),
+                      ),
+                      Text(
+                        order.phone!,
+                        style: getMediumStyle(
+                            color: ColorManager.gray,
+                            fontSize: FontSize.s14.sp),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 4.h,
+                  ),
+                  SizedBox(
+                    height: 4.h,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        ' تاريخ الطلب: ',
+                        style: getMediumStyle(
+                            color: ColorManager.black,
+                            fontSize: FontSize.s14.sp),
+                      ),
+                      Text(
+                        order.date!,
+                        style: getMediumStyle(
+                            color: ColorManager.gray,
+                            fontSize: FontSize.s14.sp),
+                      ),
+                    ],
+                  ),
+                  Consumer<FireBaseProvider>(builder: (context, provider, x) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 55.w,
+                          height: 20.h,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              log('accept order');
+                              order.status = "accept";
+                              provider.acceptedOrder(order);
+                              provider.deleteFromOrderSalesPerson(
+                                  order.id.toString());
+                            },
+                            child: Text(
+                              'قبول',
+                              style: getRegularStyle(
+                                  color: ColorManager.white,
+                                  fontSize: FontSize.s10.sp),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                primary: ColorManager.primary,
+                                elevation: 1,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(AppSize.s5))),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 15.w,
+                        ),
+                        SizedBox(
+                          width: 60.w,
+                          height: 20.h,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              provider.deleteFromOrderSalesPerson(
+                                  order.id.toString());
+                            },
+                            child: Text(
+                              'رفض',
+                              style: getRegularStyle(
+                                  color: ColorManager.reject,
+                                  fontSize: FontSize.s10.sp),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                primary: ColorManager.white,
+                                side: BorderSide(
+                                  width: 1.0,
+                                  color: ColorManager.reject,
+                                ),
+                                elevation: 1,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius:
+                                    BorderRadius.circular(AppSize.s5))),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        SvgPicture.asset(
+                          IconAssets.time,
+                          width: 13.w,
+                          height: 13.h,
+                        ),
+                        SizedBox(
+                          width: 6.w,
+                        ),
+                        Text('منذ 3 ساعات ',
+                            style: getRegularStyle(
+                                color: ColorManager.grayTime,
+                                fontSize: FontSize.s13)),
+                      ],
+                    );
+                  })
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+
 Widget SalespersonToAccountant(Order order) => Container(
       height: 150.h,
       margin: EdgeInsets.symmetric(
@@ -1572,7 +1753,6 @@ Widget StoreKeeperToDriver(Order order) => Container(
                             order.status = "shipped";
 
                             provider.OrdertoDriver(order);
-
                           },
                           child: Text(
                             'تحويل الى السائق',
@@ -1702,7 +1882,7 @@ Widget addToStake(
       ),
     );
 
-Widget DriverAccetpOrder(BuildContext ctx, Order order) => Padding(
+Widget DriverAccetpOrder(Order order) => Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 180.h,
@@ -1722,24 +1902,14 @@ Widget DriverAccetpOrder(BuildContext ctx, Order order) => Padding(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              padding: EdgeInsets.only(top: 50.h, right: 2.w),
-              decoration: BoxDecoration(),
-              child: const CircleAvatar(
-                radius: 38.0,
-                backgroundImage: NetworkImage(
-                    'https://miro.medium.com/max/1000/1*wnKTi_JRAZJ58WeWaCn7yw.jpeg'),
-                backgroundColor: Colors.transparent,
-              ),
-            ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 2.w),
+              padding: EdgeInsets.symmetric(vertical: 5.h, horizontal: 2.w),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'هذا النص هو مثال لنص',
+                    order.company!,
                     style: getBoldStyle(
                         color: ColorManager.black, fontSize: FontSize.s14),
                   ),
@@ -1823,85 +1993,13 @@ Widget DriverAccetpOrder(BuildContext ctx, Order order) => Padding(
                           width: 55.w,
                           height: 20.h,
                           child: ElevatedButton(
-                            onPressed: () => showDialog(
-                              context: ctx,
-                              builder: (ctx) => AlertDialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.r),
-                                ),
-                                title: Center(
-                                    child: Text(
-                                  'هل استلمت اكمية ؟',
-                                  style: getBoldStyle(
-                                      color: ColorManager.textOrange,
-                                      fontSize: FontSize.s24),
-                                )),
-                                actions: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.only(bottom: 15.h),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        SizedBox(
-                                          width: 100.w,
-                                          height: 30.h,
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              log(' Watting Accept');
-                                              order.status = "shipped";
-                                              order.isQuantityFull =true;
-                                              provider.OrdertoDriver(order);
-                                              provider.deleteFromOrderStoreKeeper(
-                                                  order.id.toString());
-                                            },
-                                            child: Text(
-                                              'نعم',
-                                              style: getRegularStyle(
-                                                  color: ColorManager.white,
-                                                  fontSize: FontSize.s13),
-                                            ),
-                                            style: ElevatedButton.styleFrom(
-                                                primary: ColorManager.primary,
-                                                elevation: 1,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            AppSize.s5))),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 100.w,
-                                          height: 30.h,
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              Get.back();
-                                            },
-                                            child: Text(
-                                              'لا',
-                                              style: getRegularStyle(
-                                                  color: ColorManager.black,
-                                                  fontSize: FontSize.s13),
-                                            ),
-                                            style: ElevatedButton.styleFrom(
-                                                primary: ColorManager.white,
-                                                side: BorderSide(
-                                                  width: 1.0,
-                                                  color: ColorManager.black,
-                                                ),
-                                                elevation: 1,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            AppSize.s5))),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            onPressed: () {
+                              // log('accept order');
+                              // order.status = "accept";
+                              // provider.orderDriverPinding(order);
+                              // provider
+                              //     .deleteFromOrderDriver(order.id.toString());
+                            },
                             child: Text(
                               'قبول',
                               style: getRegularStyle(
@@ -1923,80 +2021,7 @@ Widget DriverAccetpOrder(BuildContext ctx, Order order) => Padding(
                           width: 60.w,
                           height: 20.h,
                           child: ElevatedButton(
-                            onPressed: () => showDialog(
-                              context: ctx,
-                              builder: (ctx) => AlertDialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.r),
-                                ),
-                                title: Center(
-                                    child: Text(
-                                  'هل أنت متأكد من الرفض ؟',
-                                  style: getBoldStyle(
-                                      color: ColorManager.textOrange,
-                                      fontSize: FontSize.s24),
-                                )),
-                                actions: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.only(bottom: 15.h),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        SizedBox(
-                                          width: 100.w,
-                                          height: 30.h,
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              order.isQuantityFull = false;
-                                            },
-                                            child: Text(
-                                              'نعم',
-                                              style: getRegularStyle(
-                                                  color: ColorManager.white,
-                                                  fontSize: FontSize.s13),
-                                            ),
-                                            style: ElevatedButton.styleFrom(
-                                                primary: ColorManager.primary,
-                                                elevation: 1,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            AppSize.s5))),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 100.w,
-                                          height: 30.h,
-                                          child: ElevatedButton(
-                                            onPressed: () {
-                                              Get.back();
-                                            },
-                                            child: Text(
-                                              'لا',
-                                              style: getRegularStyle(
-                                                  color: ColorManager.black,
-                                                  fontSize: FontSize.s13),
-                                            ),
-                                            style: ElevatedButton.styleFrom(
-                                                primary: ColorManager.white,
-                                                side: BorderSide(
-                                                  width: 1.0,
-                                                  color: ColorManager.black,
-                                                ),
-                                                elevation: 1,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            AppSize.s5))),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            onPressed: () {},
                             child: Text(
                               'رفض',
                               style: getRegularStyle(

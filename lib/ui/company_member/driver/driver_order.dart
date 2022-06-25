@@ -25,19 +25,15 @@ class DriverCustomerOrder extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                Column(
-                  children: [
-                    Text('طلبات الزبائن',style: getBoldStyle(color: ColorManager.primary),),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: provider.orderDriver.length,
-                        itemBuilder: (ctx, index) {
-                          return DriverAccetpOrder(ctx, provider.orderDriver[index]);
-                        },
+                Text('طلبات الزبائن',style: getBoldStyle(color: ColorManager.primary),),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: provider.orderDriver.length,
+                    itemBuilder: (context,index) {
+                      return DriverAccetpOrder(provider.orderDriver[index]);
+                    },
 
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
 
 
