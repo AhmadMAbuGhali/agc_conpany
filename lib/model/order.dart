@@ -8,9 +8,9 @@ class Order{
   String? customerName;
   String? company;
   String? phone;
-  bool?  isQuantityFull = false;
-  bool?  isCompleteOrder = false;
-  int? orderNumber=0;
+  bool?  isQuantityFull ;
+  bool?  isCompleteOrder ;
+  String? orderNumber;
   Order(
       {this.id,
         this.lineItems,
@@ -19,7 +19,7 @@ class Order{
         this.status,
         this.company,
         this.phone,
-        this.orderNumber,
+        this.orderNumber='0',
         this.customerName,
         this.isQuantityFull =false,
         this.isCompleteOrder =false,

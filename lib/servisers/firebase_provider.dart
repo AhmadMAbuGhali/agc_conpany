@@ -25,8 +25,9 @@ class FireBaseProvider extends ChangeNotifier {
     getOrderDriver();
     getOrderStoreKeeperOrderAccept();
     getOrderDriverpinding();
+    getCompletedOrder();
 
-
+    getOrderStoreKeeperOrderAccept();
   }
   String? dropdownValue = 'اختر التصنيف' ;
   changeDrobDown(String value){
@@ -59,6 +60,7 @@ class FireBaseProvider extends ChangeNotifier {
   List<Order> orderStoreKeeperToDriver = [];
   List<Order> orderDriver = [];
   List<Order> orderDriverpinding = [];
+  List<Order> completedOrder = [];
   //product order
   List<ProductModel> productOrder=[];
   getAllWaitingUser() async {
@@ -205,7 +207,7 @@ class FireBaseProvider extends ChangeNotifier {
 
   acceptedOrdertoAccountent(Order order) async {
     await FirestoreHelper.firestoreHelper.acceptedOrdertoAccountent(order);
-    getOrderSalesPersontoAccountent();
+    await getOrderSalesPersontoAccountent();
     notifyListeners();
   }
   OrdertoStoreKeper(Order order) async {
@@ -229,10 +231,6 @@ class FireBaseProvider extends ChangeNotifier {
     getOrderDriverpinding();
     notifyListeners();
   }
-
-
-
-
 
 
 
@@ -278,7 +276,6 @@ class FireBaseProvider extends ChangeNotifier {
     await FirestoreHelper.firestoreHelper.deletefromOrderStoreKeeper(orderId);
     notifyListeners();
   }
-
   getOrderDriver() async {
     orderDriver= await FirestoreHelper.firestoreHelper.getOrderDriver();
     notifyListeners();
@@ -291,6 +288,8 @@ class FireBaseProvider extends ChangeNotifier {
     orderDriverpinding= await FirestoreHelper.firestoreHelper.getOrderDriverPinding();
     notifyListeners();
   }
+
+
   deleteFromOrderDriverpinding(String orderId) async {
     await FirestoreHelper.firestoreHelper.deletefromOrderDriverPinding(orderId);
     notifyListeners();
@@ -304,5 +303,14 @@ class FireBaseProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  addToCompleteOrder(Order order)async{
+    await FirestoreHelper.firestoreHelper.CompletedOrder(order);
+    await getCompletedOrder();
+    notifyListeners();
+  }
+  getCompletedOrder() async {
+    completedOrder= await FirestoreHelper.firestoreHelper.getCompletedOrder();
+    notifyListeners();
+  }
 
 }

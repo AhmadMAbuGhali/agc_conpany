@@ -2053,7 +2053,7 @@ Widget DriverAccetpOrder(Order order) => Padding(
       ),
     );
 
-Widget DriverToCustomer({required Function() onPress}) => Padding(
+Widget DriverToCustomer({required Order order,required Function() onPress}) => Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         height: 180.h,
@@ -2105,7 +2105,7 @@ Widget DriverToCustomer({required Function() onPress}) => Padding(
                             fontSize: FontSize.s14.sp),
                       ),
                       Text(
-                        'احمد سعيد',
+                        order.customerName!,
                         style: getMediumStyle(
                             color: ColorManager.gray,
                             fontSize: FontSize.s14.sp),
@@ -2176,7 +2176,7 @@ Widget DriverToCustomer({required Function() onPress}) => Padding(
                             fontSize: FontSize.s14.sp),
                       ),
                       Text(
-                        '5217143',
+                        order.phone!,
                         style: getMediumStyle(
                             color: ColorManager.gray,
                             fontSize: FontSize.s14.sp),
@@ -2195,7 +2195,7 @@ Widget DriverToCustomer({required Function() onPress}) => Padding(
                             fontSize: FontSize.s14.sp),
                       ),
                       Text(
-                        '12/12/2021',
+                       order.date!,
                         style: getMediumStyle(
                             color: ColorManager.gray,
                             fontSize: FontSize.s14.sp),

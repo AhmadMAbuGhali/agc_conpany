@@ -29,8 +29,6 @@ class FirestoreHelper {
     }
     return null;
   }
-
-
   acceptedUser(UserApp user) async {
     await firebaseFirestore.collection('users').doc(user.id).set(user.toMap());
   }
@@ -45,8 +43,6 @@ class FirestoreHelper {
     }
     return null;
   }
-
-
   acceptedCustomer(CustomerModel customerModel) async {
     await firebaseFirestore.collection('Customer').doc(customerModel.id).set(customerModel.toMap());
   }
@@ -66,7 +62,6 @@ class FirestoreHelper {
   deletefromCustomerAwaiting(String userID)async{
     await firebaseFirestore.collection('customersWaiting').doc(userID).delete();
   }
-
   deletefromUsersAwaiting(String userID)async{
     await firebaseFirestore.collection('usersWaiting').doc(userID).delete();
   }
@@ -87,7 +82,6 @@ class FirestoreHelper {
 
     }
   }
-
   rejectedCustomer(CustomerModel customerModel) async {
     await firebaseFirestore.collection('CustomersRejected').doc(customerModel.id).set(customerModel.toMap());
   }
@@ -168,13 +162,9 @@ class FirestoreHelper {
   deletefromStoreKeeperOrderAccept(String orderID)async{
     await firebaseFirestore.collection('StoreKeeperOrderAccept').doc(orderID).delete();
   }
-
-
-
   orderStoreKeeperToDriver(Order order) async {
     await firebaseFirestore.collection('DriverOrder').doc(order.id).set(order.toMap());
   }
-
   Future<List<Order>> getOrderStoreKeeper() async{
     QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
     await firebaseFirestore.collection('StoreKeeperOrder').get();
@@ -190,9 +180,8 @@ class FirestoreHelper {
     await firebaseFirestore.collection('StoreKeeperOrder').doc(orderID).delete();
   }
 
-  orderDriverToCustomer(Order order) async {
-    await firebaseFirestore.collection('CompleteOrder').doc(order.id).set(order.toMap());
-  }
+//Driver order
+
   Future<List<Order>> getOrderDriver() async{
     QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
     await firebaseFirestore.collection('DriverOrder').get();
@@ -207,7 +196,6 @@ class FirestoreHelper {
   deletefromOrderDriver(String orderID)async{
     await firebaseFirestore.collection('DriverOrder').doc(orderID).delete();
   }
-
   orderDriverPinding(Order order) async {
     await firebaseFirestore.collection('DriverOrderPinding').doc(order.id).set(order.toMap());
   }
@@ -225,11 +213,23 @@ class FirestoreHelper {
   deletefromOrderDriverPinding(String orderID)async{
     await firebaseFirestore.collection('DriverOrderPinding').doc(orderID).delete();
   }
+// Complete order
+  CompletedOrder(Order order) async {
+    await firebaseFirestore.collection('CompleteOrder').doc(order.id).set(order.toMap());
+  }
+  Future<List<Order>> getCompletedOrder() async{
+    QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
+    await firebaseFirestore.collection('CompleteOrder').get();
+    List<Order> allAsset = allAssetSnapshot.docs.map((e) {
+      Map<String, dynamic> documentMap = e.data();
+      documentMap['id'] = e.id;
+      Order productModel = Order.fromMap(documentMap);
+      return productModel;
+    }).toList();
+    return allAsset;
+  }
 
-
-
-
-  Future<List<UserApp>> getAllUsersWaiting() async {
+  Future<List<UserApp>>getAllUsersWaiting() async {
     QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
     await firebaseFirestore.collection('usersWaiting').get();
     List<UserApp> allAsset = allAssetSnapshot.docs.map((e) {
@@ -242,8 +242,7 @@ class FirestoreHelper {
     }).toList();
     return allAsset;
   }
-
-  Future<List<UserApp>> getAllUsers() async {
+  Future<List<UserApp>>getAllUsers() async {
     QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
     await firebaseFirestore.collection('users').get();
     List<UserApp> allAsset = allAssetSnapshot.docs.map((e) {
@@ -256,8 +255,7 @@ class FirestoreHelper {
     }).toList();
     return allAsset;
   }
-
-  Future<List<CategoryModel>> getAllCategory() async {
+  Future<List<CategoryModel>>getAllCategory() async {
     QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
     await firebaseFirestore.collection('Category').get();
     List<CategoryModel> allAsset = allAssetSnapshot.docs.map((e) {
@@ -268,8 +266,7 @@ class FirestoreHelper {
     }).toList();
     return allAsset;
   }
-
-  Future<List<ProductModel>> getAllProduct() async {
+  Future<List<ProductModel>>getAllProduct() async {
     QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
     await firebaseFirestore.collection('Product').get();
     List<ProductModel> allAsset = allAssetSnapshot.docs.map((e) {
@@ -282,8 +279,7 @@ class FirestoreHelper {
     }).toList();
     return allAsset;
   }
-
-  Future<List<CustomerModel>> getAllCustomerWaiting() async {
+  Future<List<CustomerModel>>getAllCustomerWaiting() async {
     QuerySnapshot<Map<String, dynamic>> allAssetSnapshot =
     await firebaseFirestore.collection('customersWaiting').get();
     List<CustomerModel> allUser = allAssetSnapshot.docs.map((e) {
@@ -307,7 +303,7 @@ class FirestoreHelper {
     productModel.id=id;
     await firebaseFirestore.collection('Product').doc(id).set(productModel.toMap());
   }
-  Future<String> uploadImage(File file) async {
+  Future<String>uploadImage(File file) async {
     String filePath = file.path;
     String fileName = filePath.split('/').last;
     Reference reference = firebaseStorage.ref('products/$fileName');
@@ -326,11 +322,5 @@ class FirestoreHelper {
     await firebaseFirestore.collection('Product').doc(productId).update({'quantity': quantity2});
   }
 
-
-
-
-
-
-
-
 }
+
