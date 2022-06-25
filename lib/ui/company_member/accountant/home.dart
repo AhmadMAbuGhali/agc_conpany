@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:agc_conpany/resources/color_manager.dart';
+import 'package:agc_conpany/resources/constants_manager.dart';
 import 'package:agc_conpany/resources/font_manager.dart';
 import 'package:agc_conpany/resources/styles_manager.dart';
 import 'package:agc_conpany/ui/registration/login.dart';
@@ -72,7 +73,7 @@ class HomeAccountant extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            'أهلاً بك أحمد',
+                            'أهلاً بك ' +AppConstants.loggedUser!.name!,
                             style: getBoldStyle(color: ColorManager.white,fontSize: FontSize.s30),
                           ),
                           const Spacer(),

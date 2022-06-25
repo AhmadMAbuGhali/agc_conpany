@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 
+import 'package:agc_conpany/resources/constants_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -72,7 +73,7 @@ class SecretaryHome extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            'أهلاً بك أحمد',
+                            'أهلاً بك ' +AppConstants.loggedUser!.name!,
                             style: getBoldStyle(color: ColorManager.white,fontSize: FontSize.s30),
                           ),
                           const Spacer(),
