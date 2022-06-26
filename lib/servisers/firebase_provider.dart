@@ -29,21 +29,26 @@ class FireBaseProvider extends ChangeNotifier {
 
     getOrderStoreKeeperOrderAccept();
   }
-  String? dropdownValue = 'اختر التصنيف' ;
-  changeDrobDown(String value){
-    dropdownValue=value;
+
+  String? dropdownValue = 'اختر التصنيف';
+
+  changeDrobDown(String value) {
+    dropdownValue = value;
     notifyListeners();
   }
-  List<String> wigthw=[  'اختر وزن',
+
+  List<String> wigthw = [
+    'اختر وزن',
     '25 كيلو غرام ',
     '50 كيلو غرام ',
-
   ];
-  String? dropdownValue2 = 'اختر وزن' ;
-  changeDrobDown2(String value){
-    dropdownValue2=value;
+  String? dropdownValue2 = 'اختر وزن';
+
+  changeDrobDown2(String value) {
+    dropdownValue2 = value;
     notifyListeners();
   }
+
   File? file;
   List<UserApp> watingUser = [];
   List<CustomerModel> watingCustomer = [];
@@ -61,8 +66,10 @@ class FireBaseProvider extends ChangeNotifier {
   List<Order> orderDriver = [];
   List<Order> orderDriverpinding = [];
   List<Order> completedOrder = [];
+
   //product order
-  List<ProductModel> productOrder=[];
+  List<ProductModel> productOrder = [];
+
   getAllWaitingUser() async {
     watingUser = await FirestoreHelper.firestoreHelper.getAllUsersWaiting();
     log(watingUser.length.toString());
@@ -75,7 +82,6 @@ class FireBaseProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   disableUser(String userId) async {
     await FirestoreHelper.firestoreHelper.disableUser(userId);
     notifyListeners();
@@ -86,13 +92,12 @@ class FireBaseProvider extends ChangeNotifier {
     getAllWaitingUser();
     notifyListeners();
   }
-  updateCatogryname(String catName,String catId) async{
-    await FirestoreHelper.firestoreHelper.updateCatogryname(catName,catId);
+
+  updateCatogryname(String catName, String catId) async {
+    await FirestoreHelper.firestoreHelper.updateCatogryname(catName, catId);
     getAllCategory();
     notifyListeners();
   }
-
-
 
   rejectedUser(UserApp userApp) async {
     await FirestoreHelper.firestoreHelper.rejectedUser(userApp);
@@ -104,91 +109,108 @@ class FireBaseProvider extends ChangeNotifier {
     await FirestoreHelper.firestoreHelper.deletefromUsersAwaiting(userId);
     notifyListeners();
   }
+
   deleteFromWatingCustomer(String userId) async {
     await FirestoreHelper.firestoreHelper.deletefromCustomerAwaiting(userId);
     notifyListeners();
   }
+
   getAllCustomerWaiting() async {
     watingCustomer =
         await FirestoreHelper.firestoreHelper.getAllCustomerWaiting();
     log(watingCustomer.length.toString());
+   await getAllCustomerWaiting();
     notifyListeners();
   }
 
   getAllCustomer() async {
     allCustomer = await FirestoreHelper.firestoreHelper.getAllCustomer();
     log(allUser.length.toString());
+    await getAllCustomer();
     notifyListeners();
   }
+
   rejectedCustomer(CustomerModel customerModel) async {
     await FirestoreHelper.firestoreHelper.rejectedCustomer(customerModel);
-    getAllWaitingUser();
+    await getAllWaitingUser();
     notifyListeners();
   }
+
   acceptedCustomer(CustomerModel customerModel) async {
     await FirestoreHelper.firestoreHelper.acceptedCustomer(customerModel);
-    getAllWaitingUser();
+    await   getAllWaitingUser();
     notifyListeners();
   }
 
   getAllCategory() async {
     allCategory = await FirestoreHelper.firestoreHelper.getAllCategory();
-    allCategoryname=[];
+    allCategoryname = [];
     allCategoryname.add('اختر التصنيف');
-    for(CategoryModel item in allCategory){
+    for (CategoryModel item in allCategory) {
       allCategoryname.add(item.categoryName!);
     }
-
+    await getAllCategory();
     notifyListeners();
   }
 
   getAllProduct() async {
-    allProduct= await FirestoreHelper.firestoreHelper.getAllProduct();
+    allProduct = await FirestoreHelper.firestoreHelper.getAllProduct();
     log(allProduct.length.toString());
+    await  getAllProduct();
     notifyListeners();
   }
-  updateProduct({required String name,required String disc,required String imagePath,required String productId}) async{
-    if(file !=null){
+
+  updateProduct(
+      {required String name,
+      required String disc,
+      required String imagePath,
+      required String productId}) async {
+    if (file != null) {
       log('add image');
-      imagePath=  await FirestoreHelper.firestoreHelper.uploadImage(file!);
+      imagePath = await FirestoreHelper.firestoreHelper.uploadImage(file!);
     }
-    await FirestoreHelper.firestoreHelper.updateProduct(name: name,disc: disc,imagePath: imagePath,productId: productId);
-    getAllProduct();
-    notifyListeners();
-  }
-  updateProductQuntity({required String quantity,required String productId}) async{
-
-    await FirestoreHelper.firestoreHelper.updateProductQuntity(quantity:quantity,productId: productId);
-    getAllProduct();
+    await FirestoreHelper.firestoreHelper.updateProduct(
+        name: name, disc: disc, imagePath: imagePath, productId: productId);
+    await getAllProduct();
     notifyListeners();
   }
 
-  addProduct(ProductModel productModel)async{
+  updateProductQuntity(
+      {required String quantity, required String productId}) async {
+    await FirestoreHelper.firestoreHelper
+        .updateProductQuntity(quantity: quantity, productId: productId);
+    await   getAllProduct();
+    notifyListeners();
+  }
+
+  addProduct(ProductModel productModel) async {
     log('start add product');
-    try{
-      if(file !=null){
+    try {
+      if (file != null) {
         log('add image');
-        String imageUrl =  await FirestoreHelper.firestoreHelper.uploadImage(file!);
-        productModel.imagePath=imageUrl;
+        String imageUrl =
+            await FirestoreHelper.firestoreHelper.uploadImage(file!);
+        productModel.imagePath = imageUrl;
       }
       await FirestoreHelper.firestoreHelper.addProduct(productModel);
-      getAllProduct();
+      await  getAllProduct();
       notifyListeners();
-    }catch (e){
+    } catch (e) {
       print(e);
     }
   }
 
-  addCategory(String name)async{
+  addCategory(String name) async {
     log('start add category');
-    try{
+    try {
       await FirestoreHelper.firestoreHelper.addCategory(name);
-      getAllCategory();
+     await  getAllCategory();
       notifyListeners();
-    }catch (e){
+    } catch (e) {
       print(e);
     }
   }
+
   pickNewImage() async {
     XFile? file = await ImagePicker().pickImage(source: ImageSource.gallery);
     this.file = File(file!.path);
@@ -196,12 +218,9 @@ class FireBaseProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
-
   acceptedOrder(Order order) async {
     await FirestoreHelper.firestoreHelper.acceptedOrder(order);
-    getOrderSalesPerson();
+   await getOrderSalesPerson();
     notifyListeners();
   }
 
@@ -210,11 +229,13 @@ class FireBaseProvider extends ChangeNotifier {
     await getOrderSalesPersontoAccountent();
     notifyListeners();
   }
+
   OrdertoStoreKeper(Order order) async {
     await FirestoreHelper.firestoreHelper.orderAccountentToStoreKeeper(order);
-    getOrderSalesPerson();
+   await getOrderSalesPerson();
     notifyListeners();
   }
+
   OrdertoStoreKeperAccept(Order order) async {
     await FirestoreHelper.firestoreHelper.orderStoreKeeperAccept(order);
     getOrderSalesPerson();
@@ -223,94 +244,124 @@ class FireBaseProvider extends ChangeNotifier {
 
   OrdertoDriver(Order order) async {
     await FirestoreHelper.firestoreHelper.orderStoreKeeperToDriver(order);
-    getOrderDriver();
+    await   getOrderDriver();
     notifyListeners();
   }
+
   OrdertriverPinding(Order order) async {
     await FirestoreHelper.firestoreHelper.orderDriverPinding(order);
-    getOrderDriverpinding();
+    await   getOrderDriverpinding();
     notifyListeners();
   }
-
-
 
   getOrderSalesPerson() async {
-    orderSalesPerson= await FirestoreHelper.firestoreHelper.getOrderSalesPerson();
+    orderSalesPerson =
+        await FirestoreHelper.firestoreHelper.getOrderSalesPerson();
+    await getOrderSalesPerson();
     notifyListeners();
   }
+
   deleteFromOrderSalesPerson(String orderId) async {
     await FirestoreHelper.firestoreHelper.deletefromOrderSalesPerson(orderId);
     notifyListeners();
   }
 
   getOrderStoreKeeperOrderAccept() async {
-    StoreKeeperOrderAccept= await FirestoreHelper.firestoreHelper.getOrderStoreKeeperOrderAccept();
+    StoreKeeperOrderAccept =
+        await FirestoreHelper.firestoreHelper.getOrderStoreKeeperOrderAccept();
+    await getOrderStoreKeeperOrderAccept();
+
     notifyListeners();
   }
+
   deleteFromStoreKeeperOrderAccept(String orderId) async {
-    await FirestoreHelper.firestoreHelper.deletefromStoreKeeperOrderAccept(orderId);
+    await FirestoreHelper.firestoreHelper
+        .deletefromStoreKeeperOrderAccept(orderId);
     notifyListeners();
   }
+
   getOrderSalesPersontoAccountent() async {
-    orderSalesPersontoAccountent= await FirestoreHelper.firestoreHelper.getOrderSalesPersontoAccountent();
+    orderSalesPersontoAccountent =
+        await FirestoreHelper.firestoreHelper.getOrderSalesPersontoAccountent();
+    await getOrderSalesPersontoAccountent();
     notifyListeners();
   }
+
   deleteFromOrderSalesPersontoAccountent(String orderId) async {
-    await FirestoreHelper.firestoreHelper.deletefromOrderSalesPersontoAccountent(orderId);
+    await FirestoreHelper.firestoreHelper
+        .deletefromOrderSalesPersontoAccountent(orderId);
     notifyListeners();
   }
+
   getOrderAccountant() async {
-    orderAccountent= await FirestoreHelper.firestoreHelper.getOrderAccountant();
+    orderAccountent =
+        await FirestoreHelper.firestoreHelper.getOrderAccountant();
+
+    await getOrderAccountant();
     notifyListeners();
   }
+
   deleteFromOrderAccountant(String orderId) async {
     await FirestoreHelper.firestoreHelper.deletefromOrderAccountant(orderId);
     notifyListeners();
   }
 
   getOrderStoreKeeper() async {
-    orderStoreKeeper= await FirestoreHelper.firestoreHelper.getOrderStoreKeeper();
+    orderStoreKeeper =
+        await FirestoreHelper.firestoreHelper.getOrderStoreKeeper();
+
+    await getOrderStoreKeeper();
     notifyListeners();
   }
+
   deleteFromOrderStoreKeeper(String orderId) async {
     await FirestoreHelper.firestoreHelper.deletefromOrderStoreKeeper(orderId);
     notifyListeners();
   }
+
   getOrderDriver() async {
-    orderDriver= await FirestoreHelper.firestoreHelper.getOrderDriver();
+    orderDriver = await FirestoreHelper.firestoreHelper.getOrderDriver();
+    await getOrderDriver();
     notifyListeners();
   }
+
   deleteFromOrderDriver(String orderId) async {
     await FirestoreHelper.firestoreHelper.deletefromOrderDriver(orderId);
     notifyListeners();
   }
+
   getOrderDriverpinding() async {
-    orderDriverpinding= await FirestoreHelper.firestoreHelper.getOrderDriverPinding();
+    orderDriverpinding =
+        await FirestoreHelper.firestoreHelper.getOrderDriverPinding();
+    await getOrderDriverpinding();
     notifyListeners();
   }
-
 
   deleteFromOrderDriverpinding(String orderId) async {
     await FirestoreHelper.firestoreHelper.deletefromOrderDriverPinding(orderId);
     notifyListeners();
   }
-  getProductFromOrder(List<LineItemsPost> lineItemsPost){
-    for(int i=0;i<lineItemsPost.length;++i){
-      ProductModel productModel=allProduct.where((element) => element.id==lineItemsPost[i].productId).toList().first;
-      productModel.quantity=lineItemsPost[i].quantity!;
+
+  getProductFromOrder(List<LineItemsPost> lineItemsPost) {
+    for (int i = 0; i < lineItemsPost.length; ++i) {
+      ProductModel productModel = allProduct
+          .where((element) => element.id == lineItemsPost[i].productId)
+          .toList()
+          .first;
+      productModel.quantity = lineItemsPost[i].quantity!;
       productOrder.add(productModel);
     }
     notifyListeners();
   }
 
-  addToCompleteOrder(Order order)async{
+  addToCompleteOrder(Order order) async {
     await FirestoreHelper.firestoreHelper.CompletedOrder(order);
     await getCompletedOrder();
     notifyListeners();
   }
+
   getCompletedOrder() async {
-    completedOrder= await FirestoreHelper.firestoreHelper.getCompletedOrder();
+    completedOrder = await FirestoreHelper.firestoreHelper.getCompletedOrder();
     notifyListeners();
   }
-
 }

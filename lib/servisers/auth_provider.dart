@@ -45,11 +45,13 @@ class AuthProvider extends ChangeNotifier {
          await AuthHelper.authHelper.signIn(email,password);
       if (AuthHelper.authHelper.success) {
         String? email = await FirebaseAuth.instance.currentUser!.email;
+        String? userId = await FirebaseAuth.instance.currentUser!.uid;
 
    if(email=='admin@admin.com'){
      Get.off(AdminNavBar());
    }else{
-     await getUserFromFirebase();
+
+     await getUserFromFirebase(userId);
      if (AppConstants.loggedUser != null) {
        if(AppConstants.loggedUser!.isaccept==false &&AppConstants.loggedUser!.isreject==false){
          return showDialog(
@@ -123,8 +125,7 @@ class AuthProvider extends ChangeNotifier {
       ));
     }
   }
-  getUserFromFirebase() async {
-    String userId = FirebaseAuth.instance.currentUser!.uid;
+  getUserFromFirebase(String userId ) async {
     AppConstants.loggedUser = await FirestoreHelper.firestoreHelper.getUserFromWaiting(userId);
     AppConstants.loggedUser ??= await FirestoreHelper.firestoreHelper.getUserFromAccepted(userId);
     AppConstants.loggedUser ??= await FirestoreHelper.firestoreHelper.getUserFromReject(userId);

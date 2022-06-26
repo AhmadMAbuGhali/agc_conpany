@@ -681,7 +681,7 @@ Widget SalespersonToAccountant(Order order) => Container(
                         child: ElevatedButton(
                           onPressed: () {
                             log('accept order to Accountent');
-                            order.status = "acceptToAccountent";
+                            order.status = "accept";
                             provider.acceptedOrdertoAccountent(order);
                             provider
                                 .deleteFromOrderAccountant(order.id.toString());
@@ -1323,7 +1323,7 @@ Widget AccountantTransferorders(Order order) => Container(
                         child: ElevatedButton(
                           onPressed: () {
                             log('Accountent Order');
-                            order.status = "shipping";
+                            order.status = "accept";
                             provider.OrdertoStoreKeper(order);
                             provider
                                 .deleteFromOrderAccountant(order.id.toString());
